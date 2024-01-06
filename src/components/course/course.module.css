@@ -1,0 +1,16 @@
+.testimonials {
+  animation: fade-in ease-in-out;
+  animation-timeline: view();
+  animation-range-end: 40vh;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    scale: 0.7;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
