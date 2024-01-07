@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
+import { Providers } from "@/lib/next_ui";
 
 const inter = Poppins({
   subsets: ["latin"],
@@ -18,8 +19,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" className="dark">
+      <body className={inter.className}>
+  
+        <Providers>{children} </Providers>
+      </body>
     </html>
   );
 }

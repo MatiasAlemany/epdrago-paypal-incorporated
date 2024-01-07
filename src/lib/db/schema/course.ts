@@ -2,8 +2,8 @@ import { relations } from "drizzle-orm";
 import { boolean, integer, pgTable, text, uuid } from "drizzle-orm/pg-core";
 import { usersToCourses } from "./users_to_courses";
 import { testimonials } from './testimonials';
-import { modules } from "./modules";
 import { payment_schema } from "./payment";
+import { modules } from "./modules";
 
 export const courses = pgTable('courses', {
     id: uuid('id').defaultRandom().primaryKey(),

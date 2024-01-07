@@ -5,7 +5,6 @@ import { currentUser } from "@clerk/nextjs/server";
 
 const courses_query = db.query.courses.findMany({
     with: {
-        modules: true,
         testimonials: true
     }
 }).prepare('courses_query');
@@ -25,7 +24,10 @@ export const userBoughtThisCourse = async (course_id: string): Promise<boolean> 
     const course = await db.query.courses.findFirst({
         where: eq(courses.id, course_id),
         with: {
-            payments: true
+            payments: true,
+            modules: {
+                with: { items: true }
+            }
         }
     });
 
