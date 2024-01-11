@@ -7,5 +7,6 @@ import * as instructors from './schema/instructors';
 import * as usersToCourses from './schema/users_to_courses';
 import * as payment from './schema/payment';
 import * as modules from './schema/modules'
-const schema = { ...users, ...testimonials, ...courses, ...news, ...modules, ...instructors, usersToCourses, ...modules_items, ...payment };
+import * as course_progress from './schema/course_progress';
+const schema = { ...users, ...course_progress, ...testimonials, ...courses, ...news, ...modules, ...instructors, usersToCourses, ...modules_items, ...payment };
 export default schema;

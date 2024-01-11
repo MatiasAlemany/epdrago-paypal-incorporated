@@ -1,8 +1,11 @@
 import { MetadataPreference } from "@/lib/actions/create_preference";
 import { db } from "@/lib/db";
+import { courses } from "@/lib/db/schema/course";
+import { course_progress } from "@/lib/db/schema/course_progress";
 import { InsertPayment, payment_schema } from "@/lib/db/schema/payment";
 import { paymentNotification } from "@/lib/types/payment_notification";
 import axios from "axios";
+import { eq } from "drizzle-orm";
 import { type PaymentResponse } from "mercadopago/dist/clients/payment/commonTypes";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -34,12 +37,12 @@ async function handler(req: NextRequest) {
             course_id: metadata.product_id,
             user_id: metadata.user_id,
         }
-        console.log('PAYMENT ID', payment.id);
 
 
             console.log(paymentInsertValues);
-
+            const course = await db.select().from(courses).where(eq(courses.id, metadata.product_id));
             await db.insert(payment_schema).values(paymentInsertValues);
+            // await db.insert(course_progress).values({course_id: metadata.product_id, module_id})
  
             console.log('ebook bought!!');
         

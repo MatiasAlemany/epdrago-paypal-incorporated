@@ -1,5 +1,5 @@
 {
-  "id": "7e94d790-9077-441f-899d-5df1e38a3fd3",
+  "id": "4ee4d558-faab-4d44-96ee-6d707e21ad0e",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -25,7 +25,8 @@
           "name": "price",
           "type": "integer",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": 0
         },
         "public": {
           "name": "public",
@@ -37,6 +38,47 @@
         "introductory_video": {
           "name": "introductory_video",
           "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "course_progress": {
+      "name": "course_progress",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "course_id": {
+          "name": "course_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "module_id": {
+          "name": "module_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "module_number": {
+          "name": "module_number",
+          "type": "smallint",
           "primaryKey": false,
           "notNull": false
         }
@@ -89,6 +131,42 @@
           "name": "id",
           "type": "uuid",
           "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "text": {
+          "name": "text",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "course_id": {
+          "name": "course_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "modules_items": {
+      "name": "modules_items",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "position": {
+          "name": "position",
+          "type": "integer",
+          "primaryKey": false,
           "notNull": true
         },
         "title": {
@@ -103,8 +181,8 @@
           "primaryKey": false,
           "notNull": true
         },
-        "course_id": {
-          "name": "course_id",
+        " module_id": {
+          "name": " module_id",
           "type": "uuid",
           "primaryKey": false,
           "notNull": true
@@ -132,6 +210,12 @@
           "type": "text",
           "primaryKey": false,
           "notNull": false
+        },
+        "time_to_repeat_exam": {
+          "name": "time_to_repeat_exam",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "indexes": {},
@@ -139,8 +223,50 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "payment": {
-      "name": "payment",
+    "news": {
+      "name": "news",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "title": {
+          "name": "title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "content": {
+          "name": "content",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "img_url": {
+          "name": "img_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "payment_schema": {
+      "name": "payment_schema",
       "schema": "",
       "columns": {
         "id": {
@@ -179,6 +305,18 @@
           "type": "text",
           "primaryKey": false,
           "notNull": false
+        },
+        "course_id": {
+          "name": "course_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
         }
       },
       "indexes": {},

@@ -1,9 +1,17 @@
 CREATE TABLE IF NOT EXISTS "courses" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"title" text NOT NULL,
-	"price" integer NOT NULL,
+	"price" integer DEFAULT 0 NOT NULL,
 	"public" boolean DEFAULT false NOT NULL,
 	"introductory_video" text
+);
+--> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "course_progress" (
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+	"user_id" text NOT NULL,
+	"course_id" uuid NOT NULL,
+	"module_id" text,
+	"module_number" smallint
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "instructors" (
@@ -14,23 +22,41 @@ CREATE TABLE IF NOT EXISTS "instructors" (
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "modules" (
-	"id" uuid PRIMARY KEY NOT NULL,
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+	"text" text NOT NULL,
+	"course_id" uuid
+);
+--> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "modules_items" (
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+	"position" integer NOT NULL,
 	"title" text NOT NULL,
 	"type" text NOT NULL,
-	"course_id" uuid NOT NULL,
+	" module_id" uuid NOT NULL,
 	"pdf_url" text,
 	"video_url" text,
 	"exam_id" text,
-	"questionary_id" text
+	"questionary_id" text,
+	"time_to_repeat_exam" integer
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "payment" (
+CREATE TABLE IF NOT EXISTS "news" (
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+	"title" text NOT NULL,
+	"content" text NOT NULL,
+	"createdAt" timestamp DEFAULT now(),
+	"img_url" text NOT NULL
+);
+--> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "payment_schema" (
 	"id" bigint PRIMARY KEY NOT NULL,
 	"item_title" text NOT NULL,
 	"created_at" timestamp DEFAULT now(),
 	"net_amount" integer NOT NULL,
 	"payer_name" text,
-	"payer_email" text
+	"payer_email" text,
+	"course_id" uuid NOT NULL,
+	"user_id" text NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "testimonials" (

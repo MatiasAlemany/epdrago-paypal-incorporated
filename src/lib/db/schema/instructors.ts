@@ -5,5 +5,6 @@ export const instructors = pgTable('instructors', {
     name: text('name').notNull(),
     instagram: text('instagram').notNull(),
     qualities: text('qualities').notNull(),
+    img_url: text('img_url').notNull()
     
 })

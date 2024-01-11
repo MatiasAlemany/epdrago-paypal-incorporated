@@ -7,11 +7,18 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { getCourse } from "@/lib/actions/get_courses";
 import { type PageParams } from "@/lib/types/params";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 import React from "react";
 
-const CoursePage = (page: PageParams<{ id: string }>) => {
+const CoursePage = async ({ params: { id } }: PageParams<{ id: string }>) => {
+  const course = await getCourse(id);
+
+  if (course == undefined) {
+    redirect("/cursos");
+  }
   return (
     <div>
       <BackGroundCourse imgUrl={""} />

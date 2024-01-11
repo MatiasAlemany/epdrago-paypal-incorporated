@@ -11,10 +11,20 @@ const courses_query = db.query.courses.findMany({
 
 export const getCourses = async () => await courses_query.execute();
 
-export const getCourse = async (course_id: string) => await db.query.courses.findFirst({
-    where: eq(courses.id, course_id),
+export const getCourse = async (course_id: string) => {
+    try {
+        await db.query.courses.findFirst({
+            where: eq(courses.id, course_id),
+            with: {
+                modules: true
+            }
 
-});
+        });
+    } catch (error) {
+        console.log(error);
+        return;
+    }
+}
 
 
 export const userBoughtThisCourse = async (course_id: string): Promise<boolean> => {

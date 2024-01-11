@@ -25,3 +25,33 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+html {
+  scrollbar-face-color: #646464;
+  scrollbar-base-color: #646464;
+  scrollbar-3dlight-color: #646464;
+  scrollbar-highlight-color: #646464;
+  scrollbar-track-color: #000;
+  scrollbar-arrow-color: #000;
+  scrollbar-shadow-color: #646464;
+}
+
+::-webkit-scrollbar {
+  padding-right: 2px;
+  margin-right: 3px;
+  width: 6px;
+  height: 3px;
+  padding-left: 4;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #414141;
+}
+::-webkit-scrollbar-track-piece {
+  background-color: #000;
+}
+::-webkit-scrollbar-thumb {
+  height: 10px;
+  background-color: #303030;
+  border-radius: 2px;
+}

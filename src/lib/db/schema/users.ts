@@ -3,6 +3,7 @@ import { pgTable, text } from "drizzle-orm/pg-core";
 import { testimonials } from './testimonials';
 import { usersToCourses } from "./users_to_courses";
 import { payment_schema } from "./payment";
+import { course_progress } from './course_progress';
 
 
 export const users = pgTable("users", {
@@ -15,5 +16,6 @@ export const users = pgTable("users", {
 export const users_relations = relations(users, ({ many }) => ({
     testimonials: many(testimonials),
     users_to_courses: many(usersToCourses),
-payments: many(payment_schema)
+payments: many(payment_schema),
+   course_progress: many(course_progress)
 }))
