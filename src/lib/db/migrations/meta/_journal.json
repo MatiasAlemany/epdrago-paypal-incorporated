@@ -43,6 +43,20 @@
       "when": 1705058711409,
       "tag": "0005_pale_the_captain",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1705141145788,
+      "tag": "0006_salty_hellcat",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "5",
+      "when": 1705145570669,
+      "tag": "0007_normal_stryfe",
+      "breakpoints": true
     }
   ]
 }

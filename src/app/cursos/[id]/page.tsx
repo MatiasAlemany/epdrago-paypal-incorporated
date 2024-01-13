@@ -1,4 +1,5 @@
 import Testimonials from "@/components/course/Testimonials";
+import YoutubePlayerCourse from "@/components/course/YoutubePlayer";
 import BackGroundCourse from "@/components/course/backgroundCourse";
 import InstructorContainer from "@/components/course/instructorContainer";
 import {
@@ -31,7 +32,8 @@ const CoursePage = async ({ params: { id } }: PageParams<{ id: string }>) => {
       <h1 className="mt-8 text-center text-4xl">Video Introduccion</h1>
       <div className="p-8 lg:px-16 xl:px-96 ">
         <div className="flex aspect-[18/9] items-center justify-center rounded-lg bg-container">
-          <svg
+          <YoutubePlayerCourse />
+          {/* <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -49,7 +51,7 @@ const CoursePage = async ({ params: { id } }: PageParams<{ id: string }>) => {
               strokeLinejoin="round"
               d="M15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z"
             />
-          </svg>
+          </svg> */}
         </div>
       </div>
       <h1 className="mt-4 text-center text-4xl">Clases</h1>

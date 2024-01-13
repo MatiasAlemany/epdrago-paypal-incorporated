@@ -1,7 +1,7 @@
 import { relations } from "drizzle-orm";
 import { boolean, pgTable, text, uuid } from "drizzle-orm/pg-core";
 import { courses } from "./course";
-import { createSelectSchema } from "drizzle-zod";
+import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import z from 'zod';
 
 export const instructors = pgTable('instructors', {
@@ -20,6 +20,8 @@ export const instructors_relations = relations(instructors, ({ one }) => ({
         references: [courses.id]
     })
 }))
+const instructor_create = createInsertSchema(instructors);
 
 const instructor_selector = createSelectSchema(instructors);
 export type Instructor = z.infer<typeof instructor_selector>
+export type InstructorCreate = z.infer<typeof instructor_create>

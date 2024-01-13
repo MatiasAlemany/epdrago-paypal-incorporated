@@ -7,7 +7,7 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
-import { Button } from "@nextui-org/react";
+import { Button, DropdownMenu } from "@nextui-org/react";
 import Link from "next/link";
 import { padding } from "../styles/padding";
 import EpdragoIcon from "./EpdragoIcon";
@@ -18,6 +18,8 @@ import { getProgress } from "@/lib/actions/get_progress";
 import HorizontalProgressBar from "../course/HorizontalProgressBar";
 import { CourseProgressContainer } from "./CourseProgressContainer";
 import { currentUser } from "@clerk/nextjs/server";
+import Menu from "./Menu";
+import DrawerCourses from "./DrawerCourses";
 
 export default async function Navbar() {
   const user = await currentUser();
@@ -70,21 +72,18 @@ export default async function Navbar() {
             </NavigationMenuList>
           </NavigationMenu>
         </div>
+        <div className="lg:hidden block">
+          <DrawerCourses />
+        </div>
         {user != null ? (
-          <Button variant="bordered" className="mx-2">
+          <Button variant="bordered" className="mx-2  lg:block hidden">
             Salir
           </Button>
         ) : (
           <NavbarDialogs />
         )}
-        <Button
-          className={cn(" lg:hidden")}
-          isIconOnly
-          variant="ghost"
-          aria-label="Menu"
-        >
-          <MenuIcon />
-        </Button>
+
+        <Menu />
         <div className="absolute h-screen w-88 bg-slate-800"></div>
       </div>
     </div>

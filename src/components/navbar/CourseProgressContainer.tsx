@@ -4,7 +4,6 @@ import { redirect } from "next/navigation";
 import { CourseProgressItem } from "./CourseProgressItem";
 
 export async function CourseProgressContainer() {
-  
   const progress = await getProgress();
   if (!(progress == undefined)) {
     return (
@@ -16,9 +15,9 @@ export async function CourseProgressContainer() {
 
   return (
     <div className="flex flex-col">
-      <CourseProgressItem />
-      <CourseProgressItem />
-      <CourseProgressItem />
+      <CourseProgressItem customWidth={315} />
+      <CourseProgressItem customWidth={315} />
+      <CourseProgressItem customWidth={315} />
     </div>
   );
 }

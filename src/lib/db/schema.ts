@@ -9,6 +9,7 @@ import * as payment from './schema/payment';
 import * as modules from './schema/modules'
 import * as course_progress from './schema/course_progress';
 import * as certifications from "./schema/certifications"
+import * as exams from "./schema/exams"
 
-const schema = { ...users, ...course_progress, ...testimonials, ...courses, ...news, ...modules, ...instructors, usersToCourses, ...modules_items, ...payment, ...certifications };
+const schema = { ...users, ...exams, ...course_progress, ...testimonials, ...courses, ...news, ...modules, ...instructors, usersToCourses, ...modules_items, ...payment, ...certifications };
 export default schema;

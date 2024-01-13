@@ -20,7 +20,11 @@ export const getCourse = async (course_id: string) => {
         const course = await db.query.courses.findFirst({
             where: eq(courses.id, course_id),
             with: {
-                modules: true, instructors: true
+                modules: {
+                    with: {
+                        items: true
+                    }
+                }, instructors: true
             }
 
         });

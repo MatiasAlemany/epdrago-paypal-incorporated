@@ -1,6 +1,11 @@
+import ModuleItemContainer from "@/components/course/ModuleItemContainer";
 import Testimonials from "@/components/course/Testimonials";
+import YoutubePlayerCourse from "@/components/course/YoutubePlayer";
 import BackGroundCourse from "@/components/course/backgroundCourse";
 import InstructorContainer from "@/components/course/instructorContainer";
+import EditDialog from "@/components/edit/EditDialog";
+import InstructorModal from "@/components/edit/InstructorModal";
+import ModuleModal from "@/components/edit/ModuleModal";
 import {
   Accordion,
   AccordionContent,
@@ -9,8 +14,15 @@ import {
 } from "@/components/ui/accordion";
 import { getCourse } from "@/lib/actions/get_courses";
 import { isAdmin } from "@/lib/actions/isAdmin";
+import { db } from "@/lib/db";
+import { courses } from "@/lib/db/schema/course";
+import { modules } from "@/lib/db/schema/modules";
+import { modules_items } from "@/lib/db/schema/modules_items";
+import { youtube_parser } from "@/lib/helpers/youtube_parser";
 import { type PageParams } from "@/lib/types/params";
-import { Button } from "@nextui-org/react";
+import { Button, Input, ModalFooter } from "@nextui-org/react";
+import { PlayCircleIcon, YoutubeIcon } from "lucide-react";
+import { revalidatePath } from "next/cache";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import React from "react";
@@ -18,207 +30,105 @@ import React from "react";
 const EditarCursoPage = async ({
   params: { id },
 }: PageParams<{ id: string }>) => {
-  
-    // const admin = await isAdmin();
-    // if (admin == false) {
-    //     redirect('/');
-    // }
-    const course = await getCourse(id);
+  // const admin = await isAdmin();
+  // if (admin == false) {
+  //     redirect('/');
+  // }
+  const course = await getCourse(id);
 
   return (
     <div>
       <BackGroundCourse imgUrl={""} />
+
       <h1 className="mt-8 text-center text-4xl">Instructores</h1>
       <div className="mt-8 flex-wrap flex justify-center ">
         {course.instructors.map((i) => (
           <InstructorContainer {...i} key={i.id} />
         ))}
-        <Button>Agregar Instructor</Button>
       </div>
+      <div className="flex justify-center">
+        {" "}
+        <InstructorModal course_id={course.id} />
+      </div>
+
       <h1 className="mt-8 text-center text-4xl">Video Introduccion</h1>
       <div className="p-8 lg:px-16 xl:px-96 ">
         <div className="flex aspect-[18/9] items-center justify-center rounded-lg bg-container">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="h-6 w-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z"
-            />
-          </svg>
+          <div className="flex flex-col items-center">
+            {course.introductory_video != null ? (
+              <YoutubePlayerCourse
+                videoId={youtube_parser(course.introductory_video) as string}
+              />
+            ) : (
+              <YoutubeIcon className="w-20 h-20" />
+            )}
+            <EditDialog
+              classname="mt-2"
+              buttonTitle="Agregar Video"
+              dialogTitle="Video Introductorio"
+            >
+              <form
+                action={async (formData: FormData) => {
+                  "use server";
+                  await db.update(courses).set({
+                    introductory_video: formData.get("video_url") as string,
+                  });
+                  revalidatePath(`/editarCurso/${course.id}`);
+                }}
+              >
+                <Input label="Video Url" name="video_url" />
+                <ModalFooter>
+                  <Button type="submit" color="primary">
+                    Actualizar
+                  </Button>
+                </ModalFooter>
+              </form>
+            </EditDialog>
+          </div>
         </div>
       </div>
       <h1 className="mt-4 text-center text-4xl">Clases</h1>
       <div className="mx-auto mt-4 max-w-4xl p-4">
-        <Accordion type="single" collapsible>
-          <AccordionItem value="item-1">
-            <AccordionTrigger>
-              Modulo 1: Principios de calistenia
-            </AccordionTrigger>
-            <AccordionContent>
-              <div className="flex py-2 px-4 my-2 bg-neutral-900 rounded-xl justify-between">
-                Yes. It adheres to the WAI-ARIA design pattern.
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="h-6 w-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z"
-                  />
-                </svg>
-              </div>
-              <div className="  flex py-2 px-4 my-2 bg-neutral-900 rounded-xl justify-between">
-                Yes. It adheres to the WAI-ARIA design pattern.
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="h-6 w-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z"
-                  />
-                </svg>
-              </div>
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
-        <Accordion type="single" collapsible>
-          <AccordionItem value="item-1">
-            <AccordionTrigger>
-              Modulo 2: Principios de calistenia
-            </AccordionTrigger>
-            <AccordionContent>
-              <div className="flex py-2 px-4 my-2 bg-neutral-900 rounded-xl justify-between">
-                Yes. It adheres to the WAI-ARIA design pattern.
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="h-6 w-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z"
-                  />
-                </svg>
-              </div>
-              <div className="  flex py-2 px-4 my-2 bg-neutral-900 rounded-xl justify-between">
-                Yes. It adheres to the WAI-ARIA design pattern.
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="h-6 w-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z"
-                  />
-                </svg>
-              </div>
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
-        {/* <Accordion disableGutters>
-      <AccordionSummary
-        expandIcon={
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="h-5 w-5"
+        {course.modules.map((e, index) => (
+          <Accordion type="single" collapsible key={e.id}>
+            <AccordionItem value="item-1">
+              <AccordionTrigger>
+                Modulo {index + 1}: {e.title}
+              </AccordionTrigger>
+              <AccordionContent>
+                {e.items.map((e) => (
+                  <ModuleItemContainer key={e.id} />
+                ))}
+                <ModuleModal module={e} />
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        ))}
+        <div className="flex justify-center">
+          <EditDialog
+            classname="mt-2 "
+            buttonTitle="Crear Modulo"
+            dialogTitle="Nuevo Modulo"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3"
-            />
-          </svg>
-        }
-      >
-        <h1 className="text-white">Clase 1</h1>
-      </AccordionSummary>
-      <AccordionDetails sx={{ padding: 0 }}>
-        <List disablePadding>
-          <ListItem disablePadding>
-            <ListItemButton disabled>
-              <ListItemIcon>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="h-6 w-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z"
-                  />
-                </svg>
-              </ListItemIcon>
-              <ListItemText primary="Video Introductorio" />
-            </ListItemButton>
-          </ListItem>
-        </List>
-      </AccordionDetails>
-    </Accordion> */}
+            <form
+              action={async (formData: FormData) => {
+                "use server";
+                await db.insert(modules).values({
+                  course_id: course.id,
+                  title: formData.get("name") as string,
+                });
+                revalidatePath(`/editarCurso/${course.id}`);
+              }}
+            >
+              <Input label="Nombre del modulo" name="name" />
+              <ModalFooter>
+                <Button type="submit" color="primary">
+                  Crear
+                </Button>
+              </ModalFooter>
+            </form>
+          </EditDialog>
+        </div>
       </div>
       <h1 className="mt-8 text-center text-2xl font-bold lg:text-4xl">
         Descripcion del curso

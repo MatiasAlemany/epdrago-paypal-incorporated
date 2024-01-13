@@ -55,3 +55,35 @@ html {
   background-color: #303030;
   border-radius: 2px;
 }
+
+.appear-from-bottom {
+  animation: appear-from-bottom ease-in-out;
+  animation-timeline: view();
+  animation-range-end: 70vh;
+}
+
+@keyframes appear-from-bottom {
+  from {
+    scale: 0.7;
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+.fade-in-view {
+  animation: fade-in-view ease-in-out;
+  animation-timeline: view();
+  animation-range-end: 60vh;
+}
+
+@keyframes fade-in-view {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

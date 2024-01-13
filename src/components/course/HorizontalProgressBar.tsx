@@ -1,10 +1,11 @@
 "use client";
+import useWindowDimensions from "@/lib/hook/useWindowDimensions";
 import { motion } from "framer-motion";
 
 interface HorizontalProgressBarProps {
   percentage: number;
   thickness: number;
-  maxWidth: number;
+  maxWidth?: number;
 }
 
 const HorizontalProgressBar: React.FC<HorizontalProgressBarProps> = ({
@@ -12,6 +13,9 @@ const HorizontalProgressBar: React.FC<HorizontalProgressBarProps> = ({
   thickness,
   maxWidth,
 }) => {
+  const { width } = useWindowDimensions();
+  console.log(width);
+  console.log(maxWidth);
   return (
     <div className=" relative mt-2 h-3">
       <div className="flex flex-row items-center">
@@ -20,7 +24,10 @@ const HorizontalProgressBar: React.FC<HorizontalProgressBarProps> = ({
             width: 0,
           }}
           animate={{
-            width: maxWidth * percentage,
+            width:
+              maxWidth == undefined
+                ? (width - 70) * percentage
+                : maxWidth * percentage,
           }}
           className={`absolute  h-3 rounded-xl bg-green-500  duration-500 ease-out`}
         />

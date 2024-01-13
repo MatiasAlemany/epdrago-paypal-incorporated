@@ -26,7 +26,7 @@ const CourseContainer = ({
           router.push(`/editarCurso/${id}`);
         }
       }}
-      className="my-4 hover:bg-neutral-800 transition-colors cursor-pointer bg-neutral-900 rounded-xl p-6 flex flex-col lg:flex-row h-96 lg:h-56 w-full"
+      className="my-4 hover:scale-105 transition-all ease-in-out hover:bg-neutral-800  cursor-pointer bg-neutral-900 rounded-xl p-6 flex flex-col lg:flex-row h-96 lg:h-56 w-full"
     >
       <div className="relative bg-neutral-800 aspect-[18/6] rounded-xl"></div>
       <div className="flex flex-col ml-0 lg:ml-4">

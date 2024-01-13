@@ -6,7 +6,7 @@ import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { ExtractModified } from "@/lib/types/extract_modified";
 import { modules } from "./modules";
 
-const moduleType = z.enum(['examen', 'questionario', 'pdf', 'video'])
+const moduleType = z.enum(['questionario', 'pdf', 'video'])
 export const moduleValues = moduleType.options;
 export type ModuleEnums = z.infer<typeof moduleType>;
 
@@ -20,7 +20,8 @@ export const modules_items = pgTable('modules_items', {
     video_url: text('video_url'),
     exam_id: text('exam_id'),
     questionary_id: text('questionary_id'),
-    time_to_repeat_exam: integer('time_to_repeat_exam')
+    time_to_repeat_exam: integer('time_to_repeat_exam'),
+    frase: text('frase')
 
 })
 
@@ -35,24 +36,22 @@ export const modules_items_relations = relations(modules_items, ({ one }) => ({
 const moduleInsert = createInsertSchema(modules_items);
 const moduleZod = createSelectSchema(modules_items)
 
-type ModuleInsert = z.infer<typeof moduleInsert>;
+export type ModuleInsert = z.infer<typeof moduleInsert>;
 const module_properties = moduleZod.pick({ position: true, module_id: true, title: true, });
 
 const module_pdf = moduleZod
     .pick({ pdf_url: true, })
     .merge(z.object({ type: z.literal(moduleType.enum.pdf) }))
 
-const module_exam = moduleZod.pick({ exam_id: true, time_to_repeat_exam: true, }).merge(z.object({ type: z.literal(moduleType.enum.examen) }))
 const module_video = moduleZod.pick({ video_url: true, }).merge(z.object({ type: z.literal(moduleType.enum.video) }))
 const module_questionary = moduleZod.pick({ questionary_id: true })
     .merge(z.object({ type: z.literal(moduleType.enum.questionario) }))
 
 
-const module_discriminated_union = z.discriminatedUnion('type', [module_pdf, module_exam, module_video, module_questionary]);
+const module_discriminated_union = z.discriminatedUnion('type', [module_pdf, module_video, module_questionary]);
 export const moduleZodIntersecttion = z.intersection(module_discriminated_union, module_properties);
 
 export type ModuleZod = z.infer<typeof moduleZodIntersecttion>;
-export type ModuleExamType = ExtractModified<ModuleZod, 'type', 'examen'>;
 export type ModuleVideoType = ExtractModified<ModuleZod, 'type', 'video'>
 
 
