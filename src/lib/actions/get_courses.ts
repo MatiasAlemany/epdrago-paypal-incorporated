@@ -5,24 +5,32 @@ import { currentUser } from "@clerk/nextjs/server";
 
 const courses_query = db.query.courses.findMany({
     with: {
-        testimonials: true
+        testimonials: true,
+        modules: true,
+        instructors: true
     }
 }).prepare('courses_query');
 
+
+export type Course = AwaitedReturn<typeof getCourses>[0];
 export const getCourses = async () => await courses_query.execute();
 
 export const getCourse = async (course_id: string) => {
     try {
-        await db.query.courses.findFirst({
+        const course = await db.query.courses.findFirst({
             where: eq(courses.id, course_id),
             with: {
-                modules: true
+                modules: true, instructors: true
             }
 
         });
+        if (course == undefined) {
+            throw Error('Course not found');
+        }
+        return course;
     } catch (error) {
         console.log(error);
-        return;
+        throw Error('Course not found');
     }
 }
 

@@ -8,32 +8,21 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { getCourse } from "@/lib/actions/get_courses";
-import { isAdmin } from "@/lib/actions/isAdmin";
 import { type PageParams } from "@/lib/types/params";
-import { Button } from "@nextui-org/react";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import React from "react";
 
-const EditarCursoPage = async ({
-  params: { id },
-}: PageParams<{ id: string }>) => {
-  
-    // const admin = await isAdmin();
-    // if (admin == false) {
-    //     redirect('/');
-    // }
-    const course = await getCourse(id);
+const CoursePage = async ({ params: { id } }: PageParams<{ id: string }>) => {
 
   return (
     <div>
       <BackGroundCourse imgUrl={""} />
       <h1 className="mt-8 text-center text-4xl">Instructores</h1>
       <div className="mt-8 flex-wrap flex justify-center ">
-        {course.instructors.map((i) => (
-          <InstructorContainer {...i} key={i.id} />
-        ))}
-        <Button>Agregar Instructor</Button>
+        {/* <InstructorContainer />
+        <InstructorContainer />
+        <InstructorContainer /> */}
       </div>
       <h1 className="mt-8 text-center text-4xl">Video Introduccion</h1>
       <div className="p-8 lg:px-16 xl:px-96 ">
@@ -279,7 +268,7 @@ const EditarCursoPage = async ({
       <div className="flex justify-center">
         <button
           type="button"
-          className="bg-bl my-4 mx-auto rounded-full bg-green-500 px-12 py-4 text-xl font-bold text-black"
+          className="bg-bl my-4 mx-auto rounded-full bg-amber-500 px-12 py-4 text-xl font-bold text-black"
         >
           Comprar Curso
         </button>
@@ -288,4 +277,4 @@ const EditarCursoPage = async ({
   );
 };
 
-export default EditarCursoPage;
+export default CoursePage;

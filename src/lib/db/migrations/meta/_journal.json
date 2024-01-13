@@ -15,6 +15,34 @@
       "when": 1704967146095,
       "tag": "0001_sloppy_liz_osborn",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1705050767337,
+      "tag": "0002_lazy_carmella_unuscione",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1705052717685,
+      "tag": "0003_yielding_xorn",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1705057126293,
+      "tag": "0004_strange_leader",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1705058711409,
+      "tag": "0005_pale_the_captain",
+      "breakpoints": true
     }
   ]
 }

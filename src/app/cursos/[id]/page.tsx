@@ -24,9 +24,9 @@ const CoursePage = async ({ params: { id } }: PageParams<{ id: string }>) => {
       <BackGroundCourse imgUrl={""} />
       <h1 className="mt-8 text-center text-4xl">Instructores</h1>
       <div className="mt-8 flex-wrap flex justify-center ">
+        {/* <InstructorContainer />
         <InstructorContainer />
-        <InstructorContainer />
-        <InstructorContainer />
+        <InstructorContainer /> */}
       </div>
       <h1 className="mt-8 text-center text-4xl">Video Introduccion</h1>
       <div className="p-8 lg:px-16 xl:px-96 ">

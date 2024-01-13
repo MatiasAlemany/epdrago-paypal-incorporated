@@ -5,17 +5,28 @@ const DescriptionContainer = () => {
   return (
     <div className="mt-20">
       <DescriptionItem
-        title="Quienes somos"
-        description="There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in th"
+        title="Equipo"
+        description="Somos un equipo dedicado a las competencias,
+        ensenanza y difusion de la calistenia y street workout
+        Fundado en el 2020.
+        "
       />
       <DescriptionItem
         orientation="right"
-        title="Equipo"
-        description="There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in th"
+        title="Competencias"
+        description="Epdrago Championship
+        es una cometencia del mas
+        alto nivel en Power Freestyle.
+        Que utiliza un reglamento digital
+        utilizado a nivel internacional, creado por
+        Rodri Otrera."
       />
       <DescriptionItem
-        title="Eventos"
-        description="There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in th"
+        title="Escuela"
+        description="Nuestra escuela ofrece distintos metodos d
+        de aprendizaje como cursos worskshops
+        y capacitaciones con certificaciones
+        oficiales avaladas por marcas y empresesas reconocidas"
       />
     </div>
   );
