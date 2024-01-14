@@ -17,6 +17,7 @@ import { UploadButton } from "@/utils/uploadthing";
 import { ModuleDB } from "@/lib/db/schema/modules";
 import { type OurFileRouter } from "@/app/api/uploadthing/core";
 import { ModuleEnums, moduleValues } from "../../lib/db/schema/modules_items";
+import { crearModuleItem } from "@/lib/actions/edit/modules_actions";
 
 const ModuleModal = ({ module }: { module: ModuleDB }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -30,14 +31,22 @@ const ModuleModal = ({ module }: { module: ModuleDB }) => {
         <ModalContent>
           {(onClose) => (
             <>
-              <form>
+              <form action={crearModuleItem}>
                 <input hidden name="module_id" value={module.id} />
+                <input hidden name="course_id" value={module.course_id} />
+
+                <input type="hidden" value={pdfUrl} name="pdf_url" />
+
                 <ModalHeader className="flex flex-col gap-1">
                   Nuevo Capitulo de Modulo
                 </ModalHeader>
                 <ModalBody>
-                  <Input name="name" label="Nombre del modulo" />
-                  <Select value={moduleType} label="Tipo de modulo">
+                  <Input name="title" label="Nombre del modulo" />
+                  <Select
+                    value={moduleType}
+                    label="Tipo de modulo"
+                    name="module_type"
+                  >
                     {moduleValues.map((e) => (
                       <SelectItem
                         key={e}
@@ -79,7 +88,6 @@ const ModuleModal = ({ module }: { module: ModuleDB }) => {
                               console.log(error);
                             }}
                           />
-                          <input type="hidden" value={pdfUrl} name="pdf_url" />
                         </div>
                       )}
                     </>
@@ -97,6 +105,7 @@ const ModuleModal = ({ module }: { module: ModuleDB }) => {
                   </Button>
                   <Button
                     onClick={() => {
+                      setpdfUrl(undefined);
                       onClose();
                     }}
                     variant="solid"

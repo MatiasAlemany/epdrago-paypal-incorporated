@@ -1,3 +1,5 @@
+import BeneficiosCurso from "@/components/course/BeneficiosCurso";
+import DescripcionCuso from "@/components/course/DescripcionCurso";
 import ModuleItemContainer from "@/components/course/ModuleItemContainer";
 import Testimonials from "@/components/course/Testimonials";
 import YoutubePlayerCourse from "@/components/course/YoutubePlayer";
@@ -96,8 +98,13 @@ const EditarCursoPage = async ({
                 Modulo {index + 1}: {e.title}
               </AccordionTrigger>
               <AccordionContent>
-                {e.items.map((e) => (
-                  <ModuleItemContainer key={e.id} />
+                {e.items.map((e, itemIndex) => (
+                  <ModuleItemContainer
+                    module_index={index + 1}
+                    index={itemIndex + 1}
+                    key={e.id}
+                    module_item={e}
+                  />
                 ))}
                 <ModuleModal module={e} />
               </AccordionContent>
@@ -130,25 +137,23 @@ const EditarCursoPage = async ({
           </EditDialog>
         </div>
       </div>
-      <h1 className="mt-8 text-center text-2xl font-bold lg:text-4xl">
-        Descripcion del curso
-      </h1>
-      <h1 className="mx-auto mt-2 max-w-5xl px-8 py-4 text-center text-text md:px-16 lg:px-32">
-        Este curso cuenta con muchas posibilidades para expandir tus
+      <DescripcionCuso
+        content="Este curso cuenta con muchas posibilidades para expandir tus
         conocimientos, incluye informacion muy interesante sobre muchos aspectos
-        de la calistenia, como lo son los basicos,estaticos y freestyle.
-      </h1>
-      <h1 className="mt-8 text-center text-2xl font-bold lg:text-4xl">
-        Beneficios del curso
-      </h1>
-      <h1 className="mx-auto mt-2 max-w-5xl px-8 py-4 text-center text-text md:px-16 lg:px-32">
-        Este curso cuenta con muchas posibilidades para expandir tus
+        de la calistenia, como lo son los basicos,estaticos y freestyle."
+      />
+      <BeneficiosCurso
+        content="Este curso cuenta con muchas posibilidades para expandir tus
         conocimientos, incluye informacion muy interesante sobre muchos aspectos
-        de la calistenia, como lo son los basicos,estaticos y freestyle.
-      </h1>
-      <h1 className="mt-12 mb-8 text-center text-2xl font-bold lg:text-4xl">
-        Testimonios
-      </h1>
+        de la calistenia, como lo son los basicos,estaticos y freestyle."
+      />
+      <div className="fade-in-view">
+        {" "}
+        <h1 className="mt-12 mb-8 text-center text-2xl font-bold lg:text-4xl">
+          Testimonios
+        </h1>
+      </div>
+
       <div className="m-2 grid grid-cols-1 content-center justify-center gap-8 md:grid-cols-2 md:px-12 lg:px-32 xl:grid-cols-3">
         <Testimonials
           content="Este curso cuenta con muchas posibilidades para expandir tus
@@ -165,7 +170,7 @@ const EditarCursoPage = async ({
     de la calistenia, como lo son los basicos,estaticos y freestyle."
         />
       </div>
-      <h1 className="mt-12 mb-12 text-center text-2xl font-bold lg:text-4xl">
+      {/* <h1 className="mt-12 mb-12 text-center text-2xl font-bold lg:text-4xl">
         Marcas y empresas que avalan nuestros cursos
       </h1>
       <div className="flex flex-wrap justify-center gap-8 px-8 md:px-16 lg:px-32">
@@ -185,7 +190,7 @@ const EditarCursoPage = async ({
             fill={true}
           />
         </div>
-      </div>
+      </div> */}
       <div className="flex justify-center">
         <button
           type="button"

@@ -8,7 +8,7 @@ import z from 'zod';
 export const modules = pgTable('modules', {
     id: uuid('id').defaultRandom().primaryKey(),
     title: text('text').notNull(),
-    course_id: uuid('course_id'),
+    course_id: uuid('course_id').notNull(),
     createdAt: timestamp('createdAt').defaultNow()
 
 

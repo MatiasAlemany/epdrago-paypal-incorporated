@@ -36,7 +36,7 @@ export const modules_items_relations = relations(modules_items, ({ one }) => ({
 const moduleInsert = createInsertSchema(modules_items);
 const moduleZod = createSelectSchema(modules_items)
 
-export type ModuleInsert = z.infer<typeof moduleInsert>;
+export type ModuleItemInsert = z.infer<typeof moduleInsert>;
 const module_properties = moduleZod.pick({ position: true, module_id: true, title: true, });
 
 const module_pdf = moduleZod
