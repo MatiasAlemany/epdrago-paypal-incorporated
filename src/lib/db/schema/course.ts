@@ -14,9 +14,10 @@ export const courses = pgTable('courses', {
     price: integer('price').default(0).notNull(),
     is_public: boolean('public').default(false).notNull(),
     introductory_video: text('introductory_video'),
-    beneficios: text('beneficios').default(""),
-    descripcion: text('descripcion').default(""),
-    duracion: text('duracion').default(""),
+    beneficios: text('beneficios').default("").notNull(),
+    descripcion: text('descripcion').default("").notNull(),
+    duracion: text('duracion').default("").notNull(),
+    img_url: text("img_url")
 
 })
 
@@ -31,3 +32,5 @@ export const courses_relations = relations(courses, ({ many }) => ({
     instructors: many(instructors)
 
 }))
+
+

@@ -15,6 +15,8 @@ const courses_query = db.query.courses.findMany({
 export type Course = AwaitedReturn<typeof getCourses>[0];
 export const getCourses = async () => await courses_query.execute();
 
+export type CourseGet = AwaitedReturn<typeof getCourse>;
+
 export const getCourse = async (course_id: string) => {
     try {
         const course = await db.query.courses.findFirst({

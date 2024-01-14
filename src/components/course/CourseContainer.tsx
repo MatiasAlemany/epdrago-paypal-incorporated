@@ -34,7 +34,8 @@ const CourseContainer = ({
         <Rating
           readonly={true}
           initialValue={4.5}
-          size="small"
+          size="small" 
+        
           showValue={true}
         />
         <h3 className="text-neutral-400 text-sm mt-1">Duracion:{duracion}</h3>

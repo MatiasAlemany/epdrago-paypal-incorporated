@@ -1,10 +1,12 @@
 import BeneficiosCurso from "@/components/course/BeneficiosCurso";
 import DescripcionCuso from "@/components/course/DescripcionCurso";
+import ImageModal from "@/components/course/ImageModal";
 import ModuleItemContainer from "@/components/course/ModuleItemContainer";
 import Testimonials from "@/components/course/Testimonials";
 import YoutubePlayerCourse from "@/components/course/YoutubePlayer";
 import BackGroundCourse from "@/components/course/backgroundCourse";
 import InstructorContainer from "@/components/course/instructorContainer";
+import ActualizarDatosModal from "@/components/edit/ActualizarDatos";
 import EditDialog from "@/components/edit/EditDialog";
 import InstructorModal from "@/components/edit/InstructorModal";
 import ModuleModal from "@/components/edit/ModuleModal";
@@ -40,8 +42,11 @@ const EditarCursoPage = async ({
 
   return (
     <div>
-      <BackGroundCourse imgUrl={""} />
-
+      <BackGroundCourse {...course} />
+      <div className="flex-col flex items-center justify-center space-y-2">
+        <ImageModal course_id={id} />
+        <ActualizarDatosModal course={course} />
+      </div>
       <h1 className="mt-8 text-center text-4xl">Instructores</h1>
       <div className="mt-8 flex-wrap flex justify-center ">
         {course.instructors.map((i) => (
@@ -138,14 +143,10 @@ const EditarCursoPage = async ({
         </div>
       </div>
       <DescripcionCuso
-        content="Este curso cuenta con muchas posibilidades para expandir tus
-        conocimientos, incluye informacion muy interesante sobre muchos aspectos
-        de la calistenia, como lo son los basicos,estaticos y freestyle."
+        content={course.descripcion}
       />
       <BeneficiosCurso
-        content="Este curso cuenta con muchas posibilidades para expandir tus
-        conocimientos, incluye informacion muy interesante sobre muchos aspectos
-        de la calistenia, como lo son los basicos,estaticos y freestyle."
+        content={course.beneficios}
       />
       <div className="fade-in-view">
         {" "}
