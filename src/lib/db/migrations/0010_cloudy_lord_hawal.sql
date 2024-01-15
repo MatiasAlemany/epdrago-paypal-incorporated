@@ -1,0 +1,1 @@
+ALTER TABLE "news" RENAME TO "eventos ";

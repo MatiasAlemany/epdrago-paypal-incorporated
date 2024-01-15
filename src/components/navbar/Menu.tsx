@@ -11,9 +11,11 @@ import {
 } from "../ui/dropdown-menu";
 import {
   CalendarCheck,
+  CircleUserRound,
   Flame,
   GraduationCap,
   Home,
+  LogIn,
   LogOut,
   MenuIcon,
   Phone,
@@ -58,7 +60,17 @@ const Menu = () => {
             <Link href="/eventos">Eventos</Link>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem
+          <DropdownMenuItem className="hover:bg-neutral-900">
+            <LogIn className="mr-3  h-4 w-4" />
+            <Link href="/cursos">Ingresar</Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem className="hover:bg-neutral-900">
+            <CircleUserRound className="mr-3  h-4 w-4" />
+            <Link href="/cursos" className="text-green-500">
+              Registrarse
+            </Link>
+          </DropdownMenuItem>
+          {/* <DropdownMenuItem
             onClick={() => {
               signOut(() => router.push("/"));
             }}
@@ -66,7 +78,7 @@ const Menu = () => {
           >
             <LogOut className="mr-3  h-4 w-4 text-red-500" />
             <h1 className="text-red-500">Salir</h1>
-          </DropdownMenuItem>
+          </DropdownMenuItem> */}
         </DropdownMenuContent>
       </DropdownMenu>
     </div>

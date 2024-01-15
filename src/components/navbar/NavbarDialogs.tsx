@@ -31,6 +31,7 @@ const NavbarDialogs = () => {
         <Dialog open={dialogRegisterOpen} onOpenChange={setDialogRegisterOpen}>
           <DialogTrigger>
             <Button
+              className="mr-2"
               variant="bordered"
               onClick={() => {
                 setDialogRegisterOpen(true);

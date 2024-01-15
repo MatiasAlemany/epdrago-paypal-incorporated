@@ -1,6 +1,9 @@
 "use client";
 import { type OurFileRouter } from "@/app/api/uploadthing/core";
-import { createInstructor, updateImage } from "@/lib/actions/edit/course_edit_actions";
+import {
+  createInstructor,
+  updateImage,
+} from "@/lib/actions/edit/course_edit_actions";
 import { UploadButton } from "@/utils/uploadthing";
 import {
   Modal,
@@ -11,6 +14,7 @@ import {
   Button,
   useDisclosure,
   Input,
+  Spinner,
 } from "@nextui-org/react";
 import { ImageIcon } from "lucide-react";
 import React, { useState } from "react";
@@ -18,7 +22,7 @@ import React, { useState } from "react";
 const ImageModal = ({ course_id }: { course_id: string }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [imgUrl, setImgUrl] = useState<string | undefined>(undefined);
-
+  const [uploading, setUploading] = useState(false);
   return (
     <>
       <Button className="mt-2" color="primary" onPress={onOpen}>
@@ -41,26 +45,36 @@ const ImageModal = ({ course_id }: { course_id: string }) => {
                       Imagen Subida!
                     </h1>
                   ) : (
-                    //@ts-ignore
-                    <UploadButton<OurFileRouter>
-                      endpoint="imageUploader"
-                      content={{
-                        button: "SUBIR IMAGEN",
+                    <div>
+                      {uploading ? (
+                        <Spinner color="success" />
+                      ) : (
+                        //@ts-ignore
+                        <UploadButton<OurFileRouter>
+                          endpoint="imageUploader"
+                          content={{
+                            button: "SUBIR IMAGEN",
 
-                        allowedContent: "4MB MAXIMO",
-                      }}
-                      appearance={{
-                        button: "bg-green-600 px-4 font-bold text-sm py-2",
-                      }}
-                      onClientUploadComplete={(res) => {
-                        if (res) {
-                          setImgUrl(res[0]!.url);
-                        }
-                      }}
-                      onUploadError={(error) => {
-                        console.log(error);
-                      }}
-                    />
+                            allowedContent: "4MB MAXIMO",
+                          }}
+                          appearance={{
+                            button: "bg-green-600 px-4 font-bold text-sm py-2",
+                          }}
+                          onUploadBegin={() => {
+                            setUploading(true);
+                          }}
+                          onClientUploadComplete={(res) => {
+                            if (res) {
+                              setImgUrl(res[0]!.url);
+                              setUploading(false);
+                            }
+                          }}
+                          onUploadError={(error) => {
+                            console.log(error);
+                          }}
+                        />
+                      )}
+                    </div>
                   )}
                   <input hidden name="img_url" value={imgUrl} />
                 </ModalBody>
