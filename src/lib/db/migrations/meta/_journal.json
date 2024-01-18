@@ -5,85 +5,15 @@
     {
       "idx": 0,
       "version": "5",
-      "when": 1704954516732,
-      "tag": "0000_gifted_lily_hollister",
+      "when": 1705567500946,
+      "tag": "0000_mysterious_king_bedlam",
       "breakpoints": true
     },
     {
       "idx": 1,
       "version": "5",
-      "when": 1704967146095,
-      "tag": "0001_sloppy_liz_osborn",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "5",
-      "when": 1705050767337,
-      "tag": "0002_lazy_carmella_unuscione",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "5",
-      "when": 1705052717685,
-      "tag": "0003_yielding_xorn",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "5",
-      "when": 1705057126293,
-      "tag": "0004_strange_leader",
-      "breakpoints": true
-    },
-    {
-      "idx": 5,
-      "version": "5",
-      "when": 1705058711409,
-      "tag": "0005_pale_the_captain",
-      "breakpoints": true
-    },
-    {
-      "idx": 6,
-      "version": "5",
-      "when": 1705141145788,
-      "tag": "0006_salty_hellcat",
-      "breakpoints": true
-    },
-    {
-      "idx": 7,
-      "version": "5",
-      "when": 1705145570669,
-      "tag": "0007_normal_stryfe",
-      "breakpoints": true
-    },
-    {
-      "idx": 8,
-      "version": "5",
-      "when": 1705222037843,
-      "tag": "0008_clammy_stingray",
-      "breakpoints": true
-    },
-    {
-      "idx": 9,
-      "version": "5",
-      "when": 1705224839331,
-      "tag": "0009_green_shadowcat",
-      "breakpoints": true
-    },
-    {
-      "idx": 10,
-      "version": "5",
-      "when": 1705350738551,
-      "tag": "0010_cloudy_lord_hawal",
-      "breakpoints": true
-    },
-    {
-      "idx": 11,
-      "version": "5",
-      "when": 1705351474977,
-      "tag": "0011_dear_titania",
+      "when": 1705567593004,
+      "tag": "0001_yielding_vin_gonzales",
       "breakpoints": true
     }
   ]

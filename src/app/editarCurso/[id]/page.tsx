@@ -105,6 +105,7 @@ const EditarCursoPage = async ({
               <AccordionContent>
                 {e.items.map((e, itemIndex) => (
                   <ModuleItemContainer
+                  course_id={course.id}
                     module_index={index + 1}
                     index={itemIndex + 1}
                     key={e.id}

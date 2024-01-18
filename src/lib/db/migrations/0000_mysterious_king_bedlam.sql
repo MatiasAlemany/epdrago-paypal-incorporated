@@ -1,30 +1,71 @@
+CREATE TABLE IF NOT EXISTS "certifications" (
+	"id" text NOT NULL,
+	"created_at" timestamp DEFAULT now() NOT NULL,
+	"course_id" uuid NOT NULL
+);
+--> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "courses" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"title" text NOT NULL,
 	"price" integer DEFAULT 0 NOT NULL,
 	"public" boolean DEFAULT false NOT NULL,
-	"introductory_video" text
+	"introductory_video" text,
+	"beneficios" text DEFAULT '' NOT NULL,
+	"descripcion" text DEFAULT '' NOT NULL,
+	"duracion" text DEFAULT '' NOT NULL,
+	"img_url" text,
+	"exam_id" uuid
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "course_progress" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"user_id" text NOT NULL,
 	"course_id" uuid NOT NULL,
-	"module_id" text,
-	"module_number" smallint
+	"module_id" text NOT NULL,
+	"module_number" smallint DEFAULT 0 NOT NULL,
+	"isFinished" boolean DEFAULT false NOT NULL
+);
+--> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "exams" (
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+	"course_id" uuid NOT NULL,
+	"user_id" uuid NOT NULL,
+	"last_time_done" timestamp
+);
+--> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "options" (
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+	"question_id" uuid NOT NULL,
+	"title" text NOT NULL,
+	"isCorrect" boolean DEFAULT false NOT NULL
+);
+--> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "questionary" (
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+	"module_item_id" uuid NOT NULL
+);
+--> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "questions" (
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+	"exam_id" uuid,
+	"title" text NOT NULL,
+	"questionary_id" uuid
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "instructors" (
-	"id" uuid DEFAULT gen_random_uuid(),
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"name" text NOT NULL,
 	"instagram" text NOT NULL,
-	"qualities" text NOT NULL
+	"qualities" text NOT NULL,
+	"img_url" text NOT NULL,
+	"course_id" uuid NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "modules" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"text" text NOT NULL,
-	"course_id" uuid
+	"course_id" uuid NOT NULL,
+	"createdAt" timestamp DEFAULT now()
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "modules_items" (
@@ -35,12 +76,11 @@ CREATE TABLE IF NOT EXISTS "modules_items" (
 	" module_id" uuid NOT NULL,
 	"pdf_url" text,
 	"video_url" text,
-	"exam_id" text,
 	"questionary_id" text,
-	"time_to_repeat_exam" integer
+	"frase" text
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "news" (
+CREATE TABLE IF NOT EXISTS "news " (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"title" text NOT NULL,
 	"content" text NOT NULL,
@@ -70,13 +110,15 @@ CREATE TABLE IF NOT EXISTS "users" (
 	"name" text NOT NULL,
 	"email" text NOT NULL,
 	"img_url" text,
+	"role" text DEFAULT 'user' NOT NULL,
 	CONSTRAINT "users_id_unique" UNIQUE("id")
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "usersToCourses" (
 	"user_id" text NOT NULL,
 	"course_id" uuid NOT NULL,
-	CONSTRAINT "usersToCourses_user_id_course_id_pk" PRIMARY KEY("user_id","course_id")
+	"payment_id" bigint NOT NULL,
+	CONSTRAINT "usersToCourses_user_id_course_id_payment_id_pk" PRIMARY KEY("user_id","course_id","payment_id")
 );
 --> statement-breakpoint
 DO $$ BEGIN
@@ -87,6 +129,12 @@ END $$;
 --> statement-breakpoint
 DO $$ BEGIN
  ALTER TABLE "usersToCourses" ADD CONSTRAINT "usersToCourses_course_id_courses_id_fk" FOREIGN KEY ("course_id") REFERENCES "public"."courses"("id") ON DELETE no action ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "usersToCourses" ADD CONSTRAINT "usersToCourses_payment_id_payment_schema_id_fk" FOREIGN KEY ("payment_id") REFERENCES "public"."payment_schema"("id") ON DELETE no action ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;

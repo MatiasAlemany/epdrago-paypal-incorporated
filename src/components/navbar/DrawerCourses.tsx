@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import {
   Drawer,
@@ -14,8 +13,18 @@ import { Button } from "../ui/button";
 import CourseContainer from "../course/CourseContainer";
 import { CourseProgressContainer } from "./CourseProgressContainer";
 import { CourseProgressItem } from "./CourseProgressItem";
+import { getUserCourseProgress } from "@/lib/actions/course_progress_actions";
 
-const DrawerCourses = () => {
+export default async function DrawerCourses({}) {
+  const progress = await getUserCourseProgress();
+  if (progress == undefined) {
+    return (
+      <div className=" flex justify-center items-center text-neutral-500  h-20">
+        No tienes ningun curso comprado
+      </div>
+    );
+  }
+
   return (
     <div>
       <Drawer>
@@ -31,10 +40,14 @@ const DrawerCourses = () => {
               Aqui encontraras todos los cursos que hayas comprado
             </DrawerDescription>
           </DrawerHeader>
-          <div>
-            <CourseProgressItem />
-            <CourseProgressItem />
-            <CourseProgressItem />
+          <div className="px-2">
+            {progress.map((e) => (
+              <CourseProgressItem
+                key={e.id}
+                customWidth={315}
+                courseProgress={e}
+              />
+            ))}
           </div>
 
           <DrawerFooter>
@@ -46,6 +59,4 @@ const DrawerCourses = () => {
       </Drawer>
     </div>
   );
-};
-
-export default DrawerCourses;
+}

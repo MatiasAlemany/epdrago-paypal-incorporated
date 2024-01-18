@@ -12,10 +12,11 @@ import {
 import MercadoPagoIcon from "../MercadoPago_Icon";
 import { Course, CourseGet } from "@/lib/actions/get_courses";
 
-const BackGroundCourse: React.FC<CourseGet> = ({
+const BackGroundCourse: React.FC<CourseGet & { onBuy: () => void }> = ({
   img_url,
   price,
   duracion,
+  onBuy,
   id,
   title,
 }) => {
@@ -47,9 +48,12 @@ const BackGroundCourse: React.FC<CourseGet> = ({
           <h1 className=" text-lg md:text-2xl my-2 font-bold text-white">
             Precio - {price}$
           </h1>
-          <Button color="primary" className="font-bold">
-            <MercadoPagoIcon /> Comprar
-          </Button>
+
+          <form action={onBuy}>
+            <Button type="submit" color="primary" className="font-bold">
+              <MercadoPagoIcon /> Comprar
+            </Button>
+          </form>
         </div>
       </div>
     </div>

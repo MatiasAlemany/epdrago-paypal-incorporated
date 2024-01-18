@@ -1,11 +1,14 @@
-import { getProgress } from "@/lib/actions/get_progress";
 import HorizontalProgressBar from "../course/HorizontalProgressBar";
 import { redirect } from "next/navigation";
 import { CourseProgressItem } from "./CourseProgressItem";
+import {
+  getUserCourseProgress,
+  userCourses,
+} from "@/lib/actions/course_progress_actions";
 
 export async function CourseProgressContainer() {
-  const progress = await getProgress();
-  if (!(progress == undefined)) {
+  const progress = await getUserCourseProgress();
+  if (progress == undefined) {
     return (
       <div className=" flex justify-center items-center text-neutral-500  h-20">
         No tienes ningun curso comprado
@@ -15,9 +18,9 @@ export async function CourseProgressContainer() {
 
   return (
     <div className="flex flex-col">
-      <CourseProgressItem customWidth={315} />
-      <CourseProgressItem customWidth={315} />
-      <CourseProgressItem customWidth={315} />
+      {progress.map((e) => (
+        <CourseProgressItem key={e.id} customWidth={315} courseProgress={e} />
+      ))}
     </div>
   );
 }

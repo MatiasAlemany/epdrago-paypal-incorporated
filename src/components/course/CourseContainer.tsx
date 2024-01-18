@@ -48,7 +48,7 @@ const CourseContainer = ({
           size="small"
           showValue={true}
         />
-        <h3 className="text-neutral-400 text-sm mt-1">Duracion:{duracion}</h3>
+        <h3 className="text-neutral-400 text-sm mt-1">Duracion: {duracion}</h3>
         <p className="text-gray-300 text-sm max-h-[180px] mt-2 overflow-hidden">
           {descripcion}
         </p>

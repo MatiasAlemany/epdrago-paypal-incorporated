@@ -1,8 +1,10 @@
 import { MetadataPreference } from "@/lib/actions/create_preference";
+import { getFirstModuleOfCourse } from "@/lib/actions/edit/modules_actions";
 import { db } from "@/lib/db";
 import { courses } from "@/lib/db/schema/course";
 import { course_progress } from "@/lib/db/schema/course_progress";
 import { InsertPayment, payment_schema } from "@/lib/db/schema/payment";
+import { usersToCourses } from "@/lib/db/schema/users_to_courses";
 import { paymentNotification } from "@/lib/types/payment_notification";
 import axios from "axios";
 import { eq } from "drizzle-orm";
@@ -39,15 +41,26 @@ async function handler(req: NextRequest) {
         }
 
 
-            console.log(paymentInsertValues);
-            const course = await db.select().from(courses).where(eq(courses.id, metadata.product_id));
-            await db.insert(payment_schema).values(paymentInsertValues);
-            // await db.insert(course_progress).values({course_id: metadata.product_id, module_id})
- 
-            console.log('ebook bought!!');
-        
+        console.log(paymentInsertValues);
+        const paymentDB = await db.insert(payment_schema).values(paymentInsertValues);
+        await db.insert(usersToCourses).values({ course_id: metadata.product_id, user_id: metadata.user_id });
+        const firstModule = await getFirstModuleOfCourse(metadata.product_id);
+        if (firstModule == undefined) {
+            throw Error('First Module not found!');
+        }
+        await db.insert(course_progress).values({
+            isFinished: false,
+            module_number: 0,
+            user_id: metadata.user_id,
+            course_id: metadata.product_id,
+            module_id: firstModule.id
+        })
 
-  
+
+        console.log('course bought!!');
+
+
+
     } catch (error) {
         console.log(error);
         return NextResponse.json({ message: "ERRO ON SAVING TO DB" }, { status: 500 });

@@ -5,6 +5,7 @@ import z from 'zod';
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { ExtractModified } from "@/lib/types/extract_modified";
 import { modules } from "./modules";
+import { questionary } from "./exams";
 
 const moduleType = z.enum(['questionario', 'pdf', 'video'])
 export const moduleValues = moduleType.options;
@@ -18,10 +19,9 @@ export const modules_items = pgTable('modules_items', {
     module_id: uuid(' module_id').notNull(),
     pdf_url: text('pdf_url'),
     video_url: text('video_url'),
-    exam_id: text('exam_id'),
     questionary_id: text('questionary_id'),
-    time_to_repeat_exam: integer('time_to_repeat_exam'),
-    frase: text('frase')
+    frase: text('frase'),
+
 
 })
 
@@ -30,13 +30,20 @@ export const modules_items_relations = relations(modules_items, ({ one }) => ({
     module: one(modules, {
         fields: [modules_items.module_id],
         references: [modules.id]
+    }),
+    questionary: one(questionary, {
+        fields: [modules_items.questionary_id],
+        references: [questionary.id]
     })
+
 }))
 
 const moduleInsert = createInsertSchema(modules_items);
 const moduleZod = createSelectSchema(modules_items)
 
 export type ModuleItemInsert = z.infer<typeof moduleInsert>;
+export type ModuleItemSelect = z.infer<typeof moduleZod>;
+
 const module_properties = moduleZod.pick({ position: true, module_id: true, title: true, });
 
 const module_pdf = moduleZod
@@ -53,6 +60,7 @@ export const moduleZodIntersecttion = z.intersection(module_discriminated_union,
 
 export type ModuleZod = z.infer<typeof moduleZodIntersecttion>;
 export type ModuleVideoType = ExtractModified<ModuleZod, 'type', 'video'>
+export type ModulePDFType = ExtractModified<ModuleZod, 'type', 'pdf'>
 
 
 // const newModule: ModuleInsert = { course_id: '', id: '', position: 1, title: 'Curso', type: 'pdf' };

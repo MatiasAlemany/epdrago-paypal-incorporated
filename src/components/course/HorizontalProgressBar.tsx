@@ -33,7 +33,7 @@ const HorizontalProgressBar: React.FC<HorizontalProgressBarProps> = ({
         />
         <div className="h-3 w-[100%] mr-2 rounded-xl bg-[#464646]" />
         <h1 className="pl-2 w-6 text-xs font-bold text-green-500 mr-2">
-          {percentage * 100}%
+          {(percentage * 100).toFixed(1)}%
         </h1>
       </div>
     </div>

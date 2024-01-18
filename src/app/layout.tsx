@@ -7,6 +7,8 @@ import { cn } from "@/lib/utils";
 import Footer from "@/components/home/Footer";
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
+import { Toaster } from "@/components/ui/sonner"
+
 export const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -35,6 +37,8 @@ export default function RootLayout({
           </Providers>
 
           <Footer />
+          <Toaster />
+
         </body>
       </html>
     </ClerkProvider>

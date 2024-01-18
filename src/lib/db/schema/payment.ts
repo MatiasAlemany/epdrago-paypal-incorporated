@@ -25,7 +25,7 @@ export const payment_schema_relation = relations(payment_schema, ({ one }) => ({
     user: one(users, {
         fields: [payment_schema.user_id],
         references: [users.id]
-    })
+    }),
 }))
 
 

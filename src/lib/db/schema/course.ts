@@ -7,6 +7,7 @@ import { modules } from "./modules";
 import { course_progress } from "./course_progress";
 import { certifications } from './certifications';
 import { instructors } from './instructors';
+import { exams } from "./exams";
 
 export const courses = pgTable('courses', {
     id: uuid('id').defaultRandom().primaryKey(),
@@ -17,19 +18,24 @@ export const courses = pgTable('courses', {
     beneficios: text('beneficios').default("").notNull(),
     descripcion: text('descripcion').default("").notNull(),
     duracion: text('duracion').default("").notNull(),
-    img_url: text("img_url")
+    img_url: text("img_url"),
+    exam_id: uuid("exam_id")
 
 })
 
 
-export const courses_relations = relations(courses, ({ many }) => ({
+export const courses_relations = relations(courses, ({ many, one }) => ({
     users_to_courses: many(usersToCourses),
     testimonials: many(testimonials),
     modules: many(modules),
     payments: many(payment_schema),
     course_progress: many(course_progress),
     certifications: many(certifications),
-    instructors: many(instructors)
+    instructors: many(instructors),
+    exam: one(exams, {
+        fields: [courses.exam_id],
+        references: [exams.id]
+    })
 
 }))
 
