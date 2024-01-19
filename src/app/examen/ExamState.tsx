@@ -1,4 +1,5 @@
 "use client";
+import OptionAnswer from "@/components/questionary/OptionAnswer";
 import QuestionContainer from "@/components/questionary/QuestionContainer";
 import { padding } from "@/components/styles/padding";
 import {
@@ -19,9 +20,9 @@ import {
 } from "@nextui-org/react";
 import { Check, PlusIcon } from "lucide-react";
 import { useState } from "react";
-import OptionAnswer from "./OptionAnswer";
+import FinishedExam from "./FinishedExam";
 
-const CuestionarioState = ({ questions }: { questions: Questions }) => {
+const ExamState = ({ questions }: { questions: Questions }) => {
   const [questionary, setquestionary] = useState<Questions>(questions);
 
   const [selectedOptions, setSelectedOptions] = useState<string[]>(
@@ -34,36 +35,14 @@ const CuestionarioState = ({ questions }: { questions: Questions }) => {
   return (
     <div>
       {finishedQuestionary ? (
-        <div className="flex flex-col mx-auto px-8 md:px-16  overflow-y-scroll py-8 md:py-16 rounded-lg bg-neutral-900 max-w-[1000px] w-full min-h-[60vh] ">
-          <h1 className="text-green-500 font-bold text-3xl mb-2">
-            Terminaste...
-          </h1>
-          <div className="flex flex-col">
-            {questionary.map((e, index) => (
-              <div key={e.id} className="py-2">
-                <h1 className="text-lg font-bold">
-                  <span className="font-bold text-neutral-500 mr-2">
-                    {index + 1}.
-                  </span>
-                  {e.title}
-                </h1>
-                <div className="flex mt-1">
-                  <Check className="mr-2 text-green-400" />
-                  {e.options.find((option) => option.isCorrect)?.title}
-                </div>
-
-                <OptionAnswer
-                  option={e.options.find(
-                    (option) => option.id == selectedOptions[index]
-                  )}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
+        <FinishedExam
+          questions={questionary}
+          selectedOptions={selectedOptions}
+        />
       ) : (
         <div className="rounded-lg bg-neutral-900 w-full min-h-[60vh] max-w-[1000px] p-6 mx-auto flex flex-col">
           <QuestionContainer
+            type="exam"
             onCreateResponse={(questionId: string, option: Option) => {
               const questionaryNew = questionary.map((e) => {
                 if (questionId == e.id) {
@@ -111,7 +90,7 @@ const CuestionarioState = ({ questions }: { questions: Questions }) => {
               }}
             >
               {questionary.length - 1 == index
-                ? "Terminar cuestionario"
+                ? "Terminar examen"
                 : "Siguiente"}
             </Button>
           </div>
@@ -121,4 +100,4 @@ const CuestionarioState = ({ questions }: { questions: Questions }) => {
   );
 };
 
-export default CuestionarioState;
+export default ExamState;

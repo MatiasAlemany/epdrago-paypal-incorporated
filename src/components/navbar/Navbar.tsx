@@ -1,11 +1,8 @@
 import { cn } from "@/lib/utils";
-import { Button, DropdownMenu } from "@nextui-org/react";
 import { padding } from "../styles/padding";
 import EpdragoIcon from "./EpdragoIcon";
 
-import { MenuIcon } from "lucide-react";
 import NavbarDialogs from "./NavbarDialogs";
-import HorizontalProgressBar from "../course/HorizontalProgressBar";
 import { CourseProgressContainer } from "./CourseProgressContainer";
 import { currentUser } from "@clerk/nextjs/server";
 import Menu from "./Menu";

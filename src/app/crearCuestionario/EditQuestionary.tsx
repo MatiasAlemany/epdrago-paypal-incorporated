@@ -1,24 +1,28 @@
 "use client";
-import QuestionContainer from "@/components/questionary/QuestionContainer";
 import { padding } from "@/components/styles/padding";
-import {
-  Option,
-  QuestionGet,
-  Questions
-} from "@/lib/actions/questionary_actionst";
+import { PageParams } from "@/lib/types/params";
 import { cn } from "@/lib/utils";
 import {
   Button,
+  Divider,
   Input,
   Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
-  useDisclosure
+  useDisclosure,
 } from "@nextui-org/react";
+import React, { useState } from "react";
+import {
+  Option,
+  QuestionGet,
+  QuestionaryGet,
+  Questions,
+} from "@/lib/actions/questionary_actionst";
+import QuestionContainer from "@/components/questionary/QuestionContainer";
+import EditDialog from "@/components/edit/EditDialog";
 import { PlusIcon } from "lucide-react";
-import { useState } from "react";
 
 const CrearCuestionario = ({
   createQuestionary,
@@ -31,7 +35,17 @@ const CrearCuestionario = ({
     {
       title: "Cuanto value el front",
       id: "",
-      options: [],
+      options: [
+        { title: "1.2", id: "dcsd", isCorrect: false, question_id: "" },
+        { title: "1.5", id: "sdfds", isCorrect: false, question_id: "" },
+        { title: "2.0", id: "vcsdvs", isCorrect: false, question_id: "" },
+        {
+          title: "No lo se.",
+          id: "sdvssdadsa",
+          isCorrect: true,
+          question_id: "",
+        },
+      ],
       exam_id: null,
       questionary_id: null,
     },

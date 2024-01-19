@@ -15,6 +15,13 @@
       "when": 1705567593004,
       "tag": "0001_yielding_vin_gonzales",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1705621448126,
+      "tag": "0002_early_mach_iv",
+      "breakpoints": true
     }
   ]
 }

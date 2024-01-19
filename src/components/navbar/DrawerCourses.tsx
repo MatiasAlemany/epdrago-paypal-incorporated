@@ -40,13 +40,9 @@ export default async function DrawerCourses({}) {
               Aqui encontraras todos los cursos que hayas comprado
             </DrawerDescription>
           </DrawerHeader>
-          <div className="px-2">
+          <div className="">
             {progress.map((e) => (
-              <CourseProgressItem
-                key={e.id}
-                customWidth={315}
-                courseProgress={e}
-              />
+              <CourseProgressItem key={e.id} courseProgress={e} />
             ))}
           </div>
 

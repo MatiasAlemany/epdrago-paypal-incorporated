@@ -1,5 +1,5 @@
 import { relations } from "drizzle-orm";
-import { boolean, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import { boolean, pgTable, primaryKey, text, timestamp, uuid } from "drizzle-orm/pg-core";
 import { courses } from "./course";
 import { users } from "./users";
 import { modules_items } from "./modules_items";
@@ -9,10 +9,10 @@ import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 export const exams = pgTable("exams", {
     id: uuid('id').defaultRandom().primaryKey(),
     course_id: uuid('course_id').notNull(),
-    user_id: uuid('user_id').notNull(),
     last_time_done: timestamp('last_time_done'),
 
 })
+
 
 
 export const questionary = pgTable("questionary", {
@@ -34,11 +34,8 @@ export const exams_relations = relations(exams, ({ one, many }) => ({
         fields: [exams.course_id],
         references: [courses.id]
     }),
-    user: one(users, {
-        fields: [exams.user_id],
-        references: [users.id]
-    }),
-    many: many(questions)
+
+    questions: many(questions)
 }))
 
 

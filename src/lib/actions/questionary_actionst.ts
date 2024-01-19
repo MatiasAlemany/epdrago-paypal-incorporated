@@ -1,8 +1,9 @@
 import { currentUser } from '@clerk/nextjs';
-import { options, questionary, questions } from '../db/schema/exams';
+import { exams, options, questionary, questions } from '../db/schema/exams';
 import { db } from '../db';
 import { eq } from 'drizzle-orm';
 import { modules_items } from '../db/schema/modules_items';
+import { courses } from '../db/schema/course';
 
 
 export type Option = QuestionaryGet['questions'][number]['options'][number];
@@ -49,6 +50,23 @@ export async function createQuestionary(module_id: string, questionsValues: Ques
     }
 
     await db.update(modules_items).set({ questionary_id: questionaryDB[0]!.id }).where(eq(modules_items.id, module_id));
+
+    console.log('Created Questionary')
+}
+
+
+
+export async function createExam(course_id: string, questionsValues: Questions) {
+
+    const newExam = await db.insert(exams).values({ course_id: course_id }).returning();
+    for (const question of questionsValues) {
+        const questionDB = await db.insert(questions).values({ title: question.title, exam_id: newExam[0]?.id }).returning();
+        for (const option of question.options) {
+            await db.insert(options).values({ question_id: questionDB[0]!.id, title: option.title, isCorrect: option.isCorrect, })
+        }
+    }
+
+    await db.update(courses).set({ exam_id: newExam[0]?.id }).where(eq(courses.id, course_id));
 
     console.log('Created Questionary')
 }

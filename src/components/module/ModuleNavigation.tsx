@@ -68,8 +68,15 @@ const ModuleNavigationTimeline = async ({
           <form
             action={async () => {
               "use server";
+
+              await db
+                .update(course_progress)
+                .set({ isFinished: true })
+                .where(
+                  eq(course_progress.course_id, navigationTimeline.course_id)
+                );
               redirect(
-                `/module/${navigationTimeline.nextModuleId}?course=${navigationTimeline.course_id}`
+                `/darExamen?exam_id=${navigationTimeline.exam_id}&course_id=${navigationTimeline.course_id}`
               );
             }}
           >

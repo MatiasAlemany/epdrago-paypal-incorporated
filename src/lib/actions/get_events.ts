@@ -11,3 +11,8 @@ export async function getEvents() {
     return events;
   }
   
+export async function createEvent(form: FormData) {
+  const img = form.get('img_url')
+  const title = form.get('title')
+  const content = form.get('content')
+}

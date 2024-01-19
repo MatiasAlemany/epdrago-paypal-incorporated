@@ -42,7 +42,12 @@ const EditarCursoPage = async ({
 
   return (
     <div>
-      <BackGroundCourse {...course} />
+      <BackGroundCourse
+        onBuy={async () => {
+          "use server";
+        }}
+        {...course}
+      />
       <div className="flex-col flex items-center justify-center space-y-2">
         <ImageModal course_id={id} />
         <ActualizarDatosModal course={course} />
@@ -105,7 +110,7 @@ const EditarCursoPage = async ({
               <AccordionContent>
                 {e.items.map((e, itemIndex) => (
                   <ModuleItemContainer
-                  course_id={course.id}
+                    course_id={course.id}
                     module_index={index + 1}
                     index={itemIndex + 1}
                     key={e.id}
@@ -142,13 +147,37 @@ const EditarCursoPage = async ({
             </form>
           </EditDialog>
         </div>
+        <div className="flex justify-center">
+          <form
+            action={async () => {
+              "use server";
+              redirect(`/crearExamen?course_id=${course.id}&`);
+            }}
+          >
+            <button className="bg-purple-800 rounded-xl mt-2 px-4 py-2 ">
+              Crear Examen
+            </button>
+          </form>
+        </div>
+        {course.exam_id != null && (
+          <div className="flex justify-center">
+            <form
+              action={async () => {
+                "use server";
+                redirect(
+                  `/examen?course_id=${course.id}&exam_id=${course.exam_id}`
+                );
+              }}
+            >
+              <button className="bg-purple-800 rounded-xl mt-2 px-4 py-2 ">
+                Ver Examen
+              </button>
+            </form>
+          </div>
+        )}
       </div>
-      <DescripcionCuso
-        content={course.descripcion}
-      />
-      <BeneficiosCurso
-        content={course.beneficios}
-      />
+      <DescripcionCuso content={course.descripcion} />
+      <BeneficiosCurso content={course.beneficios} />
       <div className="fade-in-view">
         {" "}
         <h1 className="mt-12 mb-8 text-center text-2xl font-bold lg:text-4xl">

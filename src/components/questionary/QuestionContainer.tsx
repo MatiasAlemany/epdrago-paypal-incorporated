@@ -16,17 +16,20 @@ import {
 import { Check, DeleteIcon, PlusIcon, Trash } from "lucide-react";
 import React, { useState } from "react";
 import OptionContainer from "./OptionsContainer";
+import OptionContainerExam from "./OptionExamAnswer";
 
 const QuestionContainer = ({
   question,
   currentQuestionSelected,
   onClick,
   onCreateResponse,
+  type = 'questionary'
 }: {
   question: QuestionGet;
   currentQuestionSelected: string;
   onClick: (questionId: string) => void;
   onCreateResponse: (questionId: string, option: Option) => void;
+  type?: 'exam' | "questionary"
 }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [optionTitle, setoptionTitle] = useState("");
@@ -35,8 +38,18 @@ const QuestionContainer = ({
     <div className="">
       <h1 className="font-bold text-2xl text-center">{question.title}</h1>
       <Divider className="my-3" />
-      {question.options.map((e, index) => (
+      { type == 
+       "questionary" &&  question.options.map((e, index) => (
         <OptionContainer
+          key={e.id}
+          option={e}
+          currentQuestionSelected={currentQuestionSelected}
+          onClick={onClick}
+        />
+      ))}
+           { type == 
+       "exam" &&  question.options.map((e, index) => (
+        <OptionContainerExam
           key={e.id}
           option={e}
           currentQuestionSelected={currentQuestionSelected}

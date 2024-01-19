@@ -2,6 +2,7 @@ import BeneficiosCurso from "@/components/course/BeneficiosCurso";
 import DescripcionCuso from "@/components/course/DescripcionCurso";
 import ImageModal from "@/components/course/ImageModal";
 import ModuleItemContainer from "@/components/course/ModuleItemContainer";
+import PreguntaFrecuenteContainer from "@/components/course/PreguntaFrecuenteContainer";
 import Testimonials from "@/components/course/Testimonials";
 import YoutubePlayerCourse from "@/components/course/YoutubePlayer";
 import BackGroundCourse from "@/components/course/backgroundCourse";
@@ -130,7 +131,7 @@ const EditarCursoPage = async ({
       <BeneficiosCurso content={course.beneficios} />
       <div className="fade-in-view">
         {" "}
-        <h1 className="mt-12 mb-8 text-center text-2xl font-bold lg:text-4xl">
+        <h1 className="mt-12 mb-8 text-neutral-300 text-center text-3xl font-bold lg:text-4xl">
           Testimonios
         </h1>
       </div>
@@ -151,28 +152,16 @@ const EditarCursoPage = async ({
     de la calistenia, como lo son los basicos,estaticos y freestyle."
         />
       </div>
-      {/* <h1 className="mt-12 mb-12 text-center text-2xl font-bold lg:text-4xl">
-        Marcas y empresas que avalan nuestros cursos
+      <h1 className="mt-12 mb-8 text-green-400  text-center text-2xl font-extrabold lg:text-4xl">
+        Preguntas Frecuentes
       </h1>
-      <div className="flex flex-wrap justify-center gap-8 px-8 md:px-16 lg:px-32">
-        <div className="relative mb-16 h-16 w-16  overflow-hidden rounded-full md:h-24 md:w-24  ">
-          <Image
-            src="/burgerking-icon.png"
-            className="object-cover"
-            alt="burger"
-            fill={true}
-          />
-        </div>
-        <div className="relative h-16  w-16 overflow-hidden  rounded-full md:h-24 md:w-24  ">
-          <Image
-            src="/macdonal-icon.png"
-            className="object-cover"
-            alt="burger"
-            fill={true}
-          />
-        </div>
-      </div> */}
-      <div className="flex justify-center">
+      <div className="flex flex-col items-center">
+        <PreguntaFrecuenteContainer />
+        <PreguntaFrecuenteContainer />
+        <PreguntaFrecuenteContainer />
+      </div>
+
+      <div className="flex justify-center py-8">
         <button
           type="button"
           className="bg-bl my-4 mx-auto rounded-full bg-green-500 px-12 py-4 text-xl font-bold text-black"
