@@ -64,13 +64,13 @@ export default function App() {
 
 const InputsForModule = ({ moduleType }: { moduleType: ModuleEnums }) => {
   switch (moduleType) {
-    case moduleValues[3]:
+    case "video":
       return (
         <div className="flex flex-col">
           <Input label="Video url" />
         </div>
       );
-    case moduleValues[2]:
+    case "pdf":
       return (
         <div className="flex flex-col">
           <Input label="Pdf url" />

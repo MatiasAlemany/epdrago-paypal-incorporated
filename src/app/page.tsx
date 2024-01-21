@@ -1,3 +1,4 @@
+import CarousellData from "@/components/home/CarousellData";
 import CarousellHome from "@/components/home/CarousellHome";
 import DescriptionContainer from "@/components/home/DescriptionContainer";
 import FeaturesContainer from "@/components/home/FeaturesContainer";
@@ -7,7 +8,7 @@ import { cn } from "@/lib/utils";
 export default function Home() {
   return (
     <div className={cn("pt-36 flex flex-col px-20 pb-40", padding)}>
-      <CarousellHome />
+      <CarousellData  />
       <FeaturesContainer />
       <div className="flex flex-col items-center pt-20 appear-from-bottom">
         <h1 className="text-green-500 font-bold text-4xl text-center">

@@ -5,7 +5,6 @@ import { cn } from "@/lib/utils";
 
 const EventosPage = async () => {
   const events = await getEvents();
-  console.log(events);
   return <div className={cn("min-h-screen pt-40", padding)}>
     {events.map((e) => <EventContainer key={e.id} {...e}/>)}
   </div>;

@@ -14,7 +14,9 @@ const EventContainer = (event: EventDB) => {
         />
       </div>
       <h1 className="mt-3 text-2xl font-bold">{event.title}</h1>
-      <p className="mt-2 text-neutral-400 text-sm">{event.content}</p>
+      <p className="mt-2  text-neutral-400 text-sm cutoff-text">
+        {event.content}
+      </p>
     </div>
   );
 };
