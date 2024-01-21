@@ -3,32 +3,25 @@
 import { ModulePDFType } from "@/lib/db/schema/modules_items";
 import { Button } from "@nextui-org/react";
 import { CheckCircle } from "lucide-react";
+import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { toast } from "sonner";
 
 const ModulePDF = ({ modulePDF }: { modulePDF: ModulePDFType }) => {
-  useEffect(() => {
-    setTimeout(() => {
-      toast("Estas muy cerca de terminar el curso no te rindas!", {
-        description: "De parte de Axel Dubin",
-        action: {
-          label: "Ok",
-          onClick: () => console.log("Undo"),
-        },
-        classNames: {
-          toast: "min-w-[400px] mr-40",
-          title: "text-2xl font-bold",
-        },
-        duration: 10000,
-      });
-    }, 2000);
-  }, []);
-
+  const router = useRouter();
   return (
-    <div className="flex justify-center items-center flex-col ">
+    <div className="flex justify-center items-center flex-col h-[50vh]">
       <div className="max-w-[1080px]">
         <h1 className="font-bold text-3xl pb-4 ">Modulo: {modulePDF.title}</h1>
       </div>
+      <Button
+        onClick={() => {
+          router.push(modulePDF.pdf_url!);
+        }}
+        className="bg-red-700 mb-20 w-40"
+      >
+        Descargar PDF
+      </Button>
     </div>
   );
 };

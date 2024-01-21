@@ -14,16 +14,16 @@ const DescriptionItem = ({
   return (
     <div
       className={cn(
-        "flex flex-col my-4 mt-16 fade-in-view",
+        "flex flex-col py-8 mt-16 fade-in-view",
         orientation == "left" ? "items-start" : "items-end"
       )}
     >
-      <h1 className=" font-black text-xl tracking-wide text-green-500">
+      <h1 className=" font-black text-xl lg:text-2xl tracking-wide text-green-500">
         {title.toUpperCase()}
       </h1>
       <p
         className={cn(
-          "text-neutral-300 max-w-[500px] mt-4",
+          "text-neutral-300 max-w-[600px] mt-4 text-md lg:text-lg",
           orientation == "left" ? "items-start" : "text-end"
         )}
       >
