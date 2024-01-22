@@ -23,12 +23,12 @@ export default async function Navbar() {
             <div></div>
           ) : (
             <div className="w-[400px] min-h-20 max-h-60 overflow-y-scroll px-2 py-4">
-              <CourseProgressContainer />
+              <CourseProgressContainer userId={user.id} />
             </div>
           )}
         </NavbarNavigationMenu>
         <div className="lg:hidden block">
-          {user == null ? <div></div> : <DrawerCourses />}
+          {user == null ? <div></div> : <DrawerCourses userId={user.id} />}
         </div>
         {user != null ? <SignOutButton /> : <NavbarDialogs />}
 

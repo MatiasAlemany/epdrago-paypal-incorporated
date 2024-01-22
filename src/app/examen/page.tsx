@@ -19,7 +19,6 @@ export default async function ExamenPage({
     },
   });
 
-  console.log(exam);
 
   if (exam == undefined) {
     return <div>Examen no encontrado</div>;

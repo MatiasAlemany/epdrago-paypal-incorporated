@@ -14,8 +14,7 @@ const HorizontalProgressBar: React.FC<HorizontalProgressBarProps> = ({
   maxWidth,
 }) => {
   const { width } = useWindowDimensions();
-  console.log(width);
-  console.log(maxWidth);
+
   return (
     <div className=" relative mt-2 h-3">
       <div className="flex flex-row items-center">

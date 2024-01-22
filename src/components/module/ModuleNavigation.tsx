@@ -7,6 +7,12 @@ import { Button } from "@nextui-org/react";
 import { eq } from "drizzle-orm";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import ButtonAsync from "./ButtonAsync";
+import { action } from "../../lib/actions/safe_action";
+import {
+  setExamModuleProgress,
+  setNextModuleProgress,
+} from "@/lib/actions/course_progress_actions";
 
 export type ModuleNavigationI = {
   previous: string | undefined;
@@ -25,9 +31,8 @@ const ModuleNavigationTimeline = async ({
   course_id: string;
 }) => {
   const navigationTimeline = await moduleTimeline(course_id, module_id);
-  console.log(navigationTimeline);
   return (
-    <div className="flex flex-row justify-between pt-4">
+    <div className="flex flex-row justify-between items-center pt-4">
       <form
         action={async () => {
           "use server";
@@ -44,46 +49,19 @@ const ModuleNavigationTimeline = async ({
       </form>
 
       {!navigationTimeline.isLastModule && (
-        <form
-          action={async () => {
-            "use server";
-            await db
-              .update(course_progress)
-              .set({ module_id: navigationTimeline.nextModuleId })
-              .where(
-                eq(course_progress.course_id, navigationTimeline.course_id)
-              );
-            redirect(
-              `/module/${navigationTimeline.nextModuleId}?course=${navigationTimeline.course_id}`
-            );
-          }}
-        >
-          <Button type="submit" color="success">
-            Siguiente Modulo
-          </Button>
-        </form>
+        <ButtonAsync
+          argument={navigationTimeline}
+          title="Siguiente modulo"
+          onClick={setNextModuleProgress}
+        />
       )}
       {navigationTimeline.isLastModule &&
         !navigationTimeline.exam_id != null && (
-          <form
-            action={async () => {
-              "use server";
-
-              await db
-                .update(course_progress)
-                .set({ isFinished: true })
-                .where(
-                  eq(course_progress.course_id, navigationTimeline.course_id)
-                );
-              redirect(
-                `/darExamen?exam_id=${navigationTimeline.exam_id}&course_id=${navigationTimeline.course_id}`
-              );
-            }}
-          >
-            <Button type="submit" className="self-end" color="success">
-              Realizar examen final
-            </Button>
-          </form>
+          <ButtonAsync
+            argument={navigationTimeline}
+            title="Realizar Examen"
+            onClick={setExamModuleProgress}
+          />
         )}
     </div>
   );

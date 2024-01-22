@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { db } from "../db";
 import { news } from "../db/schema/news";
+import { eq } from "drizzle-orm";
 
 
 export type Events = AwaitedReturn<typeof getEvents>
@@ -22,4 +23,17 @@ export async function createEvent(form: FormData) {
 
   })
   revalidatePath('/eventos')
+}
+
+export async function getEvent(eventId : string) {
+  const events = await db.select().from(news).where(eq(news.id, eventId));
+  const event = events[0];
+  if (event == undefined) {
+    throw Error('Evento no encontrado!')
+
+
+  }
+
+  return event;
+  
 }

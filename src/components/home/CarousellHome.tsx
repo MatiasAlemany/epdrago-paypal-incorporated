@@ -10,6 +10,7 @@ import { Events } from "@/lib/actions/get_events";
 import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
 import React from "react";
+import { Skeleton } from "../ui/skeleton";
 
 const CarousellHome = ({ data }: { data: Events }) => {
   const plugin = React.useRef(
@@ -18,6 +19,11 @@ const CarousellHome = ({ data }: { data: Events }) => {
   return (
     <Carousel plugins={[Autoplay({ delay: 5000 })]} className="mx-8">
       <CarouselContent>
+        {data.length == 0 && (
+          <CarouselItem>
+            <Skeleton className="aspect-[18/8] rounded-lg" />
+          </CarouselItem>
+        )}
         {data.map((e) => (
           <CarouselItem key={e.id}>
             <div className=" cursor-pointer bg-neutral-900 aspect-[18/8] relative rounded-lg overflow-hidden">

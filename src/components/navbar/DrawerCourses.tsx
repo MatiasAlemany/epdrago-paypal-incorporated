@@ -15,8 +15,8 @@ import { CourseProgressContainer } from "./CourseProgressContainer";
 import { CourseProgressItem } from "./CourseProgressItem";
 import { getUserCourseProgress } from "@/lib/actions/course_progress_actions";
 
-export default async function DrawerCourses({}) {
-  const progress = await getUserCourseProgress();
+export default async function DrawerCourses({userId} : {userId: string}) {
+  const progress = await getUserCourseProgress(userId);
   if (progress == undefined) {
     return (
       <div className=" flex justify-center items-center text-neutral-500  h-20">

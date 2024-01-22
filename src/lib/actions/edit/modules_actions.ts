@@ -94,3 +94,4 @@ export async function getFirstModuleOfCourse (courseId: string) {
     const {modules} =  await getModulesOfCourse(courseId);
     return modules[0];
 }
+

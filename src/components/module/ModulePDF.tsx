@@ -8,7 +8,6 @@ import React, { useEffect } from "react";
 import { toast } from "sonner";
 
 const ModulePDF = ({ modulePDF }: { modulePDF: ModulePDFType }) => {
-  const router = useRouter();
   return (
     <div className="flex justify-center items-center flex-col h-[50vh]">
       <div className="max-w-[1080px]">
@@ -16,7 +15,7 @@ const ModulePDF = ({ modulePDF }: { modulePDF: ModulePDFType }) => {
       </div>
       <Button
         onClick={() => {
-          router.push(modulePDF.pdf_url!);
+          window.open(modulePDF.pdf_url!);
         }}
         className="bg-red-700 mb-20 w-40"
       >

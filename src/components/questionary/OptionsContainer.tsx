@@ -16,7 +16,7 @@ const OptionContainer: React.FC<OptionContainerProps> = ({
   currentQuestionSelected,
 }) => {
   const selected: boolean = currentQuestionSelected == option.id;
-
+  
   return (
     <div className="flex my-4 items-center" key={option.id}>
       <div

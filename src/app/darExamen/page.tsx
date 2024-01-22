@@ -18,10 +18,10 @@ const DarExamenPage = ({
   }
   return (
     <div className=" px-4 items-center flex flex-col min-h-screen justify-center">
-      <h1 className="text-center font-extrabold tracking-wide text-5xl text-green-400">
+      <h1 className="text-center font-extrabold  text-5xl text-green-400">
         Felicitaciones! Terminaste el curso
       </h1>
-      <p className="text-center text-neutral-300 text-xl mt-4">
+      <p className="text-center text-neutral-300 text-lg mt-4">
         Ahora el ultimo paso para obtener el cerficado es realizar el examen
       </p>
       <form

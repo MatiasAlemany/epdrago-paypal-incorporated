@@ -16,8 +16,9 @@ import { UploadButton } from "@/utils/uploadthing";
 import { useState } from "react";
 import { PlusIcon } from "lucide-react";
 import { createEvent } from "@/lib/actions/get_events";
+import ImageUploader from "@/components/uploaders/ImageUploader";
 
-  export default function EventModal({} ) {
+export default function EventModal({}) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [imgUrl, setImgUrl] = useState<string | undefined>(undefined);
   return (
@@ -38,34 +39,11 @@ import { createEvent } from "@/lib/actions/get_events";
                     <Input name="title" label="Titular" />
                     <Textarea label="Contenido" name="content" />
 
-                    {/* @ts-ignore */}
-                    {imgUrl != undefined ? (
-                      <h1 className="pl-2 text-sm text-green-400">
-                        Imagen Subida!
-                      </h1>
-                    ) : (
-                      //@ts-ignore
-                      <UploadButton<OurFileRouter>
-                        endpoint="imageUploader"
-                        content={{
-                          button: "SUBIR IMAGEN",
-
-                          allowedContent: "4MB MAXIMO",
-                        }}
-                        appearance={{
-                          button: "bg-green-600 px-4 font-bold text-sm py-2",
-                        }}
-                        onClientUploadComplete={(res) => {
-                          if (res) {
-                            setImgUrl(res[0]!.url);
-                          }
-                        }}
-                        onUploadError={(error) => {
-                          console.log(error);
-                        }}
-                      />
-                    )}
-                    <input hidden name="img_url" value={imgUrl} />
+                    <ImageUploader
+                      onUploadComplete={(image) => {
+                        setImgUrl(image);
+                      }}
+                    />
                   </ModalBody>
 
                   <ModalFooter>
