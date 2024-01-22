@@ -24,12 +24,15 @@ const QuestionContainer = ({
   onClick,
   onCreateResponse,
   type = 'questionary'
+  ,
+  isAdmin = false
 }: {
   question: QuestionGet;
   currentQuestionSelected: string;
   onClick: (questionId: string) => void;
   onCreateResponse: (questionId: string, option: Option) => void;
-  type?: 'exam' | "questionary"
+  type?: 'exam' | "questionary",
+  isAdmin?: boolean
 }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [optionTitle, setoptionTitle] = useState("");
