@@ -22,6 +22,8 @@ export const getCourse = async (course_id: string) => {
         const course = await db.query.courses.findFirst({
             where: eq(courses.id, course_id),
             with: {
+                frequentlyAskedQuestions: true,
+
                 modules: {
                     with: {
                         items: true
@@ -48,9 +50,11 @@ export const userBoughtThisCourse = async (course_id: string): Promise<boolean> 
     const course = await db.query.courses.findFirst({
         where: eq(courses.id, course_id),
         with: {
+            frequentlyAskedQuestions: true,
             payments: true,
             modules: {
-                with: { items: true }
+                with: { items: true },
+
             }
         }
     });

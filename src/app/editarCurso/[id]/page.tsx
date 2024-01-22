@@ -2,6 +2,7 @@ import BeneficiosCurso from "@/components/course/BeneficiosCurso";
 import DescripcionCuso from "@/components/course/DescripcionCurso";
 import ImageModal from "@/components/course/ImageModal";
 import ModuleItemContainer from "@/components/course/ModuleItemContainer";
+import PreguntaFrecuenteContainer from "@/components/course/PreguntaFrecuenteContainer";
 import Testimonials from "@/components/course/Testimonials";
 import YoutubePlayerCourse from "@/components/course/YoutubePlayer";
 import BackGroundCourse from "@/components/course/backgroundCourse";
@@ -20,11 +21,12 @@ import { getCourse } from "@/lib/actions/get_courses";
 import { isAdmin } from "@/lib/actions/isAdmin";
 import { db } from "@/lib/db";
 import { courses } from "@/lib/db/schema/course";
+import { frequentlyAskedQuestions } from "@/lib/db/schema/frequently_questions";
 import { modules } from "@/lib/db/schema/modules";
 import { modules_items } from "@/lib/db/schema/modules_items";
 import { youtube_parser } from "@/lib/helpers/youtube_parser";
 import { type PageParams } from "@/lib/types/params";
-import { Button, Input, ModalFooter } from "@nextui-org/react";
+import { Button, Input, ModalFooter, Textarea } from "@nextui-org/react";
 import { PlayCircleIcon, YoutubeIcon } from "lucide-react";
 import { revalidatePath } from "next/cache";
 import Image from "next/image";
@@ -201,34 +203,44 @@ const EditarCursoPage = async ({
     de la calistenia, como lo son los basicos,estaticos y freestyle."
         />
       </div>
-      {/* <h1 className="mt-12 mb-12 text-center text-2xl font-bold lg:text-4xl">
-        Marcas y empresas que avalan nuestros cursos
+      <h1 className="mt-12 mb-8 text-green-400  text-center text-2xl font-extrabold lg:text-4xl">
+        Preguntas Frecuentes
       </h1>
-      <div className="flex flex-wrap justify-center gap-8 px-8 md:px-16 lg:px-32">
-        <div className="relative mb-16 h-16 w-16  overflow-hidden rounded-full md:h-24 md:w-24  ">
-          <Image
-            src="/burgerking-icon.png"
-            className="object-cover"
-            alt="burger"
-            fill={true}
-          />
-        </div>
-        <div className="relative h-16  w-16 overflow-hidden  rounded-full md:h-24 md:w-24  ">
-          <Image
-            src="/macdonal-icon.png"
-            className="object-cover"
-            alt="burger"
-            fill={true}
-          />
-        </div>
-      </div> */}
-      <div className="flex justify-center">
-        <button
-          type="button"
-          className="bg-bl my-4 mx-auto rounded-full bg-green-500 px-12 py-4 text-xl font-bold text-black"
+
+      <div className="flex flex-col items-center">
+        {course.frequentlyAskedQuestions.map((e) => (
+          <PreguntaFrecuenteContainer item={e} key={e.id} />
+        ))}
+        <EditDialog
+          classname="mt-2"
+          buttonTitle="Agregar Pregunta Frecuente"
+          dialogTitle="Nueva Pregunta frecuente"
         >
-          Comprar Curso
-        </button>
+          <form
+            action={async (formData: FormData) => {
+              "use server";
+              const question = formData.get("question") as string;
+              const response = formData.get("response") as string;
+
+              await db.insert(frequentlyAskedQuestions).values({
+                course_id: course.id,
+                question,
+                response,
+              });
+              revalidatePath(`/editarCurso/${course.id}`);
+            }}
+          >
+            <Input className="mb-2" label="Pregunta" name="question" />
+            <Textarea name="response" label="Respuesta ">
+              Respuesta
+            </Textarea>
+            <ModalFooter>
+              <Button type="submit" color="success">
+                Agregar
+              </Button>
+            </ModalFooter>
+          </form>
+        </EditDialog>
       </div>
     </div>
   );

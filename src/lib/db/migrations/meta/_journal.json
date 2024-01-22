@@ -22,6 +22,20 @@
       "when": 1705621448126,
       "tag": "0002_early_mach_iv",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1705916637045,
+      "tag": "0003_low_khan",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1705917285438,
+      "tag": "0004_lovely_the_fury",
+      "breakpoints": true
     }
   ]
 }

@@ -8,6 +8,7 @@ import { course_progress } from "./course_progress";
 import { certifications } from './certifications';
 import { instructors } from './instructors';
 import { exams } from "./exams";
+import { frequentlyAskedQuestions } from './frequently_questions';
 
 export const courses = pgTable('courses', {
     id: uuid('id').defaultRandom().primaryKey(),
@@ -35,7 +36,8 @@ export const courses_relations = relations(courses, ({ many, one }) => ({
     exam: one(exams, {
         fields: [courses.exam_id],
         references: [exams.id]
-    })
+    }),
+    frequentlyAskedQuestions: many(frequentlyAskedQuestions)
 
 }))
 

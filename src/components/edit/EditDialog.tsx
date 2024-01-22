@@ -27,7 +27,9 @@ const EditDialog = ({
 
   return (
     <div className={classname}>
-      <Button onPress={onOpen}>{buttonTitle}</Button>
+      <Button color="success" onPress={onOpen}>
+        {buttonTitle}
+      </Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (

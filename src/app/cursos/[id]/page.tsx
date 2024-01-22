@@ -156,9 +156,9 @@ const EditarCursoPage = async ({
         Preguntas Frecuentes
       </h1>
       <div className="flex flex-col items-center">
-        <PreguntaFrecuenteContainer />
-        <PreguntaFrecuenteContainer />
-        <PreguntaFrecuenteContainer />
+        {course.frequentlyAskedQuestions.map((e) => (
+          <PreguntaFrecuenteContainer item={e} key={e.id} />
+        ))}
       </div>
 
       <div className="flex justify-center py-8">
