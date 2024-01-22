@@ -3,13 +3,13 @@
 import { revalidatePath } from "next/cache";
 import { db } from "../db";
 import { news } from "../db/schema/news";
-import { eq } from "drizzle-orm";
+import { asc, desc, eq } from "drizzle-orm";
 
 
 export type Events = AwaitedReturn<typeof getEvents>
 export type EventDB = Events[number];
 export async function getEvents() {
-  const events = await db.select().from(news);
+  const events = await db.select().from(news).orderBy(desc(news.createdAt));
   return events;
 }
 
@@ -25,7 +25,7 @@ export async function createEvent(form: FormData) {
   revalidatePath('/eventos')
 }
 
-export async function getEvent(eventId : string) {
+export async function getEvent(eventId: string) {
   const events = await db.select().from(news).where(eq(news.id, eventId));
   const event = events[0];
   if (event == undefined) {
@@ -35,5 +35,5 @@ export async function getEvent(eventId : string) {
   }
 
   return event;
-  
+
 }
