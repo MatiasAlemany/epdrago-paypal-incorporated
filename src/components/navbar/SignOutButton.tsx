@@ -8,7 +8,9 @@ const SignOutButton = () => {
   const router = useRouter();
   return (
     <Button
-      onClick={() => signOut(() => router.push("/"))}
+      onClick={() => signOut(() => {
+        router.refresh();
+        router.push("/")})}
       variant="bordered"
       className="mx-2  lg:block hidden"
     >
