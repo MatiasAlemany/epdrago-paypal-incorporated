@@ -14,6 +14,8 @@ export const CourseProgressItem = ({
   const router = useRouter();
   return (
     <div>
+
+      
       <button
         className="w-full   py-4 hover:bg-neutral-900 px-4 rounded-large"
         onClick={() => {

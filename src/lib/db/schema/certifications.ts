@@ -2,6 +2,7 @@ import { relations } from "drizzle-orm";
 import { pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
 import { courses } from "./course";
 import { users } from "./users";
+import { createInsertSchema } from "drizzle-zod";
 
 export const certifications = pgTable("certifications", {
     id: uuid('id').defaultRandom().defaultRandom(),
@@ -21,3 +22,5 @@ export const certifications_relation = relations(certifications, ({one}) => ({
     }),
     
 }))
+
+export const certificationInsertZod = createInsertSchema(certifications)
