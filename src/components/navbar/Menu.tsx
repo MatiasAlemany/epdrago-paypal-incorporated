@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -24,10 +24,15 @@ import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useClerk } from "@clerk/nextjs";
+import { SignUp, useClerk, useSignIn, useSignUp } from "@clerk/nextjs";
+import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
+
 const Menu = () => {
   const { signOut } = useClerk();
-
+  const { isLoaded, signIn } = useSignIn();
+  const { signUp } = useSignUp();
+  const [dialogOpen, setdialogOpen] = useState(false);
+  const [dialogRegisterOpen, setDialogRegisterOpen] = useState(false);
   const router = useRouter();
 
   return (
@@ -60,15 +65,23 @@ const Menu = () => {
             <Link href="/eventos">Eventos</Link>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem className="hover:bg-neutral-900">
+          <DropdownMenuItem
+            onClick={() => {
+              setdialogOpen(true);
+            }}
+            className="hover:bg-neutral-900"
+          >
             <LogIn className="mr-3  h-4 w-4" />
-            <Link href="/cursos">Ingresar</Link>
+            Ingresar
           </DropdownMenuItem>
-          <DropdownMenuItem className="hover:bg-neutral-900">
+          <DropdownMenuItem
+            onClick={() => {
+              setDialogRegisterOpen(true);
+            }}
+            className="hover:bg-neutral-900"
+          >
             <CircleUserRound className="mr-3  h-4 w-4" />
-            <Link href="/cursos" className="text-green-500">
-              Registrarse
-            </Link>
+            Registrarse
           </DropdownMenuItem>
           {/* <DropdownMenuItem
             onClick={() => {
@@ -81,6 +94,16 @@ const Menu = () => {
           </DropdownMenuItem> */}
         </DropdownMenuContent>
       </DropdownMenu>
+      <Dialog open={dialogRegisterOpen} onOpenChange={setDialogRegisterOpen}>
+        <DialogContent className="bg-transparent border-none  px-0 flex justify-center">
+          <SignUp />
+        </DialogContent>
+      </Dialog>
+      <Dialog open={dialogOpen} onOpenChange={setdialogOpen}>
+        <DialogContent className="bg-transparent border-none  px-0 flex justify-center">
+          <SignUp />
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

@@ -30,7 +30,13 @@ export default async function Navbar() {
         <div className="lg:hidden block">
           {user == null ? <div></div> : <DrawerCourses userId={user.id} />}
         </div>
-        {user != null ? <SignOutButton /> : <NavbarDialogs />}
+        {user != null ? (
+          <SignOutButton />
+        ) : (
+          <div className="lg:block hidden">
+            <NavbarDialogs />
+          </div>
+        )}
 
         <Menu />
         <div className="absolute h-screen w-88 bg-slate-800"></div>
