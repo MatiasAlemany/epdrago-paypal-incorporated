@@ -11,7 +11,7 @@ export default function Home() {
       <CarousellData />
       <FeaturesContainer />
       <div className="flex flex-col items-center pt-20 appear-from-bottom">
-        <h1 className="text-green-500 font-bold text-4xl text-center">
+        <h1 className="text-green-500 font-bold text-2xl lg:text-4xl text-center">
           ¿QUIENES SOMOS?
         </h1>
         <p className="max-w-[800px]  text-md lg:text-lg text-center pt-8 ">

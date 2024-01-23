@@ -24,7 +24,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { SignUp, useClerk, useSignIn, useSignUp } from "@clerk/nextjs";
+import { SignIn, SignUp, useClerk, useSignIn, useSignUp } from "@clerk/nextjs";
 import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
 
 const Menu = () => {
@@ -101,7 +101,7 @@ const Menu = () => {
       </Dialog>
       <Dialog open={dialogOpen} onOpenChange={setdialogOpen}>
         <DialogContent className="bg-transparent border-none  px-0 flex justify-center">
-          <SignUp />
+          <SignIn />
         </DialogContent>
       </Dialog>
     </div>
