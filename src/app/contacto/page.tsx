@@ -46,11 +46,10 @@ const ContactoPage = () => {
           </div>
         </div>
         <div className="flex items-center mt-8">
-          {" "}
           <MailIcon className="text-green-500" />
           <h1 className="font-bold text-xl tracking-wide ml-2 ">Email</h1>
         </div>
-        <p className="text-xl text-neutral-500">leri@gmail.com</p>
+        <p className="text-xl text-neutral-400 mt-1">leri@gmail.com</p>
       </div>
     </div>
   );
