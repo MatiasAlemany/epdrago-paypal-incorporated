@@ -31,25 +31,7 @@ const CrearCuestionario = ({
   createQuestionary: (module_item_id: string, questions: Questions) => void;
   module_item_id: string;
 }) => {
-  const [questionary, setquestionary] = useState<Questions>([
-    {
-      title: "Cuanto value el front",
-      id: "",
-      options: [
-        { title: "1.2", id: "dcsd", isCorrect: false, question_id: "" },
-        { title: "1.5", id: "sdfds", isCorrect: false, question_id: "" },
-        { title: "2.0", id: "vcsdvs", isCorrect: false, question_id: "" },
-        {
-          title: "No lo se.",
-          id: "sdvssdadsa",
-          isCorrect: true,
-          question_id: "",
-        },
-      ],
-      exam_id: null,
-      questionary_id: null,
-    },
-  ]);
+  const [questionary, setquestionary] = useState<Questions>([]);
 
   const [selectedOptions, setSelectedOptions] = useState<string[]>(
     questionary.map(() => "")
@@ -61,29 +43,34 @@ const CrearCuestionario = ({
   return (
     <div className={cn("min-h-screen pt-40", padding)}>
       <div className="rounded-lg bg-neutral-900 w-full min-h-[60vh] max-w-[1000px] p-6 mx-auto flex flex-col">
-        <QuestionContainer
-          onCreateResponse={(questionId: string, option: Option) => {
-            const questionaryNew = questionary.map((e) => {
-              if (questionId == e.id) {
-                return {
-                  ...e,
-                  options: [...e.options, option],
-                };
-              }
+        {questionary.length == 0 ? (
+          <div> </div>
+        ) : (
+          <QuestionContainer
+            onCreateResponse={(questionId: string, option: Option) => {
+              const questionaryNew = questionary.map((e) => {
+                if (questionId == e.id) {
+                  return {
+                    ...e,
+                    options: [...e.options, option],
+                  };
+                }
 
-              return e;
-            });
+                return e;
+              });
 
-            setquestionary(questionaryNew);
-          }}
-          onClick={(questionId) => {
-            let updatedQuestions = selectedOptions.map((e) => e);
-            updatedQuestions[index] = questionId;
-            setSelectedOptions(updatedQuestions);
-          }}
-          question={questionary[index]!}
-          currentQuestionSelected={selectedOptions[index]!}
-        />
+              setquestionary(questionaryNew);
+            }}
+            onClick={(questionId) => {
+              let updatedQuestions = selectedOptions.map((e) => e);
+              updatedQuestions[index] = questionId;
+              setSelectedOptions(updatedQuestions);
+            }}
+            question={questionary[index]!}
+            currentQuestionSelected={selectedOptions[index]!}
+          />
+        )}
+
         <div className="flex mt-auto justify-between pt-3">
           <Button
             variant="ghost"
@@ -111,7 +98,12 @@ const CrearCuestionario = ({
       </div>
       <div className="flex justify-center mt-2">
         {" "}
-        <Button onPress={onOpen} color="success" variant="bordered">
+        <Button
+          onPress={onOpen}
+          className="mr-2"
+          color="success"
+          variant="bordered"
+        >
           <PlusIcon /> Agregar pregunta
         </Button>
         <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
@@ -151,11 +143,12 @@ const CrearCuestionario = ({
           </ModalContent>
         </Modal>
         <Button
+          color="success"
           onClick={() => {
             createQuestionary(module_item_id, questionary);
           }}
         >
-          Guardar
+          Guardar cuestionario
         </Button>
       </div>
     </div>
