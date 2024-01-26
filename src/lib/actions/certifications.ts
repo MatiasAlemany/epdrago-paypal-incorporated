@@ -1,19 +1,23 @@
 "use server"
-import { action } from './safe_action'
+
+import { redirect } from "next/navigation";
+import { db } from "../db";
+import { certificationInsertZod, certifications } from "../db/schema/certifications";
+import { action } from "./safe_action";
 import z from 'zod';
 
 export const verifyCertificate = action(z.object({
     id: z.string()
 }), async ({ id }) => {
-    console.log(id)
-    await delay(4000);
+
 })
 
 
-async function delay(milliseconds: number) {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve('');
-        }, milliseconds);
-    });
-}
+
+
+
+export const createCertification = action(certificationInsertZod, async ({ course_id, user_id }) => {
+    const certificationDB = await db.insert(certifications).values({ course_id, user_id }).returning();
+    const obtainedCertification = certificationDB[0]!;
+    redirect(`/certificados/${obtainedCertification.id}`)
+});

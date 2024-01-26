@@ -1,1 +1,0 @@
-ALTER TABLE "exams" DROP COLUMN IF EXISTS "user_id";

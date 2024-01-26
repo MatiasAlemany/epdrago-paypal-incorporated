@@ -5,36 +5,8 @@
     {
       "idx": 0,
       "version": "5",
-      "when": 1705567500946,
-      "tag": "0000_mysterious_king_bedlam",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "5",
-      "when": 1705567593004,
-      "tag": "0001_yielding_vin_gonzales",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "5",
-      "when": 1705621448126,
-      "tag": "0002_early_mach_iv",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "5",
-      "when": 1705916637045,
-      "tag": "0003_low_khan",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "5",
-      "when": 1705917285438,
-      "tag": "0004_lovely_the_fury",
+      "when": 1706255481080,
+      "tag": "0000_zippy_leech",
       "breakpoints": true
     }
   ]

@@ -26,7 +26,7 @@ export default async function ExamenPage({
 
   return (
     <div className="min-h-screen pt-40 px-2">
-      <ExamState questions={exam.questions} />
+      <ExamState questions={exam.questions} courseId={exam.course_id} />
     </div>
   );
 }

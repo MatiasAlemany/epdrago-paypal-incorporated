@@ -1,6 +1,7 @@
 CREATE TABLE IF NOT EXISTS "certifications" (
-	"id" text NOT NULL,
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,
+	"user_id" text NOT NULL,
 	"course_id" uuid NOT NULL
 );
 --> statement-breakpoint
@@ -29,7 +30,6 @@ CREATE TABLE IF NOT EXISTS "course_progress" (
 CREATE TABLE IF NOT EXISTS "exams" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"course_id" uuid NOT NULL,
-	"user_id" uuid NOT NULL,
 	"last_time_done" timestamp
 );
 --> statement-breakpoint
@@ -50,6 +50,13 @@ CREATE TABLE IF NOT EXISTS "questions" (
 	"exam_id" uuid,
 	"title" text NOT NULL,
 	"questionary_id" uuid
+);
+--> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "frequently_asked_questions" (
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+	"question" text NOT NULL,
+	"response" text NOT NULL,
+	"course_id" uuid NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "instructors" (
@@ -117,8 +124,7 @@ CREATE TABLE IF NOT EXISTS "users" (
 CREATE TABLE IF NOT EXISTS "usersToCourses" (
 	"user_id" text NOT NULL,
 	"course_id" uuid NOT NULL,
-	"payment_id" bigint NOT NULL,
-	CONSTRAINT "usersToCourses_user_id_course_id_payment_id_pk" PRIMARY KEY("user_id","course_id","payment_id")
+	CONSTRAINT "usersToCourses_user_id_course_id_pk" PRIMARY KEY("user_id","course_id")
 );
 --> statement-breakpoint
 DO $$ BEGIN
@@ -129,12 +135,6 @@ END $$;
 --> statement-breakpoint
 DO $$ BEGIN
  ALTER TABLE "usersToCourses" ADD CONSTRAINT "usersToCourses_course_id_courses_id_fk" FOREIGN KEY ("course_id") REFERENCES "public"."courses"("id") ON DELETE no action ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "usersToCourses" ADD CONSTRAINT "usersToCourses_payment_id_payment_schema_id_fk" FOREIGN KEY ("payment_id") REFERENCES "public"."payment_schema"("id") ON DELETE no action ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;

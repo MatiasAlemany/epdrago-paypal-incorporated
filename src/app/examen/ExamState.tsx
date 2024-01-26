@@ -22,7 +22,7 @@ import { Check, PlusIcon } from "lucide-react";
 import { useState } from "react";
 import FinishedExam from "./FinishedExam";
 
-const ExamState = ({ questions }: { questions: Questions }) => {
+const ExamState = ({ questions , courseId}: { questions: Questions, courseId: string }) => {
   const [questionary, setquestionary] = useState<Questions>(questions);
 
   const [selectedOptions, setSelectedOptions] = useState<string[]>(
@@ -36,6 +36,7 @@ const ExamState = ({ questions }: { questions: Questions }) => {
     <div>
       {finishedQuestionary ? (
         <FinishedExam
+        courseId= {courseId}
           questions={questionary}
           selectedOptions={selectedOptions}
         />
