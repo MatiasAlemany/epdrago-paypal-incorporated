@@ -38,7 +38,7 @@ export default async function Navbar() {
           </div>
         )}
 
-        <Menu />
+        <Menu userId={user == null ? null : user.id} />
         <div className="absolute h-screen w-88 bg-slate-800"></div>
       </div>
     </div>

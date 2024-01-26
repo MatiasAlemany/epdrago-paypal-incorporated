@@ -27,13 +27,11 @@ import { useRouter } from "next/navigation";
 import { SignIn, SignUp, useClerk, useSignIn, useSignUp } from "@clerk/nextjs";
 import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
 
-const Menu = () => {
-  const { signOut } = useClerk();
-  const { isLoaded, signIn } = useSignIn();
-  const { signUp } = useSignUp();
+import SignOut from "./SignOut";
+
+const Menu = ({ userId }: { userId: string | null }) => {
   const [dialogOpen, setdialogOpen] = useState(false);
   const [dialogRegisterOpen, setDialogRegisterOpen] = useState(false);
-  const router = useRouter();
 
   return (
     <div>
@@ -65,24 +63,32 @@ const Menu = () => {
             <Link href="/eventos">Eventos</Link>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem
-            onClick={() => {
-              setdialogOpen(true);
-            }}
-            className="hover:bg-neutral-900"
-          >
-            <LogIn className="mr-3  h-4 w-4" />
-            Ingresar
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            onClick={() => {
-              setDialogRegisterOpen(true);
-            }}
-            className="hover:bg-neutral-900"
-          >
-            <CircleUserRound className="mr-3  h-4 w-4" />
-            Registrarse
-          </DropdownMenuItem>
+          {userId ? (
+            <SignOut />
+          ) : (
+            <div className="flex flex-col">
+              {" "}
+              <DropdownMenuItem
+                onClick={() => {
+                  setdialogOpen(true);
+                }}
+                className="hover:bg-neutral-900"
+              >
+                <LogIn className="mr-3  h-4 w-4" />
+                Ingresar
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => {
+                  setDialogRegisterOpen(true);
+                }}
+                className="hover:bg-neutral-900"
+              >
+                <CircleUserRound className="mr-3  h-4 w-4" />
+                Registrarse
+              </DropdownMenuItem>
+            </div>
+          )}
+
           {/* <DropdownMenuItem
             onClick={() => {
               signOut(() => router.push("/"));
