@@ -9,7 +9,9 @@ export default async function EventosPage({
 }: PageParams<{ id: string }>) {
   const event = await getEvent(id);
   return (
-    <div className={cn("min-h-screen py-40  flex justify-center", padding)}>
+    <div
+      className={cn("min-h-screen pt-40 pb-80  flex justify-center", padding)}
+    >
       <div className="max-w-[800px] w-[800px]">
         <div className="aspect-[18/9] relative   rounded-xl overflow-hidden">
           <Image

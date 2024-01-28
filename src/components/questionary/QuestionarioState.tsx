@@ -34,7 +34,7 @@ const CuestionarioState = ({ questions }: { questions: Questions }) => {
   return (
     <div>
       {finishedQuestionary ? (
-        <div className="flex flex-col mx-auto px-8 md:px-16  overflow-y-scroll py-8 md:py-16 rounded-lg bg-neutral-900 max-w-[1000px] w-full min-h-[60vh] ">
+        <div className="flex flex-col mx-auto px-8 md:px-16  overflow-y-scroll py-8 md:py-16 rounded-xl bg-neutral-900 max-w-[1000px] w-full min-h-[60vh] max-h-[50vh] ">
           <h1 className="text-green-500 font-bold text-3xl mb-2">
             Terminaste...
           </h1>

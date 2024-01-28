@@ -11,11 +11,13 @@ import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
 import React from "react";
 import { Skeleton } from "../ui/skeleton";
+import { useRouter } from "next/navigation";
 
 const CarousellHome = ({ data }: { data: Events }) => {
   const plugin = React.useRef(
     Autoplay({ delay: 2000, stopOnInteraction: true })
   );
+  const router = useRouter();
   return (
     <Carousel plugins={[Autoplay({ delay: 5000 })]} className="mx-8">
       <CarouselContent>
@@ -26,7 +28,12 @@ const CarousellHome = ({ data }: { data: Events }) => {
         )}
         {data.map((e) => (
           <CarouselItem key={e.id}>
-            <div className=" cursor-pointer bg-neutral-900 aspect-[18/8] relative rounded-lg overflow-hidden">
+            <div
+              onClick={() => {
+                router.push(`/eventos/${e.id}`);
+              }}
+              className=" cursor-pointer bg-neutral-900 aspect-[18/8] relative rounded-lg overflow-hidden"
+            >
               <Image
                 src={e.img_url}
                 className="object-cover"
