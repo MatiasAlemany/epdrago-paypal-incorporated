@@ -47,6 +47,21 @@ const CrearCuestionario = ({
           <div> </div>
         ) : (
           <QuestionContainer
+            isAdmin={true}
+            onDeleteOption={(questionId: string, option: Option) => {
+              const questionaryNew = questionary.map((e) => {
+                if (questionId == e.id) {
+                  return {
+                    ...e,
+                    options: e.options.filter((o) => o.id != option.id),
+                  };
+                }
+
+                return e;
+              });
+
+              setquestionary(questionaryNew);
+            }}
             onCreateResponse={(questionId: string, option: Option) => {
               const questionaryNew = questionary.map((e) => {
                 if (questionId == e.id) {

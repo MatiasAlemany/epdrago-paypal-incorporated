@@ -8,12 +8,15 @@ interface OptionContainerExamProps {
   option: Option;
   onClick: (questionId: string) => void;
   currentQuestionSelected: string;
+  onDeleteOption: (questionId: string, option: Option) => void;
+
 }
 
 const OptionContainerExam: React.FC<OptionContainerExamProps> = ({
   onClick,
   option,
   currentQuestionSelected,
+  onDeleteOption
 }) => {
   const selected: boolean = currentQuestionSelected == option.id;
 

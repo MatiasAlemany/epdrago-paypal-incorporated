@@ -6,22 +6,26 @@ import React from "react";
 
 interface OptionContainerProps {
   option: Option;
+  isAdmin: boolean;
   onClick: (questionId: string) => void;
   currentQuestionSelected: string;
+  onDeleteOption: (questionId: string, option: Option) => void;
 }
 
 const OptionContainer: React.FC<OptionContainerProps> = ({
   onClick,
   option,
   currentQuestionSelected,
+  onDeleteOption,
+  isAdmin = false,
 }) => {
   const selected: boolean = currentQuestionSelected == option.id;
-  
+
   return (
     <div className="flex my-4 items-center" key={option.id}>
       <div
         onClick={() => {
-          if (currentQuestionSelected == "") {
+          if (currentQuestionSelected == "" || isAdmin) {
             onClick(option.id);
           }
         }}
@@ -37,9 +41,18 @@ const OptionContainer: React.FC<OptionContainerProps> = ({
         <h2>{option.title}</h2>
         {selected && (option.isCorrect ? <Check /> : <XCircle />)}
       </div>
-      <Button className="ml-2 " variant="bordered" isIconOnly>
-        <Trash />
-      </Button>
+      {isAdmin && (
+        <Button
+          className="ml-2 "
+          variant="bordered"
+          isIconOnly
+          onClick={() => {
+            onDeleteOption(option.question_id, option);
+          }}
+        >
+          <Trash />
+        </Button>
+      )}
     </div>
   );
 };
