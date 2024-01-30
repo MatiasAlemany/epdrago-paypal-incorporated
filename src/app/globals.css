@@ -111,3 +111,12 @@ html {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
 }
+
+.main-content {
+  background: linear-gradient(
+    90deg,
+    rgb(0, 36, 13) 0%,
+    rgb(13, 159, 30) 35%,
+    rgb(0, 158, 13) 100%
+  );
+}

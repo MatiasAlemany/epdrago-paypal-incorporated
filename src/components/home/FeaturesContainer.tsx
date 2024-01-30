@@ -1,4 +1,4 @@
-import { BookText, Flame, Shield } from "lucide-react";
+import { BookText, Flame, LineChart, Shield } from "lucide-react";
 import FeatureContainer from "./FeatureContainer";
 
 const FeaturesContainer = () => {
@@ -6,19 +6,19 @@ const FeaturesContainer = () => {
     <div className="flex flex-wrap feature-animation justify-center mt-10">
       <FeatureContainer
         title="Estudiantes"
-        content="Tenemos mas de 10000 estudiantes en varios paises del mundo"
+        content="Tenemos mas de 1000 instructores formados con nosotros."
         icon={<BookText className="text-green-500 w-8 h-8" />}
       />
       <FeatureContainer
-        title="Seguridad"
-        content="Tenemos mas de 10000 estudiantes en varios paises del mundo"
-        icon={<Shield className="text-green-500 w-8 h-8" />}
+        title="Trayectoria"
+        content="Tenemos mas de 10 años de experiencia en la enseñanza de Calistenia."
+        icon={<LineChart className="text-green-500 w-8 h-8" />}
       />
 
       <FeatureContainer
         title="Marcas"
-        content="Tenemos mas de 10000 estudiantes en varios paises del mundo"
-        icon={<Flame className="text-green-500 w-8 h-8" />}
+        content="Nos respaldan marcas y empresas que confian en nuestro trabajo."
+        icon={<Shield className="text-green-500 w-8 h-8" />}
       />
     </div>
   );

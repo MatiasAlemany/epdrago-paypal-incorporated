@@ -14,7 +14,7 @@ const DescriptionItem = ({
   return (
     <div
       className={cn(
-        "flex flex-col py-8 mt-16 fade-in-view",
+        "flex flex-col p-8 mt-16 fade-in-view border border-neutral-600 rounded-xl",
         orientation == "left" ? "items-start" : "items-end"
       )}
     >

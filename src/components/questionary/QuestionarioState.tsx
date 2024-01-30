@@ -1,23 +1,13 @@
 "use client";
 import QuestionContainer from "@/components/questionary/QuestionContainer";
-import { padding } from "@/components/styles/padding";
 import {
   Option,
-  QuestionGet,
-  Questions,
+  Questions
 } from "@/lib/actions/questionary_actionst";
-import { cn } from "@/lib/utils";
 import {
-  Button,
-  Input,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  useDisclosure,
+  Button
 } from "@nextui-org/react";
-import { Check, PlusIcon } from "lucide-react";
+import { Check } from "lucide-react";
 import { useState } from "react";
 import OptionAnswer from "./OptionAnswer";
 
