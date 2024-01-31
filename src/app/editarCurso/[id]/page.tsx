@@ -18,20 +18,16 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { getCourse } from "@/lib/actions/get_courses";
-import { isAdmin } from "@/lib/actions/isAdmin";
 import { db } from "@/lib/db";
 import { courses } from "@/lib/db/schema/course";
 import { frequentlyAskedQuestions } from "@/lib/db/schema/frequently_questions";
 import { modules } from "@/lib/db/schema/modules";
-import { modules_items } from "@/lib/db/schema/modules_items";
 import { youtube_parser } from "@/lib/helpers/youtube_parser";
 import { type PageParams } from "@/lib/types/params";
 import { Button, Input, ModalFooter, Textarea } from "@nextui-org/react";
-import { PlayCircleIcon, YoutubeIcon } from "lucide-react";
+import { YoutubeIcon } from "lucide-react";
 import { revalidatePath } from "next/cache";
-import Image from "next/image";
 import { redirect } from "next/navigation";
-import React from "react";
 
 const EditarCursoPage = async ({
   params: { id },

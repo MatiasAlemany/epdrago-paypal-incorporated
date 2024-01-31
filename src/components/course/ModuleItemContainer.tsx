@@ -1,4 +1,5 @@
 "use client";
+import { actionOnServer } from "@/lib/actions/test_action";
 import { ModuleItemInsert } from "@/lib/db/schema/modules_items";
 import {
   BookCheck,
@@ -6,8 +7,6 @@ import {
   FileTextIcon,
   PlayCircleIcon,
 } from "lucide-react";
-import { useRouter } from "next/navigation";
-import React from "react";
 
 const ModuleItemContainer = ({
   module_item,
@@ -20,13 +19,12 @@ const ModuleItemContainer = ({
   module_index: number;
   course_id: string;
 }) => {
-  const router = useRouter();
   return (
     <div
       onClick={() => {
-        router.push(`/module/${module_item.id}?course=${course_id}`);
+        actionOnServer(course_id, module_item.id!);
       }}
-      className="flex py-2 px-4 my-2 bg-neutral-900 rounded-xl justify-between items-center"
+      className="flex hover:bg-neutral-800 py-2 px-4 my-2 bg-neutral-900 rounded-xl justify-between items-center"
     >
       {module_index}.{index} {module_item.title}
       {module_item.type == "video" ? (
