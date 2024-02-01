@@ -5,10 +5,20 @@ import { db } from "../db";
 import { certificationInsertZod, certifications } from "../db/schema/certifications";
 import { action } from "./safe_action";
 import z from 'zod';
+import { getCertificate } from "@/app/certificados/[id]/page";
 
 export const verifyCertificate = action(z.object({
     id: z.string()
 }), async ({ id }) => {
+
+    try {
+        const certificate = await getCertificate(id)
+        return certificate;
+
+    } catch (error) {
+        return undefined;
+    }
+
 
 })
 

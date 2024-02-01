@@ -8,7 +8,7 @@ import { Button } from "@nextui-org/react";
 import { eq } from "drizzle-orm";
 import Image from "next/image";
 
-async function getCertificate(id: string) {
+export async function getCertificate(id: string) {
   return await db.query.certifications.findFirst({
     where: eq(certifications.id, id),
     with: {

@@ -47,7 +47,7 @@ const DiplomaComponent: React.FC<DiplomaComponentProps> = ({ certificate }) => {
             Se otorga el presente certificado de
           </h2>
           <h1 className="mt-1  font-extrabold text-center">
-            INSTRUCTOR DE CALISTENIA Y STREET WORKOUT
+            {certificate.course.title.toUpperCase()}
           </h1>{" "}
           <h2 className="text-[0.6rem] mt-2 font-medium">a </h2>
           <h1 className=" border-b-4 border-black mt-3 ">Rodrigo Otrera</h1>
