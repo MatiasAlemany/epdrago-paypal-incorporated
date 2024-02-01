@@ -1,28 +1,36 @@
+import DiplomaComponent from "@/components/DiplomaComponent";
 import { padding } from "@/components/styles/padding";
 import { db } from "@/lib/db";
 import { certifications } from "@/lib/db/schema/certifications";
 import { PageParams } from "@/lib/types/params";
 import { cn } from "@/lib/utils";
+import { Button } from "@nextui-org/react";
 import { eq } from "drizzle-orm";
+import Image from "next/image";
 
-export default async function Certificado({
-  params: { id },
-}: PageParams<{ id: string }>) {
-  const certificado = (await db.query.certifications.findFirst({
+async function getCertificate(id: string) {
+  return await db.query.certifications.findFirst({
     where: eq(certifications.id, id),
     with: {
       course: true,
       user: true,
     },
-  }))!;
+  });
+}
 
-  return (
-    <div className={cn("pt-40 h-screen", padding)}>
-      Certificado
-      <h1 className=""> id : {id}</h1>
-      <p> {certificado.course_id}</p>
-      <p>Nombre: {certificado.user.name}</p>
-      <p>Curso: {certificado.course.title}</p>
-    </div>
-  );
+export type Certificate = AwaitedReturn<typeof getCertificate>;
+
+export default async function Certificado({
+  params: { id },
+}: PageParams<{ id: string }>) {
+  const certificado = await getCertificate(id);
+
+  if (certificado == undefined) {
+    return (
+      <div className="h-screen flex justify-end items-center">
+        El certificado no existe
+      </div>
+    );
+  }
+  return <DiplomaComponent certificate={certificado} />;
 }

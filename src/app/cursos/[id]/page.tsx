@@ -78,8 +78,10 @@ const EditarCursoPage = async ({
       <div className="flex-col flex items-center justify-center space-y-2">
         <ImageModal course_id={id} />
         <ActualizarDatosModal course={course} />
-      </div>
-      <h1 className="mt-8 text-center text-4xl">Instructores</h1>
+      </div>{" "}
+      <h1 className="mt-12 mb-8 text-green-400  text-center text-2xl font-extrabold lg:text-4xl">
+        Instructores{" "}
+      </h1>
       <div className="mt-8 flex-wrap flex justify-center ">
         {course.instructors.map((i) => (
           <InstructorContainer {...i} key={i.id} />
@@ -89,8 +91,9 @@ const EditarCursoPage = async ({
         {" "}
         <InstructorModal course_id={course.id} />
       </div>
-
-      <h1 className="mt-8 text-center text-4xl">Video Introduccion</h1>
+      <h1 className="mt-12 mb-8 text-green-400  text-center text-2xl font-extrabold lg:text-4xl">
+        Video introduccion
+      </h1>{" "}
       <div className="p-8 lg:px-16 xl:px-96 ">
         <div className="flex aspect-[18/9] items-center justify-center rounded-lg bg-container">
           <div className="flex flex-col items-center">
@@ -104,7 +107,9 @@ const EditarCursoPage = async ({
           </div>
         </div>
       </div>
-      <h1 className="mt-4 text-center text-4xl">Clases</h1>
+      <h1 className="mt-12 mb-8 text-green-400  text-center text-2xl font-extrabold lg:text-4xl">
+        Clases
+      </h1>{" "}
       <div className="mx-auto mt-4 max-w-4xl p-4">
         {course.modules.map((e, index) => (
           <Accordion type="single" collapsible key={e.id}>
@@ -135,7 +140,6 @@ const EditarCursoPage = async ({
           Testimonios
         </h1>
       </div>
-
       <div className="m-2 grid grid-cols-1 content-center justify-center gap-8 md:grid-cols-2 md:px-12 lg:px-32 xl:grid-cols-3">
         <Testimonials
           content="Este curso cuenta con muchas posibilidades para expandir tus
@@ -160,7 +164,6 @@ const EditarCursoPage = async ({
           <PreguntaFrecuenteContainer item={e} key={e.id} />
         ))}
       </div>
-
       <div className="flex justify-center py-8">
         <button
           type="button"

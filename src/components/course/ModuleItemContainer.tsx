@@ -24,7 +24,7 @@ const ModuleItemContainer = ({
       onClick={() => {
         actionOnServer(course_id, module_item.id!);
       }}
-      className="flex hover:bg-neutral-800 py-2 px-4 my-2 bg-neutral-900 rounded-xl justify-between items-center"
+      className="flex flex-1 cursor-pointer hover:bg-neutral-800 py-2 px-4 my-1 bg-neutral-900 rounded-xl justify-between items-center"
     >
       {module_index}.{index} {module_item.title}
       {module_item.type == "video" ? (

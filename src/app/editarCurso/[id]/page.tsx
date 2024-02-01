@@ -18,14 +18,17 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { getCourse } from "@/lib/actions/get_courses";
+import { deleteModuleItem } from "@/lib/actions/test_action";
 import { db } from "@/lib/db";
 import { courses } from "@/lib/db/schema/course";
 import { frequentlyAskedQuestions } from "@/lib/db/schema/frequently_questions";
 import { modules } from "@/lib/db/schema/modules";
+import { modules_items } from "@/lib/db/schema/modules_items";
 import { youtube_parser } from "@/lib/helpers/youtube_parser";
 import { type PageParams } from "@/lib/types/params";
 import { Button, Input, ModalFooter, Textarea } from "@nextui-org/react";
-import { YoutubeIcon } from "lucide-react";
+import { eq } from "drizzle-orm";
+import { TrashIcon, YoutubeIcon } from "lucide-react";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
@@ -107,13 +110,26 @@ const EditarCursoPage = async ({
               </AccordionTrigger>
               <AccordionContent>
                 {e.items.map((e, itemIndex) => (
-                  <ModuleItemContainer
-                    course_id={course.id}
-                    module_index={index + 1}
-                    index={itemIndex + 1}
-                    key={e.id}
-                    module_item={e}
-                  />
+                  <div className="flex items-center" key={e.id}>
+                    <ModuleItemContainer
+                      course_id={course.id}
+                      module_index={index + 1}
+                      index={itemIndex + 1}
+                      module_item={e}
+                    />
+                    <form action={deleteModuleItem}>
+                      <Button
+                        className="ml-1"
+                        variant="ghost"
+                        isIconOnly={true}
+                        type="submit"
+                      >
+                        <TrashIcon />
+                      </Button>
+                      <input hidden={true} name="module_id" value={e.id} />
+                      <input hidden={true} name="course_id" value={course.id} />
+                    </form>
+                  </div>
                 ))}
                 <ModuleModal module={e} />
               </AccordionContent>

@@ -12,23 +12,11 @@ const DescriptionItem = ({
   orientation = "left",
 }: DescriptionItemI) => {
   return (
-    <div
-      className={cn(
-        "flex flex-col p-8 mt-16 fade-in-view border border-neutral-600 rounded-xl",
-        orientation == "left" ? "items-start" : "items-end"
-      )}
-    >
-      <h1 className=" font-black text-xl lg:text-2xl tracking-wide text-green-500">
+    <div className="h-[381px] w-[451px] flex-col p-8 main-content rounded-2xl mx-6 my-4">
+      <h1 className="text-2xl font-extrabold tracking-wide">
         {title.toUpperCase()}
       </h1>
-      <p
-        className={cn(
-          "text-neutral-300 max-w-[600px] mt-4 text-md lg:text-lg",
-          orientation == "left" ? "items-start" : "text-end"
-        )}
-      >
-        {description}
-      </p>
+      <p className="mt-6">{description}</p>
     </div>
   );
 };

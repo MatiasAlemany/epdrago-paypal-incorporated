@@ -113,10 +113,20 @@ html {
 }
 
 .main-content {
-  background: linear-gradient(
-    90deg,
-    rgb(0, 36, 13) 0%,
-    rgb(13, 159, 30) 35%,
-    rgb(0, 158, 13) 100%
+  background: radial-gradient(
+    759px at 14% 22.3%,
+    rgb(10, 64, 88) 0%,
+    rgb(15, 164, 102) 90%
+  );
+}
+
+.polygon {
+  clip-path: polygon(
+    52px 0%,
+    100% 0,
+    100% calc(100% - 52px),
+    calc(100% - 52px) 100%,
+    0 100%,
+    0% 52px
   );
 }
