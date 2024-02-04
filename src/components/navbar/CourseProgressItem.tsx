@@ -23,7 +23,7 @@ export const CourseProgressItem = ({
       >
         <div>
           <div className="flex flex-col items-start">
-            {" "}
+         
             <h1 className="font-bold">{courseProgress.courseTitle}</h1>
             <h2 className=" text-neutral-400 text-sm  pb-2">
               Modulo - {courseProgress.moduleTitle}
