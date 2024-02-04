@@ -29,4 +29,4 @@ export const course_progress_relations = relations(course_progress, ({ one }) =>
 const course_progress_insert = createSelectSchema(course_progress);
 const course_progress_select = createInsertSchema(course_progress)
 
-export type CourseProgressSelect = z.infer<typeof course_progress_select> & { rating: number, courseTitle: string, moduleTitle: string, exam_id: string | null };
+export type CourseProgressSelect = z.infer<typeof course_progress_select> & { rating: number, courseTitle: string, moduleTitle: string, exam_id: string | null, certification_id: string | null };

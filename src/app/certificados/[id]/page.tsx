@@ -9,6 +9,7 @@ import { eq } from "drizzle-orm";
 import Image from "next/image";
 
 export async function getCertificate(id: string) {
+  "use server";
   return await db.query.certifications.findFirst({
     where: eq(certifications.id, id),
     with: {

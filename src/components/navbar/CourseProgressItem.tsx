@@ -14,8 +14,6 @@ export const CourseProgressItem = ({
   const router = useRouter();
   return (
     <div>
-
-      
       <button
         className="w-full   py-4 hover:bg-neutral-900 px-4 rounded-large"
         onClick={() => {
@@ -42,18 +40,35 @@ export const CourseProgressItem = ({
           </div>
         </div>
       </button>
-      {courseProgress.isFinished && (
+      {courseProgress.isFinished && !courseProgress.certification_id && (
         <div className="flex justify-center">
           <button
             onClick={() => {
               if (courseProgress.exam_id == null) {
                 throw Error("No se ha creado ningun examen para este curso");
               }
-              router.push(`/examen?exam_id=${courseProgress.exam_id}&course_id=${courseProgress.course_id}`);
+              router.push(
+                `/examen?exam_id=${courseProgress.exam_id}&course_id=${courseProgress.course_id}`
+              );
             }}
             className="bg-purple-600 transition-colors mx-auto px-2 py-1 text-sm rounded-lg z-10 hover:bg-purple-500"
           >
             Dar examen
+          </button>
+        </div>
+      )}
+      {!!courseProgress.certification_id && (
+        <div className="flex justify-center">
+          <button
+            onClick={() => {
+              if (courseProgress.exam_id == null) {
+                throw Error("No se ha creado ningun examen para este curso");
+              }
+              router.push(`/certificados/${courseProgress.certification_id}`);
+            }}
+            className="bg-purple-600 transition-colors mx-auto px-2 py-1 text-sm rounded-lg z-10 hover:bg-purple-500"
+          >
+            Obtener certificado
           </button>
         </div>
       )}

@@ -1,24 +1,43 @@
 import ModuleChecker from "@/components/module/ModuleChecker";
 import ModuleNavigationTimeline from "@/components/module/ModuleNavigation";
 import { padding } from "@/components/styles/padding";
+import { Button } from "@/components/ui/button";
 import { moduleTimeline } from "@/lib/actions/edit/modules_actions";
 import { getModule } from "@/lib/actions/get_module";
 import { moduleZodIntersecttion } from "@/lib/db/schema/modules_items";
 import { PageParams } from "@/lib/types/params";
 import { cn } from "@/lib/utils";
+import { LogOutIcon } from "lucide-react";
+import { redirect } from "next/navigation";
 const ModuleItemPage = async ({
   params: { id },
-  searchParams: { course },
-}: PageParams<{ id: string }, { course: string }>) => {
+  searchParams: { course, fromHome },
+}: PageParams<{ id: string }, { course: string; fromHome?: string }>) => {
   const moduleDb = await getModule(id, course);
   const moduleParsed = moduleZodIntersecttion.parse(moduleDb);
 
   return (
     <div className={cn("min-h-screen pt-40", padding)}>
       <ModuleChecker moduleDB={moduleParsed} />
-      <div className=" w-full max-w-[1000px] mx-auto ">
-        <ModuleNavigationTimeline module_id={id} course_id={course} />
-      </div>
+      {fromHome != undefined ? (
+        <form
+          action={async () => {
+            "use server";
+            redirect(`/cursos/${course}`);
+          }}
+        >
+          <div className="flex justify-center">
+            <Button variant="secondary" className="mt-4">
+              <LogOutIcon className="mr-2 w-4 h-4" />
+              Volver al curso
+            </Button>
+          </div>
+        </form>
+      ) : (
+        <div className=" w-full max-w-[1000px] mx-auto ">
+          <ModuleNavigationTimeline module_id={id} course_id={course} />
+        </div>
+      )}
     </div>
   );
 };

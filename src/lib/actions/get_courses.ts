@@ -29,7 +29,7 @@ export const getCourse = async (course_id: string) => {
                     with: {
                         items: true
                     }
-                }, instructors: true
+                }, instructors: true, certifications: true
             }
 
         });

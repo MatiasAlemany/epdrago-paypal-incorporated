@@ -38,16 +38,16 @@ export async function setNextModuleProgress(navigationTimeline: ModuleNavigation
     );
 }
 
-export async function setExamModuleProgress (navigationTimeline: ModuleNavigationI) {
+export async function setExamModuleProgress(navigationTimeline: ModuleNavigationI) {
     await db
-    .update(course_progress)
-    .set({ isFinished: true })
-    .where(
-      eq(course_progress.course_id, navigationTimeline.course_id)
+        .update(course_progress)
+        .set({ isFinished: true })
+        .where(
+            eq(course_progress.course_id, navigationTimeline.course_id)
+        );
+    redirect(
+        `/darExamen?exam_id=${navigationTimeline.exam_id}&course_id=${navigationTimeline.course_id}`
     );
-  redirect(
-    `/darExamen?exam_id=${navigationTimeline.exam_id}&course_id=${navigationTimeline.course_id}`
-  );
 }
 
 
@@ -64,7 +64,8 @@ export async function getUserCourseProgress(user_id: string): Promise<CourseProg
         const { modules, course } = await getModulesOfCourse(courseProgress.course_id);
         const indexOfModule = modules.findIndex((e) => e.id == courseProgress.module_id);
         const progressRating = courseProgress.isFinished ? 1 : indexOfModule / modules.length;
-        progressWithRating.push({ ...courseProgress, rating: progressRating, courseTitle: course.title, moduleTitle: modules[indexOfModule] ? modules[indexOfModule]!.title : "" , exam_id: course.exam_id});
+        const certification = course.certifications.find((c) => c.user_id == user_id);
+        progressWithRating.push({ ...courseProgress, rating: progressRating, courseTitle: course.title, moduleTitle: modules[indexOfModule] ? modules[indexOfModule]!.title : "", exam_id: course.exam_id, certification_id: !certification ? null : certification.id });
     }
 
 
