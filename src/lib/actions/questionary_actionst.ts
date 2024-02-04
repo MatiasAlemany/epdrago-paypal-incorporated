@@ -1,3 +1,4 @@
+"use server";
 import { currentUser } from '@clerk/nextjs';
 import { exams, options, questionary, questions } from '../db/schema/exams';
 import { db } from '../db';

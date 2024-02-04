@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { db } from "../db";
 import { userBoughtThisCourse } from "./get_courses";
+"use server";
 import { modules_items } from "../db/schema/modules_items";
 import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
