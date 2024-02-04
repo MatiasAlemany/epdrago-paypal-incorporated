@@ -5,7 +5,20 @@ import { db } from "../db";
 import { certificationInsertZod, certifications } from "../db/schema/certifications";
 import { action } from "./safe_action";
 import z from 'zod';
-import { getCertificate } from "@/app/certificados/[id]/page";
+import { eq } from "drizzle-orm";
+
+
+
+export async function getCertificate(id: string) {
+    return await db.query.certifications.findFirst({
+      where: eq(certifications.id, id),
+      with: {
+        course: true,
+        user: true,
+      },
+    });
+  }
+  
 
 export const verifyCertificate = action(z.object({
     id: z.string()

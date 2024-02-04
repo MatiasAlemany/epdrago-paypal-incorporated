@@ -1,19 +1,9 @@
 import DiplomaComponent from "@/components/DiplomaComponent";
+import { getCertificate } from "@/lib/actions/certifications";
 import { db } from "@/lib/db";
 import { certifications } from "@/lib/db/schema/certifications";
 import { PageParams } from "@/lib/types/params";
 import { eq } from "drizzle-orm";
-
-export async function getCertificate(id: string) {
-  "use server";
-  return await db.query.certifications.findFirst({
-    where: eq(certifications.id, id),
-    with: {
-      course: true,
-      user: true,
-    },
-  });
-}
 
 export type Certificate = AwaitedReturn<typeof getCertificate>;
 
