@@ -43,6 +43,20 @@ const CrearExamen = ({
       ) : (
         <div className="rounded-lg bg-neutral-900 w-full min-h-[60vh] max-w-[1000px] p-6 mx-auto flex flex-col">
           <QuestionContainer
+            onDeleteOption={(questionId: string, option: Option) => {
+              const questionaryNew = questionary.map((e) => {
+                if (questionId == e.id) {
+                  return {
+                    ...e,
+                    options: e.options.filter((o) => o.id != option.id),
+                  };
+                }
+
+                return e;
+              });
+
+              setquestionary(questionaryNew);
+            }}
             onCreateResponse={(questionId: string, option: Option) => {
               const questionaryNew = questionary.map((e) => {
                 if (questionId == e.id) {
