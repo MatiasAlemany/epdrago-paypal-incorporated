@@ -6,7 +6,7 @@ import 'dotenv/config';
 
 const connectionString = process.env.DATABASE_URL!;
 // Disable prefetch as it is not supported for "Transaction" pool mode 
-
+//Check behore Neon
 
 
 declare global {
