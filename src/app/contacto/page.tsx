@@ -2,7 +2,7 @@
 import { padding } from "@/components/styles/padding";
 import { cn } from "@/lib/utils";
 import { Button, Divider } from "@nextui-org/react";
-import { ArrowUpRight, Flame, InstagramIcon, MailIcon } from "lucide-react";
+import { Flame, InstagramIcon, MailIcon } from "lucide-react";
 
 const ContactoPage = () => {
   return (

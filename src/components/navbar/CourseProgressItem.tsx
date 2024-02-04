@@ -1,8 +1,7 @@
 "use client";
+import { CourseProgressSelection } from "@/lib/actions/course_progress_actions";
 import { useRouter } from "next/navigation";
 import HorizontalProgressBar from "../course/HorizontalProgressBar";
-import useWindowDimensions from "@/lib/hook/useWindowDimensions";
-import { CourseProgressSelection } from "@/lib/actions/course_progress_actions";
 
 export const CourseProgressItem = ({
   customWidth,

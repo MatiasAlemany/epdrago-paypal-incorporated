@@ -3,9 +3,8 @@ import { actionOnServer } from "@/lib/actions/test_action";
 import { ModuleItemInsert } from "@/lib/db/schema/modules_items";
 import {
   BookCheck,
-  FileText,
   FileTextIcon,
-  PlayCircleIcon,
+  PlayCircleIcon
 } from "lucide-react";
 
 const ModuleItemContainer = ({

@@ -1,18 +1,11 @@
-import { moduleTimeline } from "@/lib/actions/edit/modules_actions";
-import { db } from "@/lib/db";
-import { course_progress } from "@/lib/db/schema/course_progress";
-import { modules_items } from "@/lib/db/schema/modules_items";
-import { currentUser } from "@clerk/nextjs/server";
-import { Button } from "@nextui-org/react";
-import { eq } from "drizzle-orm";
-import Link from "next/link";
-import { redirect } from "next/navigation";
-import ButtonAsync from "./ButtonAsync";
-import { action } from "../../lib/actions/safe_action";
 import {
   setExamModuleProgress,
   setNextModuleProgress,
 } from "@/lib/actions/course_progress_actions";
+import { moduleTimeline } from "@/lib/actions/edit/modules_actions";
+import { Button } from "@nextui-org/react";
+import { redirect } from "next/navigation";
+import ButtonAsync from "./ButtonAsync";
 
 export type ModuleNavigationI = {
   previous: string | undefined;

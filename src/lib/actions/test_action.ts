@@ -1,11 +1,11 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
-import { db } from "../db";
-import { userBoughtThisCourse } from "./get_courses";
-import { modules_items } from "../db/schema/modules_items";
 import { eq } from "drizzle-orm";
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { db } from "../db";
+import { modules_items } from "../db/schema/modules_items";
+import { userBoughtThisCourse } from "./get_courses";
 
 export async function actionOnServer(course_id: string, module_id: string) {
     const userCourse = await userBoughtThisCourse(course_id);
