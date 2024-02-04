@@ -17,7 +17,6 @@ export async function actionOnServer(course_id: string, module_id: string) {
 
 
 export const deleteModuleItem = async (formData: FormData) => {
-    //delete
     await db
         .delete(modules_items)
         .where(eq(modules_items.id, formData.get('module_id') as string));
