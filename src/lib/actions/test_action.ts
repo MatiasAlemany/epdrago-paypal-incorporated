@@ -3,7 +3,6 @@
 import { revalidatePath } from "next/cache";
 import { db } from "../db";
 import { userBoughtThisCourse } from "./get_courses";
-"use server";
 import { modules_items } from "../db/schema/modules_items";
 import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
@@ -18,7 +17,6 @@ export async function actionOnServer(course_id: string, module_id: string) {
 
 
 export const deleteModuleItem = async (formData: FormData) => {
-    "use server";
     await db
         .delete(modules_items)
         .where(eq(modules_items.id, formData.get('module_id') as string));
