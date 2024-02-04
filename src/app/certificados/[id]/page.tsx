@@ -1,12 +1,8 @@
 import DiplomaComponent from "@/components/DiplomaComponent";
-import { padding } from "@/components/styles/padding";
 import { db } from "@/lib/db";
 import { certifications } from "@/lib/db/schema/certifications";
 import { PageParams } from "@/lib/types/params";
-import { cn } from "@/lib/utils";
-import { Button } from "@nextui-org/react";
 import { eq } from "drizzle-orm";
-import Image from "next/image";
 
 export async function getCertificate(id: string) {
   "use server";
@@ -33,5 +29,9 @@ export default async function Certificado({
       </div>
     );
   }
-  return <DiplomaComponent certificate={certificado} />;
+  return (
+    <div>
+      <DiplomaComponent certificate={certificado} />;
+    </div>
+  );
 }
