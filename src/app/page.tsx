@@ -29,6 +29,13 @@ export default function Home() {
         </p>
       </div>
       <DescriptionContainer />
+      <div className="h-[0.8px] rounded-full w-full bg-neutral-500 my-8"></div>
+      <h1 className="text-xl md:text-2xl  font-extrabold text-center tracking-wide">
+        REGISTRATE PARA PODER ADQUIRIR NUESTROS CURSOS!
+      </h1>
+      <button className="rounded-full px-8 text-black mt-4 mx-auto py-2 font-bold bg-green-500">
+        REGISTRARSE
+      </button>
     </div>
   );
 }

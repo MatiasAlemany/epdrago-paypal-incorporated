@@ -43,6 +43,7 @@ const CrearExamen = ({
       ) : (
         <div className="rounded-lg bg-neutral-900 w-full min-h-[60vh] max-w-[1000px] p-6 mx-auto flex flex-col">
           <QuestionContainer
+            isAdmin={true}
             onDeleteOption={(questionId: string, option: Option) => {
               const questionaryNew = questionary.map((e) => {
                 if (questionId == e.id) {

@@ -31,7 +31,7 @@ const ContactoPage = () => {
                 href="https://www.instagram.com/epdrago?igsh=NmR3cmN6bXI4bzRw&utm_source=qr"
                 className=""
               >
-                Leandro Drago
+                Epdrago
               </a>
             </Button>
             <Button className="m-2 " color="success" variant="bordered">
@@ -48,6 +48,14 @@ const ContactoPage = () => {
                 className=""
               >
                 Axel Dubin
+              </a>
+            </Button>
+            <Button className="mt-2 ml-2" color="success" variant="bordered">
+              <a
+                href="https://www.instagram.com/leandrolioneldrago?igsh=MTJtdHFqcDNzZHl2MA%3D%3D&utm_source=qr"
+                className=""
+              >
+                Leandro Drago
               </a>
             </Button>
           </div>
