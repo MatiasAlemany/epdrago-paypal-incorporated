@@ -12,11 +12,11 @@ const DescriptionItem = ({
   orientation = "left",
 }: DescriptionItemI) => {
   return (
-    <div className="h-[381px] w-[451px] flex-col p-8 main-content rounded-2xl mx-6 my-4">
+    <div className="min-h-[381px] w-[451px] flex-col p-8 main-content rounded-2xl mx-6 my-4">
       <h1 className="text-2xl font-extrabold tracking-wide">
         {title.toUpperCase()}
       </h1>
-      <p className="mt-6">{description}</p>
+      <p className="mt-6 md:text-md text-sm">{description}</p>
     </div>
   );
 };
