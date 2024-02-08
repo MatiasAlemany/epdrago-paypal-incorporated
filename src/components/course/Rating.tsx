@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Icon, { type IconStylesProps, type StarStylesProps } from "./Star";
+import { useEffect } from "react";
 
 interface RatingProps extends StarStylesProps, IconStylesProps {
   initialValue?: number;
@@ -9,6 +10,7 @@ interface RatingProps extends StarStylesProps, IconStylesProps {
   textColor?: string;
   readonly?: boolean;
   showValue?: boolean;
+  onValueChanges?: (value : number) => void
 }
 
 export const Rating: React.FC<RatingProps> = ({
@@ -20,9 +22,17 @@ export const Rating: React.FC<RatingProps> = ({
   icon,
   readonly = false,
   showValue = false,
+  onValueChanges
 }) => {
   const [starsValue, setStarsValue] = useState<number>(initialValue);
   const [valueAlreadySelected, setValueAlreadySelected] = useState(readonly);
+  useEffect(() => {
+    console.log("Value changed to", starsValue);
+    if (onValueChanges != undefined) {
+     onValueChanges(starsValue);
+    }
+  }, [starsValue, onValueChanges]);
+
   return (
     <div className="flex items-end">
       {Array.from(Array(5).keys()).map((_, index) => (
