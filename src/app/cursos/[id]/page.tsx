@@ -75,10 +75,6 @@ const EditarCursoPage = async ({
         }}
         {...course}
       />
-      <div className="flex-col flex items-center justify-center space-y-2">
-        <ImageModal course_id={id} />
-        <ActualizarDatosModal course={course} />
-      </div>{" "}
       <h1 className="mt-12 mb-8 text-green-400  text-center text-2xl font-extrabold lg:text-4xl">
         Instructores{" "}
       </h1>
@@ -86,10 +82,6 @@ const EditarCursoPage = async ({
         {course.instructors.map((i) => (
           <InstructorContainer {...i} key={i.id} />
         ))}
-      </div>
-      <div className="flex justify-center">
-        {" "}
-        <InstructorModal course_id={course.id} />
       </div>
       <h1 className="mt-12 mb-8 text-green-400  text-center text-2xl font-extrabold lg:text-4xl">
         Video introduccion

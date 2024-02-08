@@ -2,6 +2,7 @@ import CarousellData from "@/components/home/CarousellData";
 import CarousellHome from "@/components/home/CarousellHome";
 import DescriptionContainer from "@/components/home/DescriptionContainer";
 import FeaturesContainer from "@/components/home/FeaturesContainer";
+import RegistrarseBottom from "@/components/navbar/RegistrarseBottom";
 import { padding } from "@/components/styles/padding";
 import { cn } from "@/lib/utils";
 
@@ -33,9 +34,7 @@ export default function Home() {
       <h1 className="text-xl md:text-2xl  font-extrabold text-center tracking-wide">
         REGISTRATE PARA PODER ADQUIRIR NUESTROS CURSOS!
       </h1>
-      <button className="rounded-full px-8 text-black mt-4 mx-auto py-2 font-bold bg-green-500">
-        REGISTRARSE
-      </button>
+     <RegistrarseBottom />
     </div>
   );
 }

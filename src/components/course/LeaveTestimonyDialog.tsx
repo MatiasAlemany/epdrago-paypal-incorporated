@@ -7,15 +7,23 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
+  Spinner,
   Textarea,
   useDisclosure,
 } from "@nextui-org/react";
 import { useState } from "react";
 import { Rating } from "./Rating";
+import { useAction } from "next-safe-action/hooks";
+import { createTestimony } from "@/lib/actions/testimony";
 
-const LeaveTestimonyDialog = () => {
+interface TestimonyDialog {
+  course_id: string;
+}
+
+const LeaveTestimonyDialog = ({ course_id }: TestimonyDialog) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [starsValue, setStarsValue] = useState<number>(0);
+  const { execute, status } = useAction(createTestimony);
   return (
     <div>
       <Button color="success" onPress={onOpen}>
@@ -39,8 +47,22 @@ const LeaveTestimonyDialog = () => {
                 <Textarea maxLength={140} label="Tu opinión" />
               </ModalBody>
               <ModalFooter>
-                <Button variant="ghost">Cancelar</Button>
-                <Button color="success">Guardar</Button>
+                {status == "executing" ? (
+                  <Spinner color="success" />
+                ) : (
+                  <>
+                    {" "}
+                    <Button variant="ghost">Cancelar</Button>
+                    <Button
+                      onClick={() => {
+                        execute({ course_id: course_id, rating: starsValue });
+                      }}
+                      color="success"
+                    >
+                      Guardar
+                    </Button>
+                  </>
+                )}
               </ModalFooter>
             </>
           )}
