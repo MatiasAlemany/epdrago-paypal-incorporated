@@ -4,8 +4,8 @@ import { courses } from "./course";
 import { relations } from "drizzle-orm";
 
 export const usersToCourses = pgTable('usersToCourses', {
-    user_id: text('user_id').references(() => users.id).notNull(),
-    course_id: uuid('course_id').references(() => courses.id).notNull()
+    user_id: text('user_id').notNull(),
+    course_id: uuid('course_id').notNull()
 }, (t) => ({
     pk: primaryKey({ columns: [t.user_id, t.course_id] })
 }))
