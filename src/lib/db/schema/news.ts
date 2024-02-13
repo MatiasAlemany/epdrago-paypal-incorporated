@@ -5,5 +5,6 @@ export const news = pgTable('news ', {
     title: text('title').notNull(),
     content: text('content').notNull(),
     createdAt: timestamp('createdAt').defaultNow(),
-    img_url: text('img_url').notNull()
+    img_url: text('img_url').notNull(),
+    link: text("text")
 })
