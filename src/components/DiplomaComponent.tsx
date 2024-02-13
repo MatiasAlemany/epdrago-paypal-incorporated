@@ -92,7 +92,7 @@ const DiplomaComponent: React.FC<DiplomaComponentProps> = ({
           </div>
         </div>
       </div>
-      <div className="flex mt-12 space-x-2">
+      <div className="flex mt-12 space-x-2 items-center">
         <Button
           onClick={() => {
             htmlToImageConvert();
@@ -103,10 +103,15 @@ const DiplomaComponent: React.FC<DiplomaComponentProps> = ({
         >
           Descargar
         </Button>
-        {canCreate && !testimonySent && (
-          <LeaveTestimonyDialog onSent={()=> {
-            setTestimonySent(true);
-          }} course_id={certificate.course_id} />
+        {canCreate && !testimonySent ? (
+          <LeaveTestimonyDialog
+            onSent={() => {
+              setTestimonySent(true);
+            }}
+            course_id={certificate.course_id}
+          />
+        ) : (
+          <h1 className="text-neutral-400 text-sm">Testimonio realizado!</h1>
         )}
       </div>
     </div>
