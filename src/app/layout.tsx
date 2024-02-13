@@ -12,7 +12,6 @@ import { Toaster } from "@/components/ui/sonner";
 export const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
-  weight: "variable",
 });
 export const metadata: Metadata = {
   title: "Epdrago",

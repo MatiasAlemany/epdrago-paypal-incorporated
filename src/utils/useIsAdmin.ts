@@ -12,9 +12,7 @@ export async function useIsAdmin(): Promise<User | null> {
     const user = (
         await db.select().from(users).where(eq(users.id, session.id))
     )[0];
-    if (user == undefined) {
-        throw Error('User not found in DB');
-    }
+    console.log(user);
     if (user!.role == "admin") return session;
 
     return null;

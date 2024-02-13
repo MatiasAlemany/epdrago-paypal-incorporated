@@ -1,7 +1,7 @@
 import { Option } from "@/lib/actions/questionary_actionst";
 import { cn } from "@/lib/utils";
 import { Button, Checkbox } from "@nextui-org/react";
-import { Check, Trash, Verified, XCircle } from "lucide-react";
+import { Check, Trash, XCircle } from "lucide-react";
 import React from "react";
 
 interface OptionContainerExamProps {
@@ -9,15 +9,17 @@ interface OptionContainerExamProps {
   onClick: (questionId: string) => void;
   currentQuestionSelected: string;
   onDeleteOption: (questionId: string, option: Option) => void;
+
 }
 
 const OptionContainerExam: React.FC<OptionContainerExamProps> = ({
   onClick,
   option,
   currentQuestionSelected,
-  onDeleteOption,
+  onDeleteOption
 }) => {
   const selected: boolean = currentQuestionSelected == option.id;
+
   return (
     <div className="flex my-4 items-center" key={option.id}>
       <div
@@ -35,7 +37,6 @@ const OptionContainerExam: React.FC<OptionContainerExamProps> = ({
         className="ml-2"
         color="success"
       />
-      {option.isCorrect ? <Verified /> : null}
     </div>
   );
 };
