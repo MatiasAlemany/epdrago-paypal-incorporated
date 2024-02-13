@@ -17,9 +17,10 @@ export async function createEvent(form: FormData) {
   const img = form.get('img_url') as string
   const title = form.get('title') as string
   const content = form.get('content') as string
+  const link = form.get('link') as string
 
   await db.insert(news).values({
-    content, title, img_url: img,
+    content, title, img_url: img,link
 
   })
   revalidatePath('/eventos')

@@ -1,6 +1,6 @@
 {
-  "id": "ae105e1d-dbf6-41f0-b152-dee28c890b8a",
-  "prevId": "5100d091-9a13-4cff-aaca-101e6347bceb",
+  "id": "2f8f37a1-7ad3-443d-a5c8-78a02fd2c4fc",
+  "prevId": "e240a769-9003-4e28-ae73-5d8bcadcaeab",
   "version": "5",
   "dialect": "pg",
   "tables": {
@@ -506,6 +506,12 @@
           "type": "text",
           "primaryKey": false,
           "notNull": true
+        },
+        "link": {
+          "name": "link",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "indexes": {},
@@ -646,15 +652,7 @@
       "indexes": {},
       "foreignKeys": {},
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "users_id_unique": {
-          "name": "users_id_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "id"
-          ]
-        }
-      }
+      "uniqueConstraints": {}
     },
     "usersToCourses": {
       "name": "usersToCourses",
@@ -674,36 +672,7 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {
-        "usersToCourses_user_id_users_id_fk": {
-          "name": "usersToCourses_user_id_users_id_fk",
-          "tableFrom": "usersToCourses",
-          "tableTo": "users",
-          "schemaTo": "public",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "usersToCourses_course_id_courses_id_fk": {
-          "name": "usersToCourses_course_id_courses_id_fk",
-          "tableFrom": "usersToCourses",
-          "tableTo": "courses",
-          "schemaTo": "public",
-          "columnsFrom": [
-            "course_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
+      "foreignKeys": {},
       "compositePrimaryKeys": {
         "usersToCourses_user_id_course_id_pk": {
           "name": "usersToCourses_user_id_course_id_pk",

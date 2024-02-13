@@ -1,5 +1,5 @@
 {
-  "id": "5100d091-9a13-4cff-aaca-101e6347bceb",
+  "id": "e240a769-9003-4e28-ae73-5d8bcadcaeab",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -506,6 +506,12 @@
           "type": "text",
           "primaryKey": false,
           "notNull": true
+        },
+        "link": {
+          "name": "link",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "indexes": {},
@@ -579,12 +585,19 @@
         "id": {
           "name": "id",
           "type": "uuid",
-          "primaryKey": false,
-          "notNull": true
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
         },
         "rating": {
           "name": "rating",
           "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "course_id": {
+          "name": "course_id",
+          "type": "uuid",
           "primaryKey": false,
           "notNull": true
         },
@@ -667,36 +680,7 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {
-        "usersToCourses_user_id_users_id_fk": {
-          "name": "usersToCourses_user_id_users_id_fk",
-          "tableFrom": "usersToCourses",
-          "tableTo": "users",
-          "schemaTo": "public",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "usersToCourses_course_id_courses_id_fk": {
-          "name": "usersToCourses_course_id_courses_id_fk",
-          "tableFrom": "usersToCourses",
-          "tableTo": "courses",
-          "schemaTo": "public",
-          "columnsFrom": [
-            "course_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
+      "foreignKeys": {},
       "compositePrimaryKeys": {
         "usersToCourses_user_id_course_id_pk": {
           "name": "usersToCourses_user_id_course_id_pk",

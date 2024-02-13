@@ -1,5 +1,6 @@
 import DiplomaComponent from "@/components/DiplomaComponent";
 import { getCertificate } from "@/lib/actions/certifications";
+import { checkTestimony } from "@/lib/actions/testimony";
 import { db } from "@/lib/db";
 import { certifications } from "@/lib/db/schema/certifications";
 import { PageParams } from "@/lib/types/params";
@@ -11,7 +12,6 @@ export default async function Certificado({
   params: { id },
 }: PageParams<{ id: string }>) {
   const certificado = await getCertificate(id);
-
   if (certificado == undefined) {
     return (
       <div className="h-screen flex justify-end items-center">
@@ -19,9 +19,15 @@ export default async function Certificado({
       </div>
     );
   }
+  const testimony = await checkTestimony(certificado.course_id);
+
   return (
     <div>
-      <DiplomaComponent certificate={certificado} />;
+      <DiplomaComponent
+        certificate={certificado}
+        canCreate={testimony == undefined}
+      />
+      ;
     </div>
   );
 }

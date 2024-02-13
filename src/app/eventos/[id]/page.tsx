@@ -2,7 +2,9 @@ import { padding } from "@/components/styles/padding";
 import { getEvent } from "@/lib/actions/get_events";
 import { PageParams } from "@/lib/types/params";
 import { cn } from "@/lib/utils";
+import { Link2Icon } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default async function EventosPage({
   params: { id },
@@ -26,6 +28,12 @@ export default async function EventosPage({
         </h2>
         <h1 className="text-3xl my-2 font-bold">{event.title}</h1>
         <p className="text-neutral-200">{event.content}</p>
+        {event.link != null && (
+          <div className="rounded-full px-4 py-2 mt-4 bg-neutral-700">
+            <Link2Icon className="mr-2" />
+            <Link href={event.link} />
+          </div>
+        )}
       </div>
     </div>
   );

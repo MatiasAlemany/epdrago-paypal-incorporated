@@ -18,16 +18,21 @@ import { createTestimony } from "@/lib/actions/testimony";
 
 interface TestimonyDialog {
   course_id: string;
+  onSent: () => void;
 }
 
-const LeaveTestimonyDialog = ({ course_id }: TestimonyDialog) => {
+const LeaveTestimonyDialog = ({ course_id, onSent }: TestimonyDialog) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [starsValue, setStarsValue] = useState<number>(0);
-  const { execute, status } = useAction(createTestimony);
+  const { execute, status } = useAction(createTestimony, {
+    onSuccess: () => {
+      onSent();
+    },
+  });
   return (
     <div>
       <Button color="success" onPress={onOpen}>
-        Testimnio
+        Dejar testimonio
       </Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>

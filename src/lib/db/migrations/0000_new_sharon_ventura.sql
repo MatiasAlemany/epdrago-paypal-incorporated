@@ -92,7 +92,8 @@ CREATE TABLE IF NOT EXISTS "news " (
 	"title" text NOT NULL,
 	"content" text NOT NULL,
 	"createdAt" timestamp DEFAULT now(),
-	"img_url" text NOT NULL
+	"img_url" text NOT NULL,
+	"link" text
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "payment_schema" (
@@ -107,8 +108,9 @@ CREATE TABLE IF NOT EXISTS "payment_schema" (
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "testimonials" (
-	"id" uuid NOT NULL,
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"rating" numeric NOT NULL,
+	"course_id" uuid NOT NULL,
 	"user_id" text NOT NULL
 );
 --> statement-breakpoint
@@ -126,15 +128,3 @@ CREATE TABLE IF NOT EXISTS "usersToCourses" (
 	"course_id" uuid NOT NULL,
 	CONSTRAINT "usersToCourses_user_id_course_id_pk" PRIMARY KEY("user_id","course_id")
 );
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "usersToCourses" ADD CONSTRAINT "usersToCourses_user_id_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE no action ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "usersToCourses" ADD CONSTRAINT "usersToCourses_course_id_courses_id_fk" FOREIGN KEY ("course_id") REFERENCES "public"."courses"("id") ON DELETE no action ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;

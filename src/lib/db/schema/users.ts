@@ -12,7 +12,7 @@ const roles = zodRoles.options;
 type Role = z.infer<typeof zodRoles>;
 
 export const users = pgTable("users", {
-    id: text('id').primaryKey().unique(),
+    id: text('id').primaryKey(),
     name: text('name').notNull(),
     email: text('email').notNull(),
     img_url: text('img_url'),

@@ -38,7 +38,7 @@ export default function EventModal({}) {
                   <ModalBody>
                     <Input name="title" label="Titular" />
                     <Textarea label="Contenido" name="content" />
-
+                    <Input name="link" label="Link de referencia (opcional)" />
                     <ImageUploader
                       onUploadComplete={(image) => {
                         setImgUrl(image);
