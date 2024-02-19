@@ -11,9 +11,10 @@ import { revalidatePath } from "next/cache";
 export const createTestimony = action(z.object({
     course_id: z.string(),
     rating: z.number(),
+    content:z.string()
     
 
-}), async ({ course_id, rating }) => {
+}), async ({ course_id, rating , content}) => {
     const user = await currentUser();
     if (user == undefined) {
         throw Error('Usario no esta loggeado para dar el testimonio')
@@ -22,7 +23,8 @@ export const createTestimony = action(z.object({
     const newTestimony = await db.insert(testimonials).values({
         course_id: course_id,
         user_id: user.id,
-        rating: `${rating}`
+        rating: `${rating}`,
+        content
     }).returning()
     revalidatePath(``)
     console.log(newTestimony);

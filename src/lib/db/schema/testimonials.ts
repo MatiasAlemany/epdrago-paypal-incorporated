@@ -9,7 +9,8 @@ export const testimonials = pgTable('testimonials', {
     id: uuid('id').defaultRandom().primaryKey(),
     rating: decimal('rating').notNull(),
     course_id: uuid('course_id').notNull(),
-    user_id: text('user_id').notNull()
+    user_id: text('user_id').notNull(),
+    content: text("content").default("").notNull()
 })
 
 export const testimonials_relation = relations(testimonials, ({ one }) => ({

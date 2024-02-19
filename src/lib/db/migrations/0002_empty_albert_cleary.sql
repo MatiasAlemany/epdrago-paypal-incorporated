@@ -1,0 +1,1 @@
+ALTER TABLE "testimonials" ADD COLUMN "content" text DEFAULT '';

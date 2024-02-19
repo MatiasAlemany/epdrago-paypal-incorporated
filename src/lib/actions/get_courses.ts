@@ -16,33 +16,53 @@ const courses_query = db.query.courses.findMany({
 
 
 export type Course = AwaitedReturn<typeof getCourses>[0];
-export const getCourses = async () => await courses_query.execute();
+export const getCourses = async () => {
+    const courses = await courses_query.execute();
+    const ratings = courses.map((e) => {
+        const testimonialsCourse = e.testimonials;
+        let testimonialValue = 0;
+        for (const testimonial of testimonialsCourse) {
+            testimonialValue = testimonialValue + parseFloat(testimonial.rating);
+        }
+        return testimonialValue / testimonialsCourse.length;
+    })
+    console.log(ratings);
+    return courses.map((e, index) => ({ ...e, rating: ratings[index] }))
+};
 
 export type CourseGet = AwaitedReturn<typeof getCourse>;
-
+export type TestimonialSelectWithCourse = CourseGet['testimonials'][number]
 export const getCourse = async (course_id: string) => {
-    try {
-        const course = await db.query.courses.findFirst({
-            where: eq(courses.id, course_id),
-            with: {
-                frequentlyAskedQuestions: true,
-
-                modules: {
-                    with: {
-                        items: true
-                    }
-                }, instructors: true, certifications: true
-            }
-
-        });
-        if (course == undefined) {
-            throw Error('Course not found');
+    const course = await db.query.courses.findFirst({
+        where: eq(courses.id, course_id),
+        with: {
+            frequentlyAskedQuestions: true,
+            testimonials: {
+                with: {
+                    user: true
+                }
+            },
+            modules: {
+                with: {
+                    items: true
+                }
+            }, instructors: true, certifications: true
         }
-        return course;
-    } catch (error) {
-        console.log(error);
+
+    });
+    if (course == undefined) {
         throw Error('Course not found');
     }
+    const testimonialsCourse = course.testimonials;
+    let testimonialValue = 0;
+    for (const testimonial of testimonialsCourse) {
+        testimonialValue = testimonialValue + parseFloat(testimonial.rating);
+    }
+
+
+
+    return { ...course, rating: testimonialValue / testimonialsCourse.length };
+
 }
 
 

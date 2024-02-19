@@ -24,6 +24,7 @@ interface TestimonyDialog {
 const LeaveTestimonyDialog = ({ course_id, onSent }: TestimonyDialog) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [starsValue, setStarsValue] = useState<number>(0);
+  const [content, setContent] = useState("");
   const { execute, status } = useAction(createTestimony, {
     onSuccess: () => {
       onSent();
@@ -49,7 +50,15 @@ const LeaveTestimonyDialog = ({ course_id, onSent }: TestimonyDialog) => {
                     size="small"
                   />
                 </div>
-                <Textarea maxLength={140} label="Tu opinión" />
+                <Textarea
+                  value={content}
+                  onChange={(e) => {
+                    setContent(e.target.value);
+                  }}
+                  maxLength={140}
+                  label="Tu opinión"
+                  name="content"
+                />
               </ModalBody>
               <ModalFooter>
                 {status == "executing" ? (
@@ -60,7 +69,7 @@ const LeaveTestimonyDialog = ({ course_id, onSent }: TestimonyDialog) => {
                     <Button variant="ghost">Cancelar</Button>
                     <Button
                       onClick={() => {
-                        execute({ course_id: course_id, rating: starsValue });
+                        execute({ course_id: course_id, rating: starsValue, content });
                       }}
                       color="success"
                     >

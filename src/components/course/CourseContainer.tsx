@@ -15,6 +15,7 @@ const CourseContainer = ({
   descripcion,
   duracion,
   isAdmin,
+  rating,
   img_url,
 }: Course & { isAdmin: boolean }) => {
   const router = useRouter();
@@ -44,7 +45,7 @@ const CourseContainer = ({
         <h1 className="font-bold text-lg mt-2 lg:mt-0 ">{title}</h1>
         <Rating
           readonly={true}
-          initialValue={4.5}
+          initialValue={rating!}
           size="small"
           showValue={true}
         />

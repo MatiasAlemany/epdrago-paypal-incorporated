@@ -15,6 +15,13 @@
       "when": 1707811668876,
       "tag": "0001_reflective_agent_zero",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1708372192220,
+      "tag": "0002_empty_albert_cleary",
+      "breakpoints": true
     }
   ]
 }

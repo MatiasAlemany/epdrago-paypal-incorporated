@@ -53,8 +53,8 @@ export async function POST(req: Request) {
 
     switch (evt.type) {
         case 'user.created':
-            const { id, first_name, email_addresses, last_name } = evt.data;
-            await db.insert(users).values({ id: id, name: `${first_name} ${last_name}`, email: email_addresses[0]!.email_address });
+            const { id, first_name, email_addresses, last_name , image_url} = evt.data;
+            await db.insert(users).values({ id: id, name: `${first_name} ${last_name}`, email: email_addresses[0]!.email_address ,img_url: image_url});
             break;
 
 
