@@ -13,7 +13,7 @@ export async function buyCourse(course_id: string) {
     if (!course) {
         throw new Error('Course not found');
     }
-    
+
     const metadata: MetadataPreference = {
         user_email: user.emailAddresses[0]!.emailAddress!,
         user_id: user.id,
@@ -24,7 +24,7 @@ export async function buyCourse(course_id: string) {
         metadata: metadata,
         descripcion: course.title,
         item_id: course.id,
-        price: course.price,
+        price: 1000,
         title: course.title,
     }
 

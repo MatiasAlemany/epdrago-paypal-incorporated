@@ -1,7 +1,6 @@
 import axios from "axios";
 import { PreferenceRequest, PreferenceResponse } from "mercadopago/dist/clients/preference/commonTypes";
 
-export type ProductType = "ebook" | "program"
 
 export interface MetadataPreference {
     user_id: string,
@@ -24,8 +23,8 @@ export const createPreferenceResponse = async ({ item_id, price, title, metadata
         metadata: metadata,
         auto_return: 'all',
         back_urls: {
-            success: process.env.NODE_ENV === 'development' ? 'http://localhost:3000/payment/success' : `https://axeldubin.com/payment/success`,
-            failure: process.env.NODE_ENV === 'development' ? 'http://localhost:3000/payment/error' : `https://axeldubin.com/payment/error`,
+            success: process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : `https://epdrago.com.ar`,
+            failure: process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : `https://epdrago.com.ar`,
         },
         binary_mode: true,
         items: [
