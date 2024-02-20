@@ -1,4 +1,3 @@
-"use client";
 import Image from "next/image";
 import React from "react";
 import { Rating } from "./Rating";
@@ -11,15 +10,11 @@ import {
 } from "@nextui-org/react";
 import MercadoPagoIcon from "../MercadoPago_Icon";
 import { Course, CourseGet } from "@/lib/actions/get_courses";
+import { buyCourse } from "@/lib/actions/buy_course";
 
-const BackGroundCourse: React.FC<CourseGet & { onBuy: () => void }> = ({
-  img_url,
-  price,
-  duracion,
-  onBuy,
-  id,
-  title,
-}) => {
+const BackGroundCourse: React.FC<
+  CourseGet & { }
+> = ({ img_url, price, duracion, id, title }) => {
   return (
     <div className="relative flex aspect-[18/6] flex-col justify-end opacity-80">
       <Image
@@ -49,7 +44,8 @@ const BackGroundCourse: React.FC<CourseGet & { onBuy: () => void }> = ({
             Precio - {price}$
           </h1>
 
-          <form action={onBuy}>
+          <form action={buyCourse}>
+            <input hidden defaultValue={id} name="course_id" />
             <Button type="submit" color="primary" className="font-bold">
               <MercadoPagoIcon /> Comprar
             </Button>
