@@ -10,7 +10,7 @@ interface RatingProps extends StarStylesProps, IconStylesProps {
   textColor?: string;
   readonly?: boolean;
   showValue?: boolean;
-  onValueChanges?: (value : number) => void
+  onValueChanges?: (value: number) => void;
 }
 
 export const Rating: React.FC<RatingProps> = ({
@@ -22,14 +22,14 @@ export const Rating: React.FC<RatingProps> = ({
   icon,
   readonly = false,
   showValue = false,
-  onValueChanges
+  onValueChanges,
 }) => {
   const [starsValue, setStarsValue] = useState<number>(initialValue);
   const [valueAlreadySelected, setValueAlreadySelected] = useState(readonly);
   useEffect(() => {
     console.log("Value changed to", starsValue);
     if (onValueChanges != undefined) {
-     onValueChanges(starsValue);
+      onValueChanges(starsValue);
     }
   }, [starsValue, onValueChanges]);
 
@@ -51,7 +51,7 @@ export const Rating: React.FC<RatingProps> = ({
       ))}
       {showValue && (
         <h1 className="pl-2 text-sm color font-bold text-orange-300">
-          {starsValue}
+          {starsValue.toFixed(1)}
         </h1>
       )}
     </div>
