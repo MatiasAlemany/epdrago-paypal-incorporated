@@ -63,7 +63,7 @@ async function handler(req: NextRequest) {
 
     } catch (error) {
         console.log(error);
-        return NextResponse.json({ message: "ERRO ON SAVING TO DB" }, { status: 500 });
+        return NextResponse.json({ message: "ERROR ON SAVING TO DB" }, { status: 500 });
 
     }
 
