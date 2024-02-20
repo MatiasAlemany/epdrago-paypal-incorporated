@@ -12,6 +12,10 @@ import { type PaymentResponse } from "mercadopago/dist/clients/payment/commonTyp
 import { NextRequest, NextResponse } from "next/server";
 
 async function handler(req: NextRequest) {
+
+    // console.log("receiving test")
+    // return NextResponse.json({message:"ok"}, {status: 200});
+
     const body_data = await new Response(req.body).json();
     const paymentNotificationParsed = paymentNotification.safeParse(body_data);
     if (!paymentNotificationParsed.success) return NextResponse.json({ message: "No Payment notification" }, { status: 200 });
