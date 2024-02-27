@@ -17,6 +17,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { buyCourse } from "@/lib/actions/buy_course";
 import { getCourse } from "@/lib/actions/get_courses";
 import { deleteModuleItem } from "@/lib/actions/test_action";
 import { db } from "@/lib/db";
@@ -45,7 +46,7 @@ const EditarCursoPage = async ({
     <div>
       <BackGroundCourse
         onBuy={async () => {
-          "use server";
+          await buyCourse(course.id);
         }}
         {...course}
       />
@@ -199,22 +200,7 @@ const EditarCursoPage = async ({
         </h1>
       </div>
 
-      <div className="m-2 grid grid-cols-1 content-center justify-center gap-8 md:grid-cols-2 md:px-12 lg:px-32 xl:grid-cols-3">
-        <Testimonials
-          content="Este curso cuenta con muchas posibilidades para expandir tus
-    conocimientos, incluye informacion muy interesante sobre muchos aspectos
-    de la calistenia, como lo son los basicos,estaticos y freestyle."
-        />
-        <Testimonials
-          content="Este curso cuenta con muchas posibilidades para expandir tus
-    conocimientos, incluye informacion muy int"
-        />
-        <Testimonials
-          content="Este curso cuenta con muchas posibilidades para expandir tus
-    conocimientos, incluye informacion muy interesante sobre muchos aspectos
-    de la calistenia, como lo son los basicos,estaticos y freestyle."
-        />
-      </div>
+      <div className="m-2 grid grid-cols-1 content-center justify-center gap-8 md:grid-cols-2 md:px-12 lg:px-32 xl:grid-cols-3"></div>
       <h1 className="mt-12 mb-8 text-green-400  text-center text-2xl font-extrabold lg:text-4xl">
         Preguntas Frecuentes
       </h1>

@@ -23,17 +23,20 @@ export default async function EventosPage({
             alt={event.title}
           />
         </div>
-        <h2 className="text-neutral-500 tracking-wide mt-2">
+        {/* <h2 className="text-neutral-500 tracking-wide mt-2">
           {event.createdAt?.toLocaleDateString()}
-        </h2>
-        <h1 className="text-3xl my-2 font-bold">{event.title}</h1>
+        </h2> */}
+        <h1 className="text-3xl my-2 font-bold mt-8">{event.title}</h1>
         <p className="text-neutral-200">{event.content}</p>
-        {event.link != null && (
-          <div className="rounded-full px-4 py-2 mt-4 bg-neutral-700">
-            <Link2Icon className="mr-2" />
-            <Link href={event.link} />
-          </div>
-        )}
+        <div className="flex">
+          {event.link != null && (
+            <div className="rounded-full hover:bg-neutral-500 cursor-pointer  px-4 py-2 mt-4 bg-neutral-700 flex">
+              <Link2Icon className="mr-2" />
+              <Link href={event.link} />
+              Link
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

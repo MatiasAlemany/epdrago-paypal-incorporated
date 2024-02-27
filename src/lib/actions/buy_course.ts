@@ -1,3 +1,4 @@
+"use server";
 import { currentUser } from "@clerk/nextjs/server";
 import { db } from "../db";
 import { courses } from "../db/schema/course";
@@ -13,7 +14,7 @@ export async function buyCourse(course_id: string) {
     if (!course) {
         throw new Error('Course not found');
     }
-    
+
     const metadata: MetadataPreference = {
         user_email: user.emailAddresses[0]!.emailAddress!,
         user_id: user.id,
