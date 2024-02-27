@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/accordion";
 import { buyCourse } from "@/lib/actions/buy_course";
 import { getCourse } from "@/lib/actions/get_courses";
+import { isAdmin } from "@/lib/actions/isAdmin";
 import { deleteModuleItem } from "@/lib/actions/test_action";
 import { db } from "@/lib/db";
 import { courses } from "@/lib/db/schema/course";
@@ -36,10 +37,10 @@ import { redirect } from "next/navigation";
 const EditarCursoPage = async ({
   params: { id },
 }: PageParams<{ id: string }>) => {
-  // const admin = await isAdmin();
-  // if (admin == false) {
-  //     redirect('/');
-  // }
+  const admin = await isAdmin();
+  if (admin == false) {
+    redirect("/");
+  }
   const course = await getCourse(id);
 
   return (
