@@ -51,7 +51,7 @@ const EditarCursoPage = async ({
     <div>
       <BackGroundCourse
         onBuy={async () => {
-          buyCourse(course.id);
+          await buyCourse(course.id);
         }}
         {...course}
       />
