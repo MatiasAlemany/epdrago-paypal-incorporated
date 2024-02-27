@@ -1,6 +1,6 @@
 import React from "react";
 import DescriptionItem from "./DescriptionItem";
-
+//Hello
 const DescriptionContainer = () => {
   return (
     <div className="flex flex-wrap justify-center mt-32">
@@ -13,15 +13,15 @@ const DescriptionContainer = () => {
       />{" "}
       <DescriptionItem
         title="INSTAGRAM"
-        description="Contenido diario, videos de ejercicios, testimonios de nuestros instructores graduados, información de nuestros cursos, competencias del mas alto nivel, trayectoria de la marca registrada Epdrago desde sus comienzos hasta la actualidad"
+        description="Contenido diario, videos de ejercicios, testimonios de nuestros instructores graduados, información de nuestros cursos, competencias del mas alto nivel, trayectoria de la marca registrada Epdrago desde sus comienzos hasta la actualidad."
       />{" "}
       <DescriptionItem
         title="EPDRAGO ARMY"
-        description="Comunidad de Calistenia activa en la cal compartimos contenido 100% calistenico, como: rutinas, tips, videos, progresos, información de competencias, juntadas, eventos y mucho más."
+        description="Comunidad de Calistenia activa en la cual compartimos contenido 100% calistenico, como: rutinas, tips, videos, progresos, información de competencias, juntadas, eventos y mucho más."
       />
       <DescriptionItem
         title="CURSOS"
-        description="Nuestros cursos comienzan desde cero, es decir que no hay que tener ningun conocimiento previo para poder hacerlos. ofrecemos cursos de formacion profesional y cursos intensivos, todos con salida laboral garantizada"
+        description="Nuestros cursos comienzan desde cero, es decir que no hay que tener ningun conocimiento previo para poder hacerlos. ofrecemos cursos de formacion profesional y cursos intensivos, todos con salida laboral garantizada."
       />
       <DescriptionItem
         title="CLASES"
