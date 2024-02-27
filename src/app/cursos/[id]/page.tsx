@@ -17,6 +17,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { buyCourse } from "@/lib/actions/buy_course";
 import { getFirstModuleOfCourse } from "@/lib/actions/edit/modules_actions";
 import { getCourse } from "@/lib/actions/get_courses";
 import { isAdmin } from "@/lib/actions/isAdmin";
@@ -50,28 +51,7 @@ const EditarCursoPage = async ({
     <div>
       <BackGroundCourse
         onBuy={async () => {
-          "use server";
-
-          const user = await currentUser();
-          if (user == null) {
-            throw Error("Not logged in");
-          }
-
-          await db
-            .insert(usersToCourses)
-            .values({ course_id: id, user_id: user.id });
-          const firstModule = await getFirstModuleOfCourse(id);
-          if (firstModule == undefined) {
-            throw Error("First Module not found!");
-          }
-          await db.insert(course_progress).values({
-            isFinished: false,
-            module_number: 0,
-            user_id: user.id,
-            course_id: id,
-            module_id: firstModule.id,
-          });
-          console.log("Course bought");
+          buyCourse(course.id);
         }}
         {...course}
       />
@@ -131,7 +111,9 @@ const EditarCursoPage = async ({
         </h1>
       </div>
       <div className="m-2 grid grid-cols-1 content-center justify-center gap-8 md:grid-cols-2 md:px-12 lg:px-32 xl:grid-cols-3">
-       {course.testimonials.map((e) => <Testimonials testimonial={e} key={e.id}/>)}
+        {course.testimonials.map((e) => (
+          <Testimonials testimonial={e} key={e.id} />
+        ))}
       </div>
       <h1 className="mt-12 mb-8 text-green-400  text-center text-2xl font-extrabold lg:text-4xl">
         Preguntas Frecuentes
