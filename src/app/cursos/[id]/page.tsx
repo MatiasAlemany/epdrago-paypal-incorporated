@@ -50,9 +50,7 @@ const EditarCursoPage = async ({
   return (
     <div>
       <BackGroundCourse
-        onBuy={async () => {
-          await buyCourse(course.id);
-        }}
+  
         {...course}
       />
       <h1 className="mt-12 mb-8 text-green-400  text-center text-2xl font-extrabold lg:text-4xl">

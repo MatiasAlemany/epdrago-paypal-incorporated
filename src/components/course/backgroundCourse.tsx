@@ -11,12 +11,12 @@ import {
 } from "@nextui-org/react";
 import MercadoPagoIcon from "../MercadoPago_Icon";
 import { Course, CourseGet } from "@/lib/actions/get_courses";
+import { buyCourse } from "@/lib/actions/buy_course";
 
-const BackGroundCourse: React.FC<CourseGet & { onBuy: () => void }> = ({
+const BackGroundCourse: React.FC<CourseGet & {  }> = ({
   img_url,
   price,
   duracion,
-  onBuy,
   id,
   title,
 }) => {
@@ -49,7 +49,8 @@ const BackGroundCourse: React.FC<CourseGet & { onBuy: () => void }> = ({
             Precio - {price}$
           </h1>
 
-          <form action={onBuy}>
+          <form action={buyCourse}>
+            <input type='hidden' name='course_id' defaultValue={id} />
             <Button type="submit" color="primary" className="font-bold">
               <MercadoPagoIcon /> Comprar
             </Button>

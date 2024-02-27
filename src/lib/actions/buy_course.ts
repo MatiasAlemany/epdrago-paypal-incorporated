@@ -7,7 +7,8 @@ import { MetadataPreference, PreferenceInputType, createPreferenceResponse } fro
 import { redirect } from "next/navigation";
 
 
-export async function buyCourse(course_id: string) {
+export async function buyCourse(formData: FormData) {
+    const course_id = formData.get('course_id') as string;
     const user = await currentUser();
     if (user == null) return;
     const course = (await db.select().from(courses).where(eq(courses.id, course_id)))[0]

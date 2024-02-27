@@ -44,12 +44,7 @@ const EditarCursoPage = async ({
 
   return (
     <div>
-      <BackGroundCourse
-        onBuy={async () => {
-          await buyCourse(course.id);
-        }}
-        {...course}
-      />
+      <BackGroundCourse {...course} />
       <div className="flex-col flex items-center justify-center space-y-2">
         <ImageModal course_id={id} />
         <ActualizarDatosModal course={course} />
