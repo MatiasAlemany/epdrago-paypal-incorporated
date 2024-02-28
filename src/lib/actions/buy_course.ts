@@ -11,7 +11,9 @@ export async function buyCourse(formData: FormData) {
     console.log("Buying...")
     const course_id: string = formData.get("course_id") as string;
     const user = await currentUser();
-    if (user == null) return;
+    if (user == null) {
+        throw Error("User not logged in!");
+    };
     const course = (await db.select().from(courses).where(eq(courses.id, course_id)))[0]
     if (!course) {
         throw new Error('Course not found');
