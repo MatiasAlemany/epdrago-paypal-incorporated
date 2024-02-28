@@ -12,9 +12,13 @@ import MercadoPagoIcon from "../MercadoPago_Icon";
 import { Course, CourseGet } from "@/lib/actions/get_courses";
 import { buyCourse } from "@/lib/actions/buy_course";
 
-const BackGroundCourse: React.FC<
-  CourseGet & { }
-> = ({ img_url, price, duracion, id, title }) => {
+const BackGroundCourse: React.FC<CourseGet & {  }> = ({
+  img_url,
+  price,
+  duracion,
+  id,
+  title,
+}) => {
   return (
     <div className="relative flex aspect-[18/6] flex-col justify-end opacity-80">
       <Image
@@ -45,7 +49,7 @@ const BackGroundCourse: React.FC<
           </h1>
 
           <form action={buyCourse}>
-            <input hidden defaultValue={id} name="course_id" />
+            <input type='hidden' name='course_id' defaultValue={id} />
             <Button type="submit" color="primary" className="font-bold">
               <MercadoPagoIcon /> Comprar
             </Button>

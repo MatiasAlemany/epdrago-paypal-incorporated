@@ -36,6 +36,7 @@
     "next": "14.0.3",
     "next-safe-action": "^6.0.1",
     "next-themes": "^0.2.1",
+    "pg": "^8.11.3",
     "postgres": "^3.4.3",
     "react": "^18",
     "react-dom": "^18",

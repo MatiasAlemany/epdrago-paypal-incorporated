@@ -17,7 +17,9 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { buyCourse } from "@/lib/actions/buy_course";
 import { getCourse } from "@/lib/actions/get_courses";
+import { isAdmin } from "@/lib/actions/isAdmin";
 import { deleteModuleItem } from "@/lib/actions/test_action";
 import { db } from "@/lib/db";
 import { courses } from "@/lib/db/schema/course";
@@ -35,20 +37,15 @@ import { redirect } from "next/navigation";
 const EditarCursoPage = async ({
   params: { id },
 }: PageParams<{ id: string }>) => {
-  // const admin = await isAdmin();
-  // if (admin == false) {
-  //     redirect('/');
-  // }
+  const admin = await isAdmin();
+  if (admin == false) {
+    redirect("/");
+  }
   const course = await getCourse(id);
 
   return (
     <div>
-      <BackGroundCourse
-        onBuy={async () => {
-          "use server";
-        }}
-        {...course}
-      />
+      <BackGroundCourse {...course} />
       <div className="flex-col flex items-center justify-center space-y-2">
         <ImageModal course_id={id} />
         <ActualizarDatosModal course={course} />
@@ -199,6 +196,10 @@ const EditarCursoPage = async ({
         </h1>
       </div>
 
+<<<<<<< HEAD
+=======
+      <div className="m-2 grid grid-cols-1 content-center justify-center gap-8 md:grid-cols-2 md:px-12 lg:px-32 xl:grid-cols-3"></div>
+>>>>>>> 639baa469f73f8ff5019b877c0f2056ec151d7dc
       <h1 className="mt-12 mb-8 text-green-400  text-center text-2xl font-extrabold lg:text-4xl">
         Preguntas Frecuentes
       </h1>
