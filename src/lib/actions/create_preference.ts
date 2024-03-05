@@ -27,6 +27,7 @@ export const createPreferenceResponse = async ({ item_id, price, title, metadata
             failure: process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : `https://epdrago.com.ar`,
         },
         binary_mode: true,
+        notification_url: "https://epdrago.com.ar/api/webhooks/payments",
         items: [
             {
                 id: item_id,
