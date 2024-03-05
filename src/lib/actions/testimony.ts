@@ -12,8 +12,6 @@ export const createTestimony = action(z.object({
     course_id: z.string(),
     rating: z.number(),
     content:z.string()
-    
-
 }), async ({ course_id, rating , content}) => {
     const user = await currentUser();
     if (user == undefined) {
