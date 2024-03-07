@@ -11,7 +11,7 @@ const Footer = () => {
           <div className=" flex py-3  ">
             <Instagram className="text-green-500" size={25} />
             <a
-              href="https://www.instagram.com/axeel_dubin/"
+              href="https://www.instagram.com/epdrago?igsh=NmR3cmN6bXI4bzRw&utm_source=qr"
               className=" pl-4 text-md tracking-wide text-[#AFA18F] font-semibold"
             >
               INSTAGRAM
@@ -21,7 +21,7 @@ const Footer = () => {
           <div className="flex py-3 ">
             <Phone className="text-green-500" size={25} />
             <a
-              href="https://wa.me/message/VXF6JNGEW5FNP1"
+              href="https://wa.me/message/QLTXHAY6P3YYE1"
               className=" pl-4 text-md tracking-wide text-[#AFA18F] font-semibold "
             >
               WHATSAPP

@@ -13,7 +13,7 @@ const InstructorContainer = ({
   return (
     <div
       className={cn(
-        "flex flex-col items-center justify-center py-6 px-4 text-center sm:px-8 md:px-12 lg:px-20",
+        "flex flex-col items-center justify-center py-6 px-4 text-center sm:px-6 md:px-6 lg:px-12",
         styles.testimonials
       )}
     >

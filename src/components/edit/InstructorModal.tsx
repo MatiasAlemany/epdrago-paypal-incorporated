@@ -12,6 +12,7 @@ import {
   useDisclosure,
   Input,
 } from "@nextui-org/react";
+import { revalidatePath } from "next/cache";
 import React, { useState } from "react";
 
 const InstructorModal = ({ course_id }: { course_id: string }) => {
@@ -75,6 +76,7 @@ const InstructorModal = ({ course_id }: { course_id: string }) => {
                   <Button
                     onClick={() => {
                       onClose();
+                      revalidatePath(`/editarCurso/${course_id}`);
                     }}
                     variant="solid"
                     disabled={imgUrl == undefined}

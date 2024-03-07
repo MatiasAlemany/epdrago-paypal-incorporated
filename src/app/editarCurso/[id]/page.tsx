@@ -28,6 +28,7 @@ import { modules } from "@/lib/db/schema/modules";
 import { modules_items } from "@/lib/db/schema/modules_items";
 import { youtube_parser } from "@/lib/helpers/youtube_parser";
 import { type PageParams } from "@/lib/types/params";
+import { useIsAdmin } from "@/utils/useIsAdmin";
 import { Button, Input, ModalFooter, Textarea } from "@nextui-org/react";
 import { eq } from "drizzle-orm";
 import { TrashIcon, YoutubeIcon } from "lucide-react";
@@ -37,8 +38,8 @@ import { redirect } from "next/navigation";
 const EditarCursoPage = async ({
   params: { id },
 }: PageParams<{ id: string }>) => {
-  const admin = await isAdmin();
-  if (admin == false) {
+  const admin = await useIsAdmin();
+  if (admin == null) {
     redirect("/");
   }
   const course = await getCourse(id);

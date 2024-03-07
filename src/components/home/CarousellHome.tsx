@@ -23,7 +23,7 @@ const CarousellHome = ({ data }: { data: Events }) => {
       <CarouselContent>
         {data.length == 0 && (
           <CarouselItem>
-            <Skeleton className="aspect-[18/8] rounded-lg" />
+            <Skeleton className="aspect-[18/9] rounded-lg" />
           </CarouselItem>
         )}
         {data.map((e) => (
@@ -32,7 +32,7 @@ const CarousellHome = ({ data }: { data: Events }) => {
               onClick={() => {
                 router.push(`/eventos/${e.id}`);
               }}
-              className=" cursor-pointer bg-neutral-900 aspect-[18/8] relative rounded-lg overflow-hidden"
+              className=" cursor-pointer bg-neutral-900 aspect-[18/9] relative rounded-lg overflow-hidden"
             >
               <Image
                 src={e.img_url}

@@ -29,11 +29,10 @@ export default async function EventosPage({
         <h1 className="text-3xl my-2 font-bold mt-8">{event.title}</h1>
         <p className="text-neutral-200">{event.content}</p>
         <div className="flex">
-          {event.link != null && (
+          {event.link != null && event.link != "" && (
             <div className="rounded-full hover:bg-neutral-500 cursor-pointer  px-4 py-2 mt-4 bg-neutral-700 flex">
               <Link2Icon className="mr-2" />
-              <Link href={event.link} />
-              Link
+              <Link href={event.link}>Link</Link>
             </div>
           )}
         </div>
