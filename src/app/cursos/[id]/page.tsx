@@ -46,7 +46,6 @@ const EditarCursoPage = async ({
   //     redirect('/');
   // }
   const course = await getCourse(id);
-   
   return (
     <div>
       <BackGroundCourse {...course} />
