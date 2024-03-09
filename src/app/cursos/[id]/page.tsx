@@ -46,13 +46,10 @@ const EditarCursoPage = async ({
   //     redirect('/');
   // }
   const course = await getCourse(id);
-
+   
   return (
     <div>
-      <BackGroundCourse
-  
-        {...course}
-      />
+      <BackGroundCourse {...course} />
       <h1 className="mt-12 mb-8 text-green-400  text-center text-2xl font-extrabold lg:text-4xl">
         Instructores{" "}
       </h1>
@@ -121,14 +118,15 @@ const EditarCursoPage = async ({
           <PreguntaFrecuenteContainer item={e} key={e.id} />
         ))}
       </div>
-      <div className="flex justify-center py-8">
+      <form action={buyCourse} className="flex justify-center pb-40">
+        <input type="hidden" name="course_id" defaultValue={id} />
         <button
           type="button"
           className="bg-bl my-4 mx-auto rounded-full bg-green-500 px-12 py-4 text-xl font-bold text-black"
         >
           Comprar Curso
         </button>
-      </div>
+      </form>
     </div>
   );
 };

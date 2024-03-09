@@ -17,6 +17,7 @@ const ModuleItemContainer = ({
   index: number;
   module_index: number;
   course_id: string;
+  
 }) => {
   return (
     <div

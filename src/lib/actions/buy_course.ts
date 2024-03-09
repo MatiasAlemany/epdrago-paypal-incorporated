@@ -29,7 +29,7 @@ export async function buyCourse(formData: FormData) {
         metadata: metadata,
         descripcion: course.title,
         item_id: course.id,
-        price: 1000,
+        price: course.price,
         title: course.title,
     }
 
