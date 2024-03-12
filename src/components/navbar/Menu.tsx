@@ -89,15 +89,7 @@ const Menu = ({ userId }: { userId: string | null }) => {
             </div>
           )}
 
-          {/* <DropdownMenuItem
-            onClick={() => {
-              signOut(() => router.push("/"));
-            }}
-            className="hover:bg-neutral-900  cursor-pointer"
-          >
-            <LogOut className="mr-3  h-4 w-4 text-red-500" />
-            <h1 className="text-red-500">Salir</h1>
-          </DropdownMenuItem> */}
+
         </DropdownMenuContent>
       </DropdownMenu>
       <Dialog open={dialogRegisterOpen} onOpenChange={setDialogRegisterOpen}>

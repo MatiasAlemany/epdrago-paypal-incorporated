@@ -3,14 +3,19 @@ import { useClerk } from "@clerk/nextjs";
 import { CircleUserRound, LogOut } from "lucide-react";
 import React from "react";
 import { DropdownMenuItem } from "../ui/dropdown-menu";
+import { useRouter } from "next/navigation";
 
 const SignOut = () => {
   const { signOut } = useClerk();
+  const router = useRouter();
 
   return (
     <DropdownMenuItem
-      onClick={() => {
-        signOut();
+      onClick={async () => {
+        signOut(() => {
+          router.refresh();
+          router.push("/");
+        });
       }}
       className="hover:bg-neutral-900 text-red-400"
     >
