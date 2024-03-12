@@ -33,6 +33,9 @@ async function handler(req: NextRequest) {
         })).data;
         if (payment.status_detail == 'accredited') {
             console.log('Got a payment');
+        } else {
+            console.log('Got a payment but its not accredited!');
+
         }
         const metadata = payment.metadata as MetadataPreference;
         const paymentInsertValues: InsertPayment = {

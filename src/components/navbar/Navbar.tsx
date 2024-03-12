@@ -27,6 +27,7 @@ export default async function Navbar() {
             </div>
           )}
         </NavbarNavigationMenu>
+
         <div className="lg:hidden block">
           {user == null ? <div></div> : <DrawerCourses userId={user.id} />}
         </div>

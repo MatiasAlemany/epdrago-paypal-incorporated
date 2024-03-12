@@ -88,8 +88,6 @@ const Menu = ({ userId }: { userId: string | null }) => {
               </DropdownMenuItem>
             </div>
           )}
-
-
         </DropdownMenuContent>
       </DropdownMenu>
       <Dialog open={dialogRegisterOpen} onOpenChange={setDialogRegisterOpen}>

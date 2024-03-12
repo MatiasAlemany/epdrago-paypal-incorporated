@@ -15,14 +15,14 @@ const NavbarNavigationMenu = ({ children }: { children: ReactNode }) => {
     <div className="hidden lg:flex ">
       <NavigationMenu>
         <NavigationMenuList>
-          <NavigationMenuItem className="bg-transparent">
+          <NavigationMenuItem className="bg-transparent" asChild>
             <Link href="/" legacyBehavior passHref>
               <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center rounded-md  px-4 py-2 text-sm font-medium transition-colors hover:bg-zinc-100 hover:text-zinc-900 focus:bg-zinc-100 focus:text-zinc-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-zinc-100/50 data-[state=open]:bg-zinc-100/50  dark:hover:bg-zinc-800 dark:hover:text-zinc-50 dark:focus:bg-zinc-800 dark:focus:text-zinc-50 dark:data-[active]:bg-zinc-800/50 dark:data-[state=open]:bg-zinc-800/50">
                 Home
               </NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
-          <NavigationMenuItem>
+          <NavigationMenuItem asChild>
             <Link href="/cursos" legacyBehavior passHref>
               <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center rounded-md  px-4 py-2 text-sm font-medium transition-colors hover:bg-zinc-100 hover:text-zinc-900 focus:bg-zinc-100 focus:text-zinc-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-zinc-100/50 data-[state=open]:bg-zinc-100/50  dark:hover:bg-zinc-800 dark:hover:text-zinc-50 dark:focus:bg-zinc-800 dark:focus:text-zinc-50 dark:data-[active]:bg-zinc-800/50 dark:data-[state=open]:bg-zinc-800/50">
                 Cursos
@@ -30,19 +30,23 @@ const NavbarNavigationMenu = ({ children }: { children: ReactNode }) => {
             </Link>
           </NavigationMenuItem>
 
-          <NavigationMenuItem>
-            <NavigationMenuTrigger>Mis Cursos</NavigationMenuTrigger>
-            <NavigationMenuContent>{children}</NavigationMenuContent>
+          <NavigationMenuItem asChild>
+            <div>
+              <NavigationMenuTrigger>Mis Cursos</NavigationMenuTrigger>
+              <NavigationMenuContent>{children}</NavigationMenuContent>
+            </div>
           </NavigationMenuItem>
-          <NavigationMenuItem>
-            <Link href="/contacto">
+
+          <NavigationMenuItem asChild>
+            <Link href="/contacto" legacyBehavior passHref>
               <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center rounded-md  px-4 py-2 text-sm font-medium transition-colors hover:bg-zinc-100 hover:text-zinc-900 focus:bg-zinc-100 focus:text-zinc-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-zinc-100/50 data-[state=open]:bg-zinc-100/50  dark:hover:bg-zinc-800 dark:hover:text-zinc-50 dark:focus:bg-zinc-800 dark:focus:text-zinc-50 dark:data-[active]:bg-zinc-800/50 dark:data-[state=open]:bg-zinc-800/50">
                 Contacto
               </NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
-          <NavigationMenuItem>
-            <Link href="/eventos">
+
+          <NavigationMenuItem asChild>
+            <Link href="/eventos" legacyBehavior passHref>
               <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center rounded-md  px-4 py-2 text-sm font-medium transition-colors hover:bg-zinc-100 hover:text-zinc-900 focus:bg-zinc-100 focus:text-zinc-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-zinc-100/50 data-[state=open]:bg-zinc-100/50  dark:hover:bg-zinc-800 dark:hover:text-zinc-50 dark:focus:bg-zinc-800 dark:focus:text-zinc-50 dark:data-[active]:bg-zinc-800/50 dark:data-[state=open]:bg-zinc-800/50">
                 Eventos
               </NavigationMenuLink>

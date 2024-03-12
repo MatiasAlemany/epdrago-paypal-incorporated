@@ -11,7 +11,7 @@ const NavbarDialogs = () => {
     <div className="flex">
       <div>
         <Dialog open={dialogOpen} onOpenChange={setdialogOpen}>
-          <DialogTrigger>
+          <DialogTrigger asChild>
             <Button
               className="mx-2"
               color="success"
@@ -29,7 +29,7 @@ const NavbarDialogs = () => {
       </div>
       <div>
         <Dialog open={dialogRegisterOpen} onOpenChange={setDialogRegisterOpen}>
-          <DialogTrigger>
+          <DialogTrigger asChild>
             <Button
               className="mr-2"
               variant="bordered"

@@ -11,7 +11,7 @@ const RegistrarseBottom = () => {
     <div className="flex justify-center">
       <div>
         <Dialog open={dialogOpen} onOpenChange={setdialogOpen}>
-          <DialogTrigger>
+          <DialogTrigger asChild>
             <button className="rounded-full px-8 text-black mt-6 mx-auto py-2 font-bold bg-green-500">
               REGISTRARSE
             </button>

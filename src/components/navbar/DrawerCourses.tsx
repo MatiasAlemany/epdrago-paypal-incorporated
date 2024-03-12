@@ -15,7 +15,7 @@ import { CourseProgressContainer } from "./CourseProgressContainer";
 import { CourseProgressItem } from "./CourseProgressItem";
 import { getUserCourseProgress } from "@/lib/actions/course_progress_actions";
 
-export default async function DrawerCourses({userId} : {userId: string}) {
+export default async function DrawerCourses({ userId }: { userId: string }) {
   const progress = await getUserCourseProgress(userId);
   if (progress == undefined) {
     return (
@@ -28,7 +28,7 @@ export default async function DrawerCourses({userId} : {userId: string}) {
   return (
     <div>
       <Drawer>
-        <DrawerTrigger>
+        <DrawerTrigger asChild>
           <Button variant="outline" className="mr-2">
             Mis cursos
           </Button>
