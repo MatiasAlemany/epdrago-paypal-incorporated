@@ -12,7 +12,7 @@ const SignOut = () => {
   return (
     <DropdownMenuItem
       onClick={async () => {
-        signOut(() => {
+      await signOut(() => {
           router.refresh();
           router.push("/");
         });
