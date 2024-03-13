@@ -12,7 +12,7 @@ import MercadoPagoIcon from "../MercadoPago_Icon";
 import { Course, CourseGet } from "@/lib/actions/get_courses";
 import { buyCourse } from "@/lib/actions/buy_course";
 
-const BackGroundCourse: React.FC<CourseGet & {  }> = ({
+const BackGroundCourse: React.FC<CourseGet & {}> = ({
   img_url,
   price,
   duracion,

@@ -11,6 +11,7 @@ interface TestimonialProps {
 }
 
 const Testimonials: React.FC<TestimonialProps> = ({ testimonial }) => {
+  console.log(testimonial.user);
   return (
     <div
       className={cn(
@@ -18,7 +19,7 @@ const Testimonials: React.FC<TestimonialProps> = ({ testimonial }) => {
         styles.testimonials
       )}
     >
-      <div className="flex ">
+      {/* <div className="flex ">
         <div className="  overflow-hidden rounded-full">
           {testimonial.user.img_url == null ? (
             <Avatar name={testimonial.user.name} />
@@ -35,7 +36,7 @@ const Testimonials: React.FC<TestimonialProps> = ({ testimonial }) => {
             showValue={true}
           />
         </div>
-      </div>
+      </div> */}
       <h1 className="mt-3 text-sm text-neutral-300">{testimonial.content}</h1>
     </div>
   );
