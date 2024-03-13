@@ -46,6 +46,7 @@ const EditarCursoPage = async ({
   //     redirect('/');
   // }
   const course = await getCourse(id);
+  console.log(course.img_url);
   return (
     <div>
       <BackGroundCourse {...course} />

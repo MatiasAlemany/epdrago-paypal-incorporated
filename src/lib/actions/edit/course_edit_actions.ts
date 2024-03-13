@@ -20,7 +20,13 @@ export async function createInstructor(form: FormData) {
 
 export async function updateImage(form: FormData) {
     const courseId = form.get("course_id") as string
-    await db.update(courses).set({ img_url: form.get("img_url") as string }).where(eq(courses.id, courseId));
+    const img_url = form.get("img_url") as string | null;
+
+    if (img_url == null) {
+        throw Error("Img url doestn exists!")
+
+    }
+    await db.update(courses).set({ img_url: img_url }).where(eq(courses.id, courseId));
     revalidatePath(`/editarCurso/${courseId}`);
 
 
