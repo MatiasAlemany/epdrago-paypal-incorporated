@@ -104,11 +104,11 @@ const EditarCursoPage = async ({
           Testimonios
         </h1>
       </div>
-      {/* <div className="m-2 grid grid-cols-1 content-center justify-center gap-8 md:grid-cols-2 md:px-12 lg:px-32 xl:grid-cols-3">
+      <div className="m-2 grid grid-cols-1 content-center justify-center gap-8 md:grid-cols-2 md:px-12 lg:px-32 xl:grid-cols-3">
         {course.testimonials.map((e) => (
           <Testimonials testimonial={e} key={e.id} />
         ))}
-      </div> */}
+      </div>
       <h1 className="mt-12 mb-8 text-green-400  text-center text-2xl font-extrabold lg:text-4xl">
         Preguntas Frecuentes
       </h1>
