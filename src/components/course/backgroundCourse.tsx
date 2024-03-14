@@ -63,7 +63,7 @@ const BackGroundCourse: React.FC<CourseGet> = async ({
                 <TooltipTrigger>
                   <Button
                     type="submit"
-                    disabled={!!user}
+                    disabled={!user}
                     color="primary"
                     className="font-bold disabled:bg-gray-800 disabled:text-gray-400"
                   >
