@@ -13,7 +13,6 @@ export async function buyCourse(formData: FormData) {
     const user = await currentUser();
     if (user == null) {
         return;
-        throw Error("User not logged in!");
     };
     const course = (await db.select().from(courses).where(eq(courses.id, course_id)))[0]
     if (!course) {

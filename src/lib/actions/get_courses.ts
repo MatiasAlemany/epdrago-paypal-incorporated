@@ -26,7 +26,6 @@ export const getCourses = async () => {
         }
         return testimonialValue / testimonialsCourse.length;
     })
-    console.log(ratings);
     return courses.map((e, index) => ({ ...e, rating: ratings[index] }))
 };
 

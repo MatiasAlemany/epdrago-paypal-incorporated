@@ -11,7 +11,6 @@ interface TestimonialProps {
 }
 
 const Testimonials: React.FC<TestimonialProps> = ({ testimonial }) => {
-  console.log(testimonial.user);
   return (
     <div
       className={cn(

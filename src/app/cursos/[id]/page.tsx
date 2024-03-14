@@ -41,10 +41,7 @@ import React from "react";
 const EditarCursoPage = async ({
   params: { id },
 }: PageParams<{ id: string }>) => {
-  // const admin = await isAdmin();
-  // if (admin == false) {
-  //     redirect('/');
-  // }
+
   const course = await getCourse(id);
   return (
     <div>

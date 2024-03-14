@@ -11,14 +11,22 @@ import {
 import MercadoPagoIcon from "../MercadoPago_Icon";
 import { Course, CourseGet } from "@/lib/actions/get_courses";
 import { buyCourse } from "@/lib/actions/buy_course";
-
-const BackGroundCourse: React.FC<CourseGet & {}> = ({
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { currentUser } from "@clerk/nextjs";
+const BackGroundCourse: React.FC<CourseGet> = async ({
   img_url,
   price,
   duracion,
   id,
   title,
 }) => {
+  const user = await currentUser();
+  console.log(user);
   return (
     <div className="relative flex aspect-[18/6] flex-col justify-end opacity-80">
       <Image
@@ -49,10 +57,24 @@ const BackGroundCourse: React.FC<CourseGet & {}> = ({
           </h1>
 
           <form action={buyCourse}>
-            <input type='hidden' name='course_id' defaultValue={id} />
-            <Button type="submit" color="primary" className="font-bold">
-              <MercadoPagoIcon /> Comprar
-            </Button>
+            <input type="hidden" name="course_id" defaultValue={id} />
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger>
+                  <Button
+                    type="submit"
+                    disabled={!!user}
+                    color="primary"
+                    className="font-bold disabled:bg-gray-800 disabled:text-gray-400"
+                  >
+                    <MercadoPagoIcon /> Comprar
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Para poder comprar debes estar registrado!</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </form>
         </div>
       </div>
