@@ -39,7 +39,7 @@ const DiplomaComponent: React.FC<DiplomaComponentProps> = ({
   return (
     <div
       className={cn(
-        " h-screen pt-32 flex flex-col justify-center items-center",
+        " min-h-screen pt-32 flex flex-col justify-center items-center",
         padding
       )}
     >
