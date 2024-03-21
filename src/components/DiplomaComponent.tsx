@@ -71,7 +71,7 @@ const DiplomaComponent: React.FC<DiplomaComponentProps> = ({
           </h1>{" "}
           <h2 className="text-[0.6rem]  md:text-lg mt-2 font-medium">a </h2>
           <h1 className=" border-b-4 border-black mt-3 md:mt-10 md:text-4xl">
-            {username}
+            {certificate.user.name}
           </h1>
           <p className="mt-1 text-[0.4rem] md:text-[0.8rem] text-neutral-800 md:text-md">
             CERTIFICADO ID: {certificate.id}
