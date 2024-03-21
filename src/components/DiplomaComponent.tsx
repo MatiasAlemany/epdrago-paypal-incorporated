@@ -3,13 +3,14 @@ import { Certificate } from "@/app/certificados/[id]/page";
 import Image from "next/image";
 import React, { useRef, useState } from "react";
 import { padding } from "./styles/padding";
-import { Button } from "@nextui-org/react";
+import { Button, Input, user } from "@nextui-org/react";
 import { cn } from "@/lib/utils";
 import { toPng } from "html-to-image";
 import EpdragoIcon from "./navbar/EpdragoIcon";
 import DiplomaParticipant from "./DiplomaParticipant";
 import EpdragoOutlinedIcon from "./EpdragoOutilined";
 import LeaveTestimonyDialog from "./course/LeaveTestimonyDialog";
+import Firmas from "./course/FirmasSvg";
 
 interface DiplomaComponentProps {
   certificate: NonNullable<Certificate>;
@@ -22,6 +23,7 @@ const DiplomaComponent: React.FC<DiplomaComponentProps> = ({
 }) => {
   const elementRef = useRef(null);
   const [testimonySent, setTestimonySent] = useState(false);
+  const [username, setUsername] = useState("");
   const htmlToImageConvert = () => {
     toPng(elementRef.current!, { cacheBust: false })
       .then((dataUrl) => {
@@ -37,16 +39,25 @@ const DiplomaComponent: React.FC<DiplomaComponentProps> = ({
   return (
     <div
       className={cn(
-        " h-screen flex flex-col justify-center items-center",
+        " h-screen pt-32 flex flex-col justify-center items-center",
         padding
       )}
     >
+      {/* <Input
+        color="success"
+        onChange={(e) => {
+          setUsername(e.target.value);
+        }}
+        label="Tu nombre"
+        className="max-w-[300px] "
+        variant="bordered"
+      /> */}
       <div
         ref={elementRef}
         className="h-[300px]  w-[420px] md:h-[600px] md:w-[840px] bg-neutral-400 relative border-black border-[9px]"
       >
         <Image
-          src={"/fondo_diploma.jpg"}
+          src={"/fondo_diploma.webp"}
           alt="Fondo"
           fill={true}
           className="object-cover"
@@ -60,15 +71,16 @@ const DiplomaComponent: React.FC<DiplomaComponentProps> = ({
           </h1>{" "}
           <h2 className="text-[0.6rem]  md:text-lg mt-2 font-medium">a </h2>
           <h1 className=" border-b-4 border-black mt-3 md:mt-10 md:text-4xl">
-            {certificate.user.name}
+            {username}
           </h1>
           <p className="mt-1 text-[0.4rem] md:text-[0.8rem] text-neutral-800 md:text-md">
             CERTIFICADO ID: {certificate.id}
           </p>
           <div className="flex mt-1 md:mt-6 relative">
-            <div className="h-[80px] w-[240px] mx-4 md:w-[480px] md:h-[160px]  relative flex flex-col">
-              <Image src="/Firmas.png" fill={true} alt="Firmas" />
-              <div className="flex justify-between mt-[85px] md:mt-[170px]">
+            <div className="flex flex-col">
+              <Firmas />
+
+              <div className="flex justify-between ">
                 <DiplomaParticipant
                   name="Leandro Drago"
                   occupation="Director Epdrago"
