@@ -1,4 +1,4 @@
-import { relations } from "drizzle-orm";
+import { InferSelectModel, relations } from "drizzle-orm";
 import { boolean, integer, pgTable, text, uuid } from "drizzle-orm/pg-core";
 import { usersToCourses } from "./users_to_courses";
 import { testimonials } from './testimonials';
@@ -42,3 +42,4 @@ export const courses_relations = relations(courses, ({ many, one }) => ({
 }))
 
 
+export type CourseOnly = InferSelectModel<typeof courses>

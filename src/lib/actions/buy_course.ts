@@ -8,7 +8,6 @@ import { redirect } from "next/navigation";
 
 
 export async function buyCourse(formData: FormData) {
-    console.log("Buying...")
     const course_id: string = formData.get("course_id") as string;
     const user = await currentUser();
     if (user == null) {
@@ -34,7 +33,6 @@ export async function buyCourse(formData: FormData) {
     }
 
     const response = await createPreferenceResponse(preferenceInput);
-    console.log(response);
     redirect(response.init_point!)
 
 }
