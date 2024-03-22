@@ -23,7 +23,8 @@ const DiplomaComponent: React.FC<DiplomaComponentProps> = ({
 }) => {
   const elementRef = useRef(null);
   const [testimonySent, setTestimonySent] = useState(false);
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState(certificate.user.name);
+  const [dni, setDni] = useState("");
   const htmlToImageConvert = () => {
     toPng(elementRef.current!, { cacheBust: false })
       .then((dataUrl) => {
@@ -39,19 +40,33 @@ const DiplomaComponent: React.FC<DiplomaComponentProps> = ({
   return (
     <div
       className={cn(
-        " min-h-screen pt-32 flex flex-col justify-center items-center",
+        " min-h-screen py-32 flex flex-col justify-center items-center",
         padding
       )}
     >
-      {/* <Input
-        color="success"
-        onChange={(e) => {
-          setUsername(e.target.value);
-        }}
-        label="Tu nombre"
-        className="max-w-[300px] "
-        variant="bordered"
-      /> */}
+      <div className="flex">
+        <Input
+          color="success"
+          onChange={(e) => {
+            setUsername(e.target.value);
+          }}
+          label="Tu nombre"
+          className="max-w-[300px] mr-4 "
+          variant="bordered"
+          value={username}
+        />
+        <Input
+          value={dni}
+          color="success"
+          onChange={(e) => {
+            setDni(e.target.value);
+          }}
+          label="Tu DNI"
+          className="max-w-[300px] "
+          variant="bordered"
+        />
+      </div>
+
       <div
         ref={elementRef}
         className="h-[300px]  w-[420px] md:h-[600px] md:w-[840px] bg-neutral-400 relative border-black border-[9px]"
@@ -71,10 +86,13 @@ const DiplomaComponent: React.FC<DiplomaComponentProps> = ({
           </h1>{" "}
           <h2 className="text-[0.6rem]  md:text-lg mt-2 font-medium">a </h2>
           <h1 className=" border-b-4 border-black mt-3 md:mt-10 md:text-4xl">
-            {certificate.user.name}
+            {username}
           </h1>
           <p className="mt-1 text-[0.4rem] md:text-[0.8rem] text-neutral-800 md:text-md">
             CERTIFICADO ID: {certificate.id}
+          </p>
+          <p className=" text-[0.4rem] md:text-[0.8rem] text-neutral-800 md:text-md">
+            DNI: {dni}
           </p>
           <div className="flex mt-1 md:mt-6 relative">
             <div className="flex flex-col">
