@@ -81,9 +81,12 @@ const EditarCursoPage = async ({
               <form
                 action={async (formData: FormData) => {
                   "use server";
-                  await db.update(courses).set({
-                    introductory_video: formData.get("video_url") as string,
-                  });
+                  await db
+                    .update(courses)
+                    .set({
+                      introductory_video: formData.get("video_url") as string,
+                    })
+                    .where(eq(courses.id, course.id));
                   revalidatePath(`/editarCurso/${course.id}`);
                 }}
               >
