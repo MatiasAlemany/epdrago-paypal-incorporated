@@ -41,7 +41,6 @@ import React from "react";
 const EditarCursoPage = async ({
   params: { id },
 }: PageParams<{ id: string }>) => {
-
   const course = await getCourse(id);
   return (
     <div>
@@ -117,7 +116,7 @@ const EditarCursoPage = async ({
       <form action={buyCourse} className="flex justify-center pb-40">
         <input type="hidden" name="course_id" defaultValue={id} />
         <button
-          type="button"
+          type="submit"
           className="bg-bl my-4 mx-auto rounded-full bg-green-500 px-12 py-4 text-xl font-bold text-black"
         >
           Comprar Curso
