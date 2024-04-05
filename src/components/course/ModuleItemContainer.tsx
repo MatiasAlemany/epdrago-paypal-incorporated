@@ -12,17 +12,18 @@ const ModuleItemContainer = ({
   index,
   module_index,
   course_id,
+  admin = false
 }: {
   module_item: ModuleItemInsert;
   index: number;
   module_index: number;
   course_id: string;
-  
+  admin?: boolean
 }) => {
   return (
     <div
       onClick={() => {
-        actionOnServer(course_id, module_item.id!);
+        actionOnServer(course_id, module_item.id!,admin);
       }}
       className="flex flex-1 cursor-pointer hover:bg-neutral-800 py-2 px-4 my-1 bg-neutral-900 rounded-xl justify-between items-center"
     >

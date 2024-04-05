@@ -113,6 +113,7 @@ const EditarCursoPage = async ({
                 {e.items.map((e, itemIndex) => (
                   <div className="flex items-center" key={e.id}>
                     <ModuleItemContainer
+                      admin={true}
                       course_id={course.id}
                       module_index={index + 1}
                       index={itemIndex + 1}
