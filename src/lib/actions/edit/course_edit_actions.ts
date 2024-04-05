@@ -15,6 +15,8 @@ export async function createInstructor(form: FormData) {
     }
     console.log(newInstructor);
     await db.insert(instructors).values(newInstructor);
+    revalidatePath(`/editarCurso/${form.get("course_id") as string}`);
+
     console.log('instructor created')
 }
 

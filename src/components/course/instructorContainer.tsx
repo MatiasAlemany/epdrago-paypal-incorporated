@@ -2,14 +2,23 @@ import Image from "next/image";
 import React from "react";
 import styles from "./course.module.css";
 import { cn } from "@/lib/utils";
-import { Instructor } from "@/lib/db/schema/instructors";
+import { Instructor, instructors } from "@/lib/db/schema/instructors";
+import { Button } from "../ui/button";
+import { db } from "@/lib/db";
+import { eq } from "drizzle-orm";
+import { revalidatePath } from "next/cache";
 
 const InstructorContainer = ({
   qualities,
   instagram,
   img_url,
   name,
-}: Instructor) => {
+  id,
+  course_id,
+  admin = false,
+}: Instructor & {
+  admin?: boolean;
+}) => {
   return (
     <div
       className={cn(
@@ -30,6 +39,17 @@ const InstructorContainer = ({
         <h1 className="text-sm">{qualities}</h1>
         <h1 className="text-sm">Instagram: @{instagram}</h1>
       </div>
+      <form
+        action={async () => {
+          "use server";
+          await db.delete(instructors).where(eq(instructors.id, id));
+          revalidatePath(`/editarCurso/${course_id}`);
+        }}
+      >
+        <Button className="mt-2" variant="destructive">
+          Eliminar
+        </Button>
+      </form>
     </div>
   );
 };
