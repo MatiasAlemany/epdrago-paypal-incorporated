@@ -26,7 +26,6 @@ const BackGroundCourse: React.FC<CourseGet> = async ({
   title,
 }) => {
   const user = await currentUser();
-  console.log(user);
   return (
     <div className="relative flex aspect-[18/6] flex-col justify-end opacity-80">
       <Image
