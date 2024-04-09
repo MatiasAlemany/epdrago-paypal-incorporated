@@ -52,12 +52,15 @@ const EditarCursoPage = async ({
       <div className="flex-col flex items-center justify-center space-y-2">
         <ImageModal course_id={id} />
         <ActualizarDatosModal course={course} />
-        <MercadoPagoKeyModal course_id={course.id} mpKey={course.mp_access_token} />
+        <MercadoPagoKeyModal
+          course_id={course.id}
+          mpKey={course.mp_access_token}
+        />
       </div>
       <h1 className="mt-8 text-center text-4xl">Instructores</h1>
       <div className="mt-8 flex-wrap flex justify-center ">
         {course.instructors.map((i) => (
-          <InstructorContainer {...i} key={i.id} />
+          <InstructorContainer admin={true} {...i} key={i.id} />
         ))}
       </div>
       <div className="flex justify-center">
@@ -85,7 +88,7 @@ const EditarCursoPage = async ({
                 action={async (formData: FormData) => {
                   "use server";
                   await db
-                  .update(courses)
+                    .update(courses)
                     .set({
                       introductory_video: formData.get("video_url") as string,
                     })
