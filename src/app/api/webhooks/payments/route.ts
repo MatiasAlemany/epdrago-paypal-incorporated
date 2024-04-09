@@ -22,7 +22,7 @@ async function handler(req: NextRequest) {
     if (!paymentNotificationParsed.success) return NextResponse.json({ message: "No Payment notification" }, { status: 200 });
 
     const notification = paymentNotificationParsed.data;
-    const paymentUrl = `https://api.mercadopago.com/v1/payments/73969055459`;
+    const paymentUrl = `https://api.mercadopago.com/v1/payments/${+notification.data.id}`;
 
     const accessKeys: string[] = (await db.select().from(mercadopago_accesskeys)).map((e) => e.value);
 
@@ -44,7 +44,8 @@ async function handler(req: NextRequest) {
                 console.log('Got a payment but its not accredited!');
 
             }
-            console.log(payment.payer?.identification?.number);
+
+            console.log("Payment ID", payment.id);
             const metadata = payment.metadata as MetadataPreference;
             const paymentInsertValues: InsertPayment = {
                 id: payment.id! + Math.floor(Math.random() * 100) + 1,
