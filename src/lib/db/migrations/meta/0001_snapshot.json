@@ -1,6 +1,6 @@
 {
-  "id": "2f8f37a1-7ad3-443d-a5c8-78a02fd2c4fc",
-  "prevId": "e240a769-9003-4e28-ae73-5d8bcadcaeab",
+  "id": "536b6c53-9569-4b7d-9441-4abf07506b7d",
+  "prevId": "9b6c2261-b7d1-485d-aae5-9c5afbe325e7",
   "version": "5",
   "dialect": "pg",
   "tables": {
@@ -107,6 +107,12 @@
         "exam_id": {
           "name": "exam_id",
           "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "mp_access_token": {
+          "name": "mp_access_token",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         }
@@ -471,6 +477,22 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
+    "mp_access_keys": {
+      "name": "mp_access_keys",
+      "schema": "",
+      "columns": {
+        "value": {
+          "name": "value",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
     "news ": {
       "name": "news ",
       "schema": "",
@@ -606,6 +628,13 @@
           "type": "text",
           "primaryKey": false,
           "notNull": true
+        },
+        "content": {
+          "name": "content",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
         }
       },
       "indexes": {},

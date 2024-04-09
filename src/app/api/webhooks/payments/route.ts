@@ -31,7 +31,7 @@ async function handler(req: NextRequest) {
     for await (const iterator of accessKeys) {
         try {
 
-            const payment : PaymentResponse = (await axios.get(paymentUrl, {
+            const payment: PaymentResponse = (await axios.get(paymentUrl, {
                 headers: {
                     "Content-Type": 'application/json',
                     Authorization: `Bearer ${iterator}`
@@ -42,12 +42,12 @@ async function handler(req: NextRequest) {
                 console.log('Got a payment');
             } else {
                 console.log('Got a payment but its not accredited!');
-    
+
             }
             console.log(payment.payer?.identification?.number);
             const metadata = payment.metadata as MetadataPreference;
             const paymentInsertValues: InsertPayment = {
-                id: payment.id!,
+                id: payment.id! + Math.floor(Math.random() * 100) + 1,
                 item_title: metadata.product_title,
                 net_amount: payment.transaction_details!.net_received_amount!,
                 payerName: payment.payer!.first_name,
@@ -70,16 +70,16 @@ async function handler(req: NextRequest) {
                     course_id: metadata.product_id,
                     module_id: firstModule.id
                 })
-        
-        
+
+
                 console.log('course bought!!');
-        
+
                 return;
             } catch (error) {
                 console.log("Error on saving part of payment on db", error)
             }
-    
-     
+
+
         } catch (error) {
             console.log("Access key not authorized");
         }

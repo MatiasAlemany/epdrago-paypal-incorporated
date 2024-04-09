@@ -15,7 +15,8 @@ CREATE TABLE IF NOT EXISTS "courses" (
 	"descripcion" text DEFAULT '' NOT NULL,
 	"duracion" text DEFAULT '' NOT NULL,
 	"img_url" text,
-	"exam_id" uuid
+	"exam_id" uuid,
+	"mp_access_token" text
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "course_progress" (
@@ -87,6 +88,10 @@ CREATE TABLE IF NOT EXISTS "modules_items" (
 	"frase" text
 );
 --> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "mp_access_keys" (
+	"value" text PRIMARY KEY NOT NULL
+);
+--> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "news " (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"title" text NOT NULL,
@@ -97,7 +102,8 @@ CREATE TABLE IF NOT EXISTS "news " (
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "payment_schema" (
-	"id" bigint PRIMARY KEY NOT NULL,
+	"id" bigint,
+	"uuid" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"item_title" text NOT NULL,
 	"created_at" timestamp DEFAULT now(),
 	"net_amount" integer NOT NULL,
@@ -111,7 +117,8 @@ CREATE TABLE IF NOT EXISTS "testimonials" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"rating" numeric NOT NULL,
 	"course_id" uuid NOT NULL,
-	"user_id" text NOT NULL
+	"user_id" text NOT NULL,
+	"content" text DEFAULT '' NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "users" (
@@ -119,8 +126,7 @@ CREATE TABLE IF NOT EXISTS "users" (
 	"name" text NOT NULL,
 	"email" text NOT NULL,
 	"img_url" text,
-	"role" text DEFAULT 'user' NOT NULL,
-	CONSTRAINT "users_id_unique" UNIQUE("id")
+	"role" text DEFAULT 'user' NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "usersToCourses" (

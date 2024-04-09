@@ -1,5 +1,5 @@
 {
-  "id": "e240a769-9003-4e28-ae73-5d8bcadcaeab",
+  "id": "9b6c2261-b7d1-485d-aae5-9c5afbe325e7",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -107,6 +107,12 @@
         "exam_id": {
           "name": "exam_id",
           "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "mp_access_token": {
+          "name": "mp_access_token",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         }
@@ -471,6 +477,22 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
+    "mp_access_keys": {
+      "name": "mp_access_keys",
+      "schema": "",
+      "columns": {
+        "value": {
+          "name": "value",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
     "news ": {
       "name": "news ",
       "schema": "",
@@ -526,8 +548,15 @@
         "id": {
           "name": "id",
           "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "uuid": {
+          "name": "uuid",
+          "type": "uuid",
           "primaryKey": true,
-          "notNull": true
+          "notNull": true,
+          "default": "gen_random_uuid()"
         },
         "item_title": {
           "name": "item_title",
@@ -606,6 +635,13 @@
           "type": "text",
           "primaryKey": false,
           "notNull": true
+        },
+        "content": {
+          "name": "content",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
         }
       },
       "indexes": {},
@@ -652,15 +688,7 @@
       "indexes": {},
       "foreignKeys": {},
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "users_id_unique": {
-          "name": "users_id_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "id"
-          ]
-        }
-      }
+      "uniqueConstraints": {}
     },
     "usersToCourses": {
       "name": "usersToCourses",

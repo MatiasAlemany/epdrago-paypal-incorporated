@@ -5,36 +5,15 @@
     {
       "idx": 0,
       "version": "5",
-      "when": 1707811595166,
-      "tag": "0000_new_sharon_ventura",
+      "when": 1712622482645,
+      "tag": "0000_mean_darwin",
       "breakpoints": true
     },
     {
       "idx": 1,
       "version": "5",
-      "when": 1707811668876,
-      "tag": "0001_reflective_agent_zero",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "5",
-      "when": 1708372192220,
-      "tag": "0002_empty_albert_cleary",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "5",
-      "when": 1712603362207,
-      "tag": "0003_simple_hulk",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "5",
-      "when": 1712605601178,
-      "tag": "0004_glossy_jackal",
+      "when": 1712622669052,
+      "tag": "0001_strange_prism",
       "breakpoints": true
     }
   ]
