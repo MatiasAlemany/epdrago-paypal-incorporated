@@ -16,9 +16,10 @@ export type PreferenceInputType = {
     descripcion: string;
     price: number;
     item_id: string;
-    metadata: MetadataPreference
+    metadata: MetadataPreference,
+    mercadoPagoKey: string | null
 }
-export const createPreferenceResponse = async ({ item_id, price, title, metadata, descripcion }: PreferenceInputType): Promise<PreferenceResponse> => {
+export const createPreferenceResponse = async ({ item_id, price, title, metadata, descripcion, mercadoPagoKey }: PreferenceInputType): Promise<PreferenceResponse> => {
     const body: PreferenceRequest = {
         metadata: metadata,
         auto_return: 'all',
@@ -42,7 +43,7 @@ export const createPreferenceResponse = async ({ item_id, price, title, metadata
     return (await axios.post('https://api.mercadopago.com/checkout/preferences', body, {
         headers: {
             "Content-Type": 'application/json',
-            Authorization: `Bearer ${process.env.MERCADOPAGO_ACCESS_TOKEN}`
+            Authorization: `Bearer ${mercadoPagoKey ? mercadoPagoKey : process.env.MERCADOPAGO_ACCESS_TOKEN}`
         }
     })).data;
 }

@@ -30,6 +30,7 @@ export async function buyCourse(formData: FormData) {
         item_id: course.id,
         price: course.price,
         title: course.title,
+        mercadoPagoKey: course.mp_access_token
     }
 
     const response = await createPreferenceResponse(preferenceInput);

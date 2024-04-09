@@ -1,6 +1,8 @@
+import MercadoPagoIcon from "@/components/MercadoPago_Icon";
 import BeneficiosCurso from "@/components/course/BeneficiosCurso";
 import DescripcionCuso from "@/components/course/DescripcionCurso";
 import ImageModal from "@/components/course/ImageModal";
+import MercadoPagoKeyModal from "@/components/course/MercadoPagoKeyModal";
 import ModuleItemContainer from "@/components/course/ModuleItemContainer";
 import PreguntaFrecuenteContainer from "@/components/course/PreguntaFrecuenteContainer";
 import Testimonials from "@/components/course/Testimonials";
@@ -31,7 +33,7 @@ import { type PageParams } from "@/lib/types/params";
 import { useIsAdmin } from "@/utils/useIsAdmin";
 import { Button, Input, ModalFooter, Textarea } from "@nextui-org/react";
 import { eq } from "drizzle-orm";
-import { TrashIcon, YoutubeIcon } from "lucide-react";
+import { KeyIcon, TrashIcon, YoutubeIcon } from "lucide-react";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
@@ -50,6 +52,7 @@ const EditarCursoPage = async ({
       <div className="flex-col flex items-center justify-center space-y-2">
         <ImageModal course_id={id} />
         <ActualizarDatosModal course={course} />
+        <MercadoPagoKeyModal course_id={course.id} mpKey={course.mp_access_token} />
       </div>
       <h1 className="mt-8 text-center text-4xl">Instructores</h1>
       <div className="mt-8 flex-wrap flex justify-center ">
@@ -82,7 +85,7 @@ const EditarCursoPage = async ({
                 action={async (formData: FormData) => {
                   "use server";
                   await db
-                    .update(courses)
+                  .update(courses)
                     .set({
                       introductory_video: formData.get("video_url") as string,
                     })

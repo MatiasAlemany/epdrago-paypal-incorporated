@@ -1,5 +1,6 @@
 "use client";
 import LeaveTestimonyDialog from "@/components/course/LeaveTestimonyDialog";
+import { testPaymentAccess } from "@/lib/payments/test_payment_search";
 import React from "react";
 
 const Test = () => {
@@ -11,6 +12,9 @@ const Test = () => {
           console.log("Uploaded");
         }}
       />
+      <form action={testPaymentAccess}>
+        <button>test</button>
+      </form>
     </div>
   );
 };

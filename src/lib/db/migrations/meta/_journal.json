@@ -22,6 +22,20 @@
       "when": 1708372192220,
       "tag": "0002_empty_albert_cleary",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1712603362207,
+      "tag": "0003_simple_hulk",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1712605601178,
+      "tag": "0004_glossy_jackal",
+      "breakpoints": true
     }
   ]
 }

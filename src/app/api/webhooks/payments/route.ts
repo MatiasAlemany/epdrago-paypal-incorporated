@@ -3,6 +3,7 @@ import { getFirstModuleOfCourse } from "@/lib/actions/edit/modules_actions";
 import { db } from "@/lib/db";
 import { courses } from "@/lib/db/schema/course";
 import { course_progress } from "@/lib/db/schema/course_progress";
+import { mercadopago_accesskeys } from "@/lib/db/schema/mp_access_keys";
 import { InsertPayment, payment_schema } from "@/lib/db/schema/payment";
 import { usersToCourses } from "@/lib/db/schema/users_to_courses";
 import { paymentNotification } from "@/lib/types/payment_notification";
@@ -21,58 +22,69 @@ async function handler(req: NextRequest) {
     if (!paymentNotificationParsed.success) return NextResponse.json({ message: "No Payment notification" }, { status: 200 });
 
     const notification = paymentNotificationParsed.data;
+    const paymentUrl = `https://api.mercadopago.com/v1/payments/73969055459`;
 
-    const paymentUrl = `https://api.mercadopago.com/v1/payments/${+notification.data.id}`
+    const accessKeys: string[] = (await db.select().from(mercadopago_accesskeys)).map((e) => e.value);
 
-    try {
-        const payment: PaymentResponse = (await axios.get(paymentUrl, {
-            headers: {
-                "Content-Type": 'application/json',
-                Authorization: `Bearer ${process.env.MERCADOPAGO_ACCESS_TOKEN}`
+
+
+    for await (const iterator of accessKeys) {
+        try {
+
+            const payment : PaymentResponse = (await axios.get(paymentUrl, {
+                headers: {
+                    "Content-Type": 'application/json',
+                    Authorization: `Bearer ${iterator}`
+                }
+            })).data;
+            console.log("Payment exists");
+            if (payment.status_detail == 'accredited') {
+                console.log('Got a payment');
+            } else {
+                console.log('Got a payment but its not accredited!');
+    
             }
-        })).data;
-        if (payment.status_detail == 'accredited') {
-            console.log('Got a payment');
-        } else {
-            console.log('Got a payment but its not accredited!');
+            console.log(payment.payer?.identification?.number);
+            const metadata = payment.metadata as MetadataPreference;
+            const paymentInsertValues: InsertPayment = {
+                id: payment.id!,
+                item_title: metadata.product_title,
+                net_amount: payment.transaction_details!.net_received_amount!,
+                payerName: payment.payer!.first_name,
+                course_id: metadata.product_id,
+                user_id: metadata.user_id,
+            }
 
+
+            try {
+                await db.insert(payment_schema).values(paymentInsertValues);
+                await db.insert(usersToCourses).values({ course_id: metadata.product_id, user_id: metadata.user_id });
+                const firstModule = await getFirstModuleOfCourse(metadata.product_id);
+                if (firstModule == undefined) {
+                    throw Error('First Module not found!');
+                }
+                await db.insert(course_progress).values({
+                    isFinished: false,
+                    module_number: 0,
+                    user_id: metadata.user_id,
+                    course_id: metadata.product_id,
+                    module_id: firstModule.id
+                })
+        
+        
+                console.log('course bought!!');
+        
+                return;
+            } catch (error) {
+                console.log("Error on saving part of payment on db", error)
+            }
+    
+     
+        } catch (error) {
+            console.log("Access key not authorized");
         }
-        const metadata = payment.metadata as MetadataPreference;
-        const paymentInsertValues: InsertPayment = {
-            id: payment.id!,
-            item_title: metadata.product_title,
-            net_amount: payment.transaction_details!.net_received_amount!,
-            payerName: payment.payer!.first_name,
-            course_id: metadata.product_id,
-            user_id: metadata.user_id,
-        }
-
-
-        console.log(paymentInsertValues);
-        const paymentDB = await db.insert(payment_schema).values(paymentInsertValues);
-        await db.insert(usersToCourses).values({ course_id: metadata.product_id, user_id: metadata.user_id });
-        const firstModule = await getFirstModuleOfCourse(metadata.product_id);
-        if (firstModule == undefined) {
-            throw Error('First Module not found!');
-        }
-        await db.insert(course_progress).values({
-            isFinished: false,
-            module_number: 0,
-            user_id: metadata.user_id,
-            course_id: metadata.product_id,
-            module_id: firstModule.id
-        })
-
-
-        console.log('course bought!!');
-
-
-
-    } catch (error) {
-        console.log(error);
-        return NextResponse.json({ message: "ERROR ON SAVING TO DB" }, { status: 500 });
-
     }
+
 
 
     return NextResponse.json({ message: "Payment Succesfull!!" }, { status: 400 });

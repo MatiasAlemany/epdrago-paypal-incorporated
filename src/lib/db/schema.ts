@@ -11,5 +11,6 @@ import * as course_progress from './schema/course_progress';
 import * as certifications from "./schema/certifications"
 import * as exams from "./schema/exams"
 import * as frenquentlyAskedQuestions from "./schema/frequently_questions"
-const schema = { ...users, ...frenquentlyAskedQuestions, ...exams, ...course_progress, ...testimonials, ...courses, ...news, ...modules, ...instructors, ...usersToCourses, ...modules_items, ...payment, ...certifications };
+import * as mercadoPagoAccessKeys from "./schema/mp_access_keys";
+const schema = { ...users, ...frenquentlyAskedQuestions, ...exams, ...mercadoPagoAccessKeys, ...course_progress, ...testimonials, ...courses, ...news, ...modules, ...instructors, ...usersToCourses, ...modules_items, ...payment, ...certifications };
 export default schema;

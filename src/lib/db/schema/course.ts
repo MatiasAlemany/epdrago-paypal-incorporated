@@ -20,7 +20,8 @@ export const courses = pgTable('courses', {
     descripcion: text('descripcion').default("").notNull(),
     duracion: text('duracion').default("").notNull(),
     img_url: text("img_url"),
-    exam_id: uuid("exam_id")
+    exam_id: uuid("exam_id"),
+    mp_access_token: text("mp_access_token")
 
 })
 
