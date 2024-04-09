@@ -39,17 +39,19 @@ const InstructorContainer = ({
         <h1 className="text-sm">{qualities}</h1>
         <h1 className="text-sm">Instagram: @{instagram}</h1>
       </div>
-      <form
-        action={async () => {
-          "use server";
-          await db.delete(instructors).where(eq(instructors.id, id));
-          revalidatePath(`/editarCurso/${course_id}`);
-        }}
-      >
-        <Button className="mt-2" variant="destructive">
-          Eliminar
-        </Button>
-      </form>
+      {admin && (
+        <form
+          action={async () => {
+            "use server";
+            await db.delete(instructors).where(eq(instructors.id, id));
+            revalidatePath(`/editarCurso/${course_id}`);
+          }}
+        >
+          <Button className="mt-2" variant="destructive">
+            Eliminar
+          </Button>
+        </form>
+      )}
     </div>
   );
 };

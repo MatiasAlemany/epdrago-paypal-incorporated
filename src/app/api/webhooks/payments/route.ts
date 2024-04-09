@@ -75,7 +75,8 @@ async function handler(req: NextRequest) {
 
                 console.log('course bought!!');
 
-                return;
+                return NextResponse.json({ message: "Payment Succesfull!!" }, { status: 400 });
+
             } catch (error) {
                 console.log("Error on saving part of payment on db", error)
             }
