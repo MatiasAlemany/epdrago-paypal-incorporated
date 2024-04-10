@@ -1,14 +1,12 @@
 import { MetadataPreference } from "@/lib/actions/create_preference";
 import { getFirstModuleOfCourse } from "@/lib/actions/edit/modules_actions";
 import { db } from "@/lib/db";
-import { courses } from "@/lib/db/schema/course";
 import { course_progress } from "@/lib/db/schema/course_progress";
 import { mercadopago_accesskeys } from "@/lib/db/schema/mp_access_keys";
 import { InsertPayment, payment_schema } from "@/lib/db/schema/payment";
 import { usersToCourses } from "@/lib/db/schema/users_to_courses";
 import { paymentNotification } from "@/lib/types/payment_notification";
 import axios from "axios";
-import { eq } from "drizzle-orm";
 import { type PaymentResponse } from "mercadopago/dist/clients/payment/commonTypes";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -37,7 +35,6 @@ async function handler(req: NextRequest) {
                     Authorization: `Bearer ${iterator}`
                 }
             })).data;
-            console.log("Payment exists");
             if (payment.status_detail == 'accredited') {
                 console.log('Got a payment');
             } else {
@@ -48,7 +45,7 @@ async function handler(req: NextRequest) {
             console.log("Payment ID", payment.id);
             const metadata = payment.metadata as MetadataPreference;
             const paymentInsertValues: InsertPayment = {
-                id: payment.id! + Math.floor(Math.random() * 100) + 1,
+                id: payment.id! ,
                 item_title: metadata.product_title,
                 net_amount: payment.transaction_details!.net_received_amount!,
                 payerName: payment.payer!.first_name,

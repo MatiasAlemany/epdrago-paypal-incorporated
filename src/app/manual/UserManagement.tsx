@@ -23,7 +23,8 @@ const UserManagement: React.FC<UserManagementProps> = ({ user, cursos }) => {
         title={` ${user.email}`}
       >
         <div>
-          <h1 className="font-bold mb-4">CURSOS</h1>{" "}
+          <h1 className="font-bold mb-4">CURSOS</h1>
+          <p>USER ID: ${user.id}</p>
           <div className="flex flex-wrap space-x-2">
             {" "}
             {cursos.map((curso) => (
