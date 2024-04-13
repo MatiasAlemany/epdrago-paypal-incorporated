@@ -45,7 +45,7 @@ async function handler(req: NextRequest) {
             console.log("Payment ID", payment.id);
             const metadata = payment.metadata as MetadataPreference;
             const paymentInsertValues: InsertPayment = {
-                id: payment.id! ,
+                id: payment.id!,
                 item_title: metadata.product_title,
                 net_amount: payment.transaction_details!.net_received_amount!,
                 payerName: payment.payer!.first_name,
@@ -72,7 +72,7 @@ async function handler(req: NextRequest) {
 
                 console.log('course bought!!');
 
-                return NextResponse.json({ message: "Payment Succesfull!!" }, { status: 400 });
+                return NextResponse.json({ message: "Payment Succesfull!!" }, { status: 200 });
 
             } catch (error) {
                 console.log(error);

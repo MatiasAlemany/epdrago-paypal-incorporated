@@ -29,9 +29,9 @@ const Test = async () => {
         <Input placeholder="COURSE ID" name="course_id" />
         <Button type="submit">Subir</Button>
       </form>
-      {/* <form action={testPaymentAccess}>
+      <form action={testPaymentAccess}>
         <button>test</button>
-      </form> */}
+      </form>
     </div>
   );
 };
