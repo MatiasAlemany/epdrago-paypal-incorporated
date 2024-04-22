@@ -7,6 +7,7 @@ import { InsertPayment, payment_schema } from "@/lib/db/schema/payment";
 import { usersToCourses } from "@/lib/db/schema/users_to_courses";
 import { paymentNotification } from "@/lib/types/payment_notification";
 import axios from "axios";
+import { and, eq } from "drizzle-orm";
 import { type PaymentResponse } from "mercadopago/dist/clients/payment/commonTypes";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -44,6 +45,16 @@ async function handler(req: NextRequest) {
 
             console.log("Payment ID", payment.id);
             const metadata = payment.metadata as MetadataPreference;
+            const courseRelation = (await db.select().from(usersToCourses).where(and(eq(usersToCourses.course_id, metadata.product_id), eq(usersToCourses.user_id, metadata.user_id))));
+
+            if (courseRelation.length > 0) {
+                console.log(courseRelation);
+                console.log("User already has course")
+                return NextResponse.json({ message: "Payment already exists" }, { status: 200 });
+
+            }
+
+
             const paymentInsertValues: InsertPayment = {
                 id: payment.id!,
                 item_title: metadata.product_title,
