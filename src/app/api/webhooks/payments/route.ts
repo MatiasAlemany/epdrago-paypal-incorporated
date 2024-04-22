@@ -47,7 +47,7 @@ async function handler(req: NextRequest) {
             const paymentInsertValues: InsertPayment = {
                 id: payment.id!,
                 item_title: metadata.product_title,
-                net_amount: payment.transaction_details!.net_received_amount!,
+                net_amount: Math.round(payment.transaction_details!.net_received_amount!),
                 payerName: payment.payer!.first_name,
                 course_id: metadata.product_id,
                 user_id: metadata.user_id,
