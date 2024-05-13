@@ -21,5 +21,6 @@ export async function manualBuyCourse(form: FormData) {
     })
 
     console.log("Curso comprado! artificialmente")
+    return;
 
 }
