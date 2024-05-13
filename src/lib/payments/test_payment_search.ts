@@ -36,9 +36,7 @@ export async function testPaymentAccess() {
             console.log("Payment Inserted");
             return;
         } catch (error) {
-            console.log("Access key with error");
-            console.log(error);
-        }
+            console.log("Access key with error");        }
     }
 
 

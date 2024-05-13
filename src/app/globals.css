@@ -56,6 +56,11 @@ html {
   border-radius: 2px;
 }
 
+.image-fade {
+  mask-image: linear-gradient(black 75%, rgba(0, 0, 0, 0.01));
+  filter: grayscale();
+}
+
 .appear-from-bottom {
   animation: appear-from-bottom ease-in-out;
   animation-timeline: view();
