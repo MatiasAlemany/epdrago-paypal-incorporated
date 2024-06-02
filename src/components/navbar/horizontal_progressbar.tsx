@@ -23,7 +23,7 @@ const HorizontalProgressBar: React.FC<HorizontalProgressBarProps> = ({
           className={twMerge("absolute  h-2 rounded-xl transition-all")}
         >
           <div
-            style={{ "--barcolor": percentageColor }}
+            style={{ "--barcolor": percentageColor } as React.CSSProperties}
             className={twMerge("relative h-2 rounded-xl ", styles.bar)}
           />
         </div>
