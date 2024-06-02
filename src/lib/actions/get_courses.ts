@@ -7,6 +7,8 @@ import { currentUser } from "@clerk/nextjs/server";
 import { userCourses } from "./course_progress_actions";
 
 const courses_query = db.query.courses.findMany({
+    where: eq(courses.is_public, true),
+
     with: {
         testimonials: true,
         modules: true,
@@ -14,7 +16,25 @@ const courses_query = db.query.courses.findMany({
     }
 }).prepare('courses_query');
 
+export const getCoursesAdmin = async () => {
+    const courses2 = await db.query.courses.findMany({
 
+        with: {
+            testimonials: true,
+            modules: true,
+            instructors: true
+        }
+    }).execute();
+    const ratings = courses2.map((e) => {
+        const testimonialsCourse = e.testimonials;
+        let testimonialValue = 0;
+        for (const testimonial of testimonialsCourse) {
+            testimonialValue = testimonialValue + parseFloat(testimonial.rating);
+        }
+        return testimonialValue / testimonialsCourse.length;
+    })
+    return courses2.map((e, index) => ({ ...e, rating: ratings[index] }))
+};
 export type Course = AwaitedReturn<typeof getCourses>[0];
 export const getCourses = async () => {
     const courses = await courses_query.execute();

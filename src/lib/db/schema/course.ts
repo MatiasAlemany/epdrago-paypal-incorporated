@@ -1,4 +1,4 @@
-import { InferSelectModel, relations } from "drizzle-orm";
+import { InferSelectModel, is, relations } from "drizzle-orm";
 import { boolean, integer, pgTable, text, uuid } from "drizzle-orm/pg-core";
 import { usersToCourses } from "./users_to_courses";
 import { testimonials } from './testimonials';

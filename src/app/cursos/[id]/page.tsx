@@ -30,9 +30,9 @@ import { usersToCourses } from "@/lib/db/schema/users_to_courses";
 import { youtube_parser } from "@/lib/helpers/youtube_parser";
 import { type PageParams } from "@/lib/types/params";
 import { currentUser } from "@clerk/nextjs/server";
-import { Button, Input, ModalFooter } from "@nextui-org/react";
+import { Button, Input, ModalFooter, user } from "@nextui-org/react";
 import { eq } from "drizzle-orm";
-import { PlayCircleIcon, YoutubeIcon } from "lucide-react";
+import { LockIcon, PlayCircleIcon, YoutubeIcon } from "lucide-react";
 import { revalidatePath } from "next/cache";
 import Image from "next/image";
 import { redirect } from "next/navigation";
@@ -42,6 +42,8 @@ const EditarCursoPage = async ({
   params: { id },
 }: PageParams<{ id: string }>) => {
   const course = await getCourse(id);
+  const user = await currentUser();
+
   return (
     <div>
       <BackGroundCourse {...course} />
