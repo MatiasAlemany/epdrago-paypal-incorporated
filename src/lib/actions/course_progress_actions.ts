@@ -63,7 +63,6 @@ export async function getUserCourseProgress(user_id: string): Promise<CourseProg
     let progressWithRating: CourseProgressSelect[] = [];
 
     for (const courseProgress of progress) {
-        console.log(courseProgress);
         const { modules, course } = await getModulesOfCourse(courseProgress.course_id);
         const indexOfModule = modules.findIndex((e) => e.id == courseProgress.module_id);
         const progressRating = courseProgress.isFinished ? 1 : indexOfModule / modules.length;
