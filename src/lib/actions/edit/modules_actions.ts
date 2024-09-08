@@ -57,9 +57,9 @@ export async function crearModuleItem(form: FormData) {
 
 export async function moduleTimeline(courseId: string, module_id: string) {
     const {modules: allModules, course} = await getModulesOfCourse(courseId)
-    const currentModule: ModuleItemSelect | undefined = allModules.find((e) => e.id == module_id);
+    let currentModule: ModuleItemSelect | undefined = allModules.find((e) => e.id == module_id);
     if (currentModule == undefined) {
-        throw Error('Module not found')
+       currentModule = allModules[0]!
     };
     const index = allModules.findIndex((e) => e.id == currentModule.id);
     const hasNext = allModules.length - 1 > index;

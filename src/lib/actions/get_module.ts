@@ -30,7 +30,7 @@ export async function getModule(moduleId: string, courseId: string, course_progr
         if (firstModule == undefined) {
             throw Error("No hay ningun modulo para este curso");
         }
-        await db.update(course_progress).set({ module_id: firstModule.id }).where(eq(course_progress.course_id, course_progress_id));
+        await db.update(course_progress).set({ module_id: firstModule.id }).where(eq(course_progress.id, course_progress_id));
         return firstModule;
     }
 
