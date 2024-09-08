@@ -4,6 +4,7 @@ import { padding } from "@/components/styles/padding";
 import { Button } from "@/components/ui/button";
 import { moduleTimeline } from "@/lib/actions/edit/modules_actions";
 import { getModule } from "@/lib/actions/get_module";
+import { course_progress } from "@/lib/db/schema/course_progress";
 import { moduleZodIntersecttion } from "@/lib/db/schema/modules_items";
 import { PageParams } from "@/lib/types/params";
 import { cn } from "@/lib/utils";
@@ -11,9 +12,9 @@ import { LogOutIcon } from "lucide-react";
 import { redirect } from "next/navigation";
 const ModuleItemPage = async ({
   params: { id },
-  searchParams: { course, fromHome },
-}: PageParams<{ id: string }, { course: string; fromHome?: string }>) => {
-  const moduleDb = await getModule(id, course);
+  searchParams: { course, fromHome, course_progress_id },
+}: PageParams<{ id: string }, { course: string; fromHome?: string, course_progress_id: string }>) => {
+  const moduleDb = await getModule(id, course, course_progress_id);
   const moduleParsed = moduleZodIntersecttion.parse(moduleDb);
 
   return (

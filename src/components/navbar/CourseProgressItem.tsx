@@ -17,7 +17,7 @@ export const CourseProgressItem = ({
         className="w-full   py-4 hover:bg-neutral-900 px-4 rounded-large"
         onClick={() => {
           router.push(
-            `/module/${courseProgress.module_id}?course=${courseProgress.course_id}`
+            `/module/${courseProgress.module_id}?course=${courseProgress.course_id}&course_progress_id=${courseProgress.id}`
           );
         }}
       >
