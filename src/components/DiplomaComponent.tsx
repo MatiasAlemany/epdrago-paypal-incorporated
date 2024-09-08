@@ -23,7 +23,7 @@ const DiplomaComponent: React.FC<DiplomaComponentProps> = ({
 }) => {
   const elementRef = useRef(null);
   const [testimonySent, setTestimonySent] = useState(false);
-  const [username, setUsername] = useState(certificate.user.name);
+  const [username, setUsername] = useState("");
   const [dni, setDni] = useState("");
   const htmlToImageConvert = () => {
     toPng(elementRef.current!, { cacheBust: false })
@@ -98,15 +98,12 @@ const DiplomaComponent: React.FC<DiplomaComponentProps> = ({
             <div className="flex flex-col">
               <Firmas />
 
-              <div className="flex justify-between ">
+              <div className="flex w-[400px] justify-between ">
                 <DiplomaParticipant
                   name="Leandro Drago"
                   occupation="Director Epdrago"
                 />
-                <DiplomaParticipant
-                  name="AXEL DUBIN"
-                  occupation="INSTRUCTOR DE CALISTENIA Y PERSONAL TRAINER"
-                />
+
                 <DiplomaParticipant
                   name="ARIEL CABRERA"
                   occupation="INSTRUCTOR DE CALISTENIA Y PERSONAL TRAINER"

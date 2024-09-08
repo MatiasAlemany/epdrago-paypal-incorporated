@@ -20,7 +20,7 @@ export default async function Certificado({
     );
   }
   const testimony = await checkTestimony(certificado.course_id);
-
+  console.log(certificado);
   return (
     <div>
       <DiplomaComponent

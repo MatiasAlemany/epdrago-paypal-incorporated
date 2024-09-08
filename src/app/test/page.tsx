@@ -9,10 +9,14 @@ import React from "react";
 
 const Test = async () => {
   const admin = await useIsAdmin();
-  if (admin == null) {
-    redirect("/");
+  if (process.env.NODE_ENV == "test") {
+    return redirect("/");
   }
 
+  if (admin == null) {
+    return <div>No tines acceso</div>;
+  }
+  console.log(admin.id);
   return (
     <div className="h-screen pt-40 flex justify-center items-center">
       {/* <LeaveTestimonyDialog

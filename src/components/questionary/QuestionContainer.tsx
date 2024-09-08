@@ -84,7 +84,7 @@ const QuestionContainer = ({
                     />
                     <Checkbox
                       className="mx-auto"
-                      isSelected={newResponseIsCorrect}
+                      checked={newResponseIsCorrect}
                       onChange={() => {
                         setNewResponseIsCorrect(!newResponseIsCorrect);
                       }}
@@ -102,6 +102,7 @@ const QuestionContainer = ({
                           question_id: question.id,
                           title: optionTitle,
                         };
+                        setNewResponseIsCorrect(false);
                         onCreateResponse(question.id, newResponse);
                         onClose();
                       }}
