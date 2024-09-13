@@ -1,16 +1,11 @@
 import BeneficiosCurso from "@/components/course/BeneficiosCurso";
 import DescripcionCuso from "@/components/course/DescripcionCurso";
-import ImageModal from "@/components/course/ImageModal";
 import ModuleItemContainer from "@/components/course/ModuleItemContainer";
 import PreguntaFrecuenteContainer from "@/components/course/PreguntaFrecuenteContainer";
 import Testimonials from "@/components/course/Testimonials";
 import YoutubePlayerCourse from "@/components/course/YoutubePlayer";
 import BackGroundCourse from "@/components/course/backgroundCourse";
 import InstructorContainer from "@/components/course/instructorContainer";
-import ActualizarDatosModal from "@/components/edit/ActualizarDatos";
-import EditDialog from "@/components/edit/EditDialog";
-import InstructorModal from "@/components/edit/InstructorModal";
-import ModuleModal from "@/components/edit/ModuleModal";
 import {
   Accordion,
   AccordionContent,
@@ -18,25 +13,11 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { buyCourse } from "@/lib/actions/buy_course";
-import { getFirstModuleOfCourse } from "@/lib/actions/edit/modules_actions";
 import { getCourse } from "@/lib/actions/get_courses";
-import { isAdmin } from "@/lib/actions/isAdmin";
-import { db } from "@/lib/db";
-import { courses } from "@/lib/db/schema/course";
-import { course_progress } from "@/lib/db/schema/course_progress";
-import { modules } from "@/lib/db/schema/modules";
-import { modules_items } from "@/lib/db/schema/modules_items";
-import { usersToCourses } from "@/lib/db/schema/users_to_courses";
 import { youtube_parser } from "@/lib/helpers/youtube_parser";
 import { type PageParams } from "@/lib/types/params";
 import { currentUser } from "@clerk/nextjs/server";
-import { Button, Input, ModalFooter, user } from "@nextui-org/react";
-import { eq } from "drizzle-orm";
-import { LockIcon, PlayCircleIcon, YoutubeIcon } from "lucide-react";
-import { revalidatePath } from "next/cache";
-import Image from "next/image";
-import { redirect } from "next/navigation";
-import React from "react";
+import { YoutubeIcon } from "lucide-react";
 
 const EditarCursoPage = async ({
   params: { id },

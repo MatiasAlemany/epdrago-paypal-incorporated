@@ -111,6 +111,7 @@ const ModuleModal = ({ module }: { module: ModuleDB }) => {
                     variant="solid"
                     type="submit"
                     color="primary"
+                    disabled={pdfUrl == undefined}
                   >
                     Crear
                   </Button>
