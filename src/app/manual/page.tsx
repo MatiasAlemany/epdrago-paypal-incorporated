@@ -18,12 +18,13 @@ async function getUsers() {
   return users;
 }
 export default async function ManualPage({}) {
-  const users = await getUsers();
-  const courses2 = await db.select().from(courses);
   const admin = await useIsAdmin();
   if (admin == null) {
     redirect("/");
   }
+  const users = await getUsers();
+  const courses2 = await db.select().from(courses);
+
   return (
     <div className={cn("py-40 min-h-screen", padding)}>
       <h1 className="text-transparent bg-clip-text bg-gradient-to-r w-32  from-green-500 to-green-300 font-extrabold text-2xl">
@@ -31,7 +32,6 @@ export default async function ManualPage({}) {
       </h1>
       {users.map((user) => (
         <div key={user.id} className="my-4">
-         
           <UserManagement user={user} cursos={courses2} />
         </div>
       ))}

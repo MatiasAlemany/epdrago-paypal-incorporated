@@ -10,15 +10,14 @@ import { userBoughtThisCourse } from "./get_courses";
 export async function actionOnServer(course_id: string, module_id: string, admin: boolean) {
     if (admin) {
         redirect(`/module/${module_id}?course=${course_id}&fromHome=true`);
-    
+
     }
 
     const userCourse = await userBoughtThisCourse(course_id);
     if (userCourse) {
         redirect(`/module/${module_id}?course=${course_id}&fromHome=true`)
     }
-
-    return;
+    console.log(userCourse)
 
 
 }

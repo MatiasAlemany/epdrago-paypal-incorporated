@@ -75,24 +75,30 @@ const EditarCursoPage = async ({
         Clases
       </h1>{" "}
       <div className="mx-auto mt-4 max-w-4xl p-4">
-        {course.modules.map((e, index) => (
-          <Accordion type="single" collapsible key={e.id}>
-            <AccordionItem value="item-1">
-              <AccordionTrigger>{e.title}</AccordionTrigger>
-              <AccordionContent>
-                {e.items.map((e, itemIndex) => (
-                  <ModuleItemContainer
-                    course_id={course.id}
-                    module_index={index + 1}
-                    index={itemIndex + 1}
-                    key={e.id}
-                    module_item={e}
-                  />
-                ))}
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
-        ))}
+        {course.modules
+          .sort(
+            (a, b) =>
+              new Date(a.createdAt!).getTime() -
+              new Date(b.createdAt!).getTime()
+          )
+          .map((e, index) => (
+            <Accordion type="single" collapsible key={e.id}>
+              <AccordionItem value="item-1">
+                <AccordionTrigger>{e.title}</AccordionTrigger>
+                <AccordionContent>
+                  {e.items.map((e, itemIndex) => (
+                    <ModuleItemContainer
+                      course_id={course.id}
+                      module_index={index + 1}
+                      index={itemIndex + 1}
+                      key={e.id}
+                      module_item={e}
+                    />
+                  ))}
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          ))}
       </div>
       <DescripcionCuso content={course.descripcion} />
       <BeneficiosCurso content={course.beneficios} />

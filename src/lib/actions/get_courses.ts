@@ -91,6 +91,8 @@ export const userBoughtThisCourse = async (course_id: string): Promise<boolean> 
         return !!courses.find((c) => c.id == course_id);
 
     } catch (error) {
+        console.log('ERROR', error)
+
         return false;
     }
 
