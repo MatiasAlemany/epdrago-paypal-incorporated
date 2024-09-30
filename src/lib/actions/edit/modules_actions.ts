@@ -56,12 +56,12 @@ export async function crearModuleItem(form: FormData) {
 
 
 export async function moduleTimeline(courseId: string, module_id: string) {
-    const {modules: allModules, course} = await getModulesOfCourse(courseId)
+    const { modules: allModules, course } = await getModulesOfCourse(courseId)
     let currentModule: ModuleItemSelect | undefined = allModules.find((e) => e.id == module_id);
     if (currentModule == undefined) {
-       currentModule = allModules[0]!
+        currentModule = allModules[0]!
     };
-    const index = allModules.findIndex((e) => e.id == currentModule.id);
+    const index = allModules.findIndex((e) => e.id == currentModule!.id);
     const hasNext = allModules.length - 1 > index;
     const hasPrevios = index != 0;
 
@@ -87,11 +87,11 @@ export async function getModulesOfCourse(courseId: string) {
         allModules = [...allModules, ...moduleDB.items]
 
     }
-    return {modules: allModules, course};
+    return { modules: allModules, course };
 }
 
-export async function getFirstModuleOfCourse (courseId: string) {
-    const {modules} =  await getModulesOfCourse(courseId);
+export async function getFirstModuleOfCourse(courseId: string) {
+    const { modules } = await getModulesOfCourse(courseId);
     return modules[0];
 }
 
