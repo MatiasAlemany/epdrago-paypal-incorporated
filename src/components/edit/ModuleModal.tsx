@@ -96,7 +96,6 @@ const ModuleModal = ({ module }: { module: ModuleDB }) => {
                     </>
                   )}
                 </ModalBody>
-                {//ok}
                 <ModalFooter>
                   <Button color="danger" variant="light" onPress={onClose}>
                     Cancelar
