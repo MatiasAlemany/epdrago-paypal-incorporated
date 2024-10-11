@@ -34,9 +34,7 @@ const ModuleModal = ({ module }: { module: ModuleDB }) => {
               <form action={crearModuleItem}>
                 <input hidden name="module_id" value={module.id} />
                 <input hidden name="course_id" value={module.course_id} />
-
                 <input type="hidden" value={pdfUrl} name="pdf_url" />
-
                 <ModalHeader className="flex flex-col gap-1">
                   Nuevo Capitulo de Modulo
                 </ModalHeader>
@@ -98,7 +96,7 @@ const ModuleModal = ({ module }: { module: ModuleDB }) => {
                     </>
                   )}
                 </ModalBody>
-
+                {//ok}
                 <ModalFooter>
                   <Button color="danger" variant="light" onPress={onClose}>
                     Cancelar
@@ -111,7 +109,6 @@ const ModuleModal = ({ module }: { module: ModuleDB }) => {
                     variant="solid"
                     type="submit"
                     color="primary"
-                    disabled={pdfUrl == undefined}
                   >
                     Crear
                   </Button>
