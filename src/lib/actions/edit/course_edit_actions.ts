@@ -40,7 +40,9 @@ export async function updateData(form: FormData) {
     const duracion = form.get('duration') as string
     const benefits = form.get('benefits') as string
     const descripcion = form.get("description") as string
-    await db.update(courses).set({ price: price, beneficios: benefits, descripcion: descripcion, duracion: duracion, }).where(eq(courses.id, courseId))
+    const isPublic: boolean = form.get('is_public') as string == 'on' ? true : false
+
+    await db.update(courses).set({ price: price, is_public: isPublic, beneficios: benefits, descripcion: descripcion, duracion: duracion, }).where(eq(courses.id, courseId))
     revalidatePath(`/editarCurso/${courseId}`);
 
 }

@@ -19,6 +19,8 @@ import {
 } from "@nextui-org/react";
 import { AlignLeftIcon, InfoIcon } from "lucide-react";
 import React, { useState } from "react";
+import { Label } from "../ui/label";
+import { Checkbox } from "../ui/checkbox";
 
 const ActualizarDatosModal = ({ course }: { course: CourseGet }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -76,6 +78,14 @@ const ActualizarDatosModal = ({ course }: { course: CourseGet }) => {
                     label="Precio"
                     placeholder={course.price ? `${course.price}` : ""}
                   />
+                  <div className="flex items-start gap-3 pl-2">
+                    <Checkbox
+                      id="esPublico"
+                      defaultChecked={course.is_public}
+                      name="is_public"
+                    />
+                    <Label htmlFor="esPublico">Esta publicado</Label>
+                  </div>
                 </ModalBody>
 
                 <ModalFooter>
@@ -84,7 +94,7 @@ const ActualizarDatosModal = ({ course }: { course: CourseGet }) => {
                   </Button>
                   <Button
                     onClick={() => {
-                        onClose();
+                      onClose();
                     }}
                     variant="solid"
                     type="submit"
