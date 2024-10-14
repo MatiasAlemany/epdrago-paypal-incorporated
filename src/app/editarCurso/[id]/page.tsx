@@ -112,9 +112,7 @@ const EditarCursoPage = async ({
         {course.modules.map((e, index) => (
           <Accordion type="single" collapsible key={e.id}>
             <AccordionItem value="item-1">
-              <AccordionTrigger>
-                Modulo {index + 1}: {e.title}
-              </AccordionTrigger>
+              <AccordionTrigger>{e.title}</AccordionTrigger>
               <AccordionContent>
                 {e.items.map((e, itemIndex) => (
                   <div className="flex items-center" key={e.id}>
