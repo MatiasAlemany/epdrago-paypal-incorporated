@@ -12,8 +12,9 @@
     "db:studio": " drizzle-kit studio"
   },
   "dependencies": {
-    "@clerk/nextjs": "^4.29.1",
-    "@clerk/themes": "^1.7.9",
+    "@clerk/localizations": "^2.2.0",
+    "@clerk/nextjs": "^5.0.3",
+    "@clerk/themes": "^2.1.0",
     "@nextui-org/react": "^2.2.9",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-checkbox": "^1.1.2",

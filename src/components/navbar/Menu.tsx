@@ -1,6 +1,21 @@
 "use client";
 
-import React, { useState } from "react";
+import { cn } from "@/lib/utils";
+import { SignIn, SignInButton, SignUp, SignUpButton } from "@clerk/nextjs";
+import {
+  CalendarCheck,
+  CircleUserRound,
+  GraduationCap,
+  Home,
+  LogIn,
+  LogInIcon,
+  MenuIcon,
+  Phone,
+} from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
+import { Button } from "../ui/button";
+import { Dialog, DialogContent } from "../ui/dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,23 +24,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import {
-  CalendarCheck,
-  CircleUserRound,
-  Flame,
-  GraduationCap,
-  Home,
-  LogIn,
-  LogOut,
-  MenuIcon,
-  Phone,
-} from "lucide-react";
-import { cn } from "@/lib/utils";
-import { Button } from "../ui/button";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { SignIn, SignUp, useClerk, useSignIn, useSignUp } from "@clerk/nextjs";
-import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
 
 import SignOut from "./SignOut";
 
@@ -68,38 +66,22 @@ const Menu = ({ userId }: { userId: string | null }) => {
           ) : (
             <div className="flex flex-col">
               {" "}
-              <DropdownMenuItem
-                onClick={() => {
-                  setdialogOpen(true);
-                }}
-                className="hover:bg-neutral-900"
-              >
-                <LogIn className="mr-3  h-4 w-4" />
-                Ingresar
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => {
-                  setDialogRegisterOpen(true);
-                }}
-                className="hover:bg-neutral-900"
-              >
-                <CircleUserRound className="mr-3  h-4 w-4" />
-                Registrarse
-              </DropdownMenuItem>
+              <SignInButton mode="modal">
+                <DropdownMenuItem className="hover:bg-neutral-900">
+                  <LogInIcon className="mr-3  h-4 w-4" />
+                  Ingresar
+                </DropdownMenuItem>
+              </SignInButton>
+              <SignUpButton mode="modal">
+                <DropdownMenuItem className="hover:bg-neutral-900 text-green-400">
+                  <CircleUserRound className="mr-3  h-4 w-4" />
+                  Registrarse
+                </DropdownMenuItem>
+              </SignUpButton>
             </div>
           )}
         </DropdownMenuContent>
       </DropdownMenu>
-      <Dialog open={dialogRegisterOpen} onOpenChange={setDialogRegisterOpen}>
-        <DialogContent className="bg-transparent border-none  px-0 flex justify-center">
-          <SignUp />
-        </DialogContent>
-      </Dialog>
-      <Dialog open={dialogOpen} onOpenChange={setdialogOpen}>
-        <DialogContent className="bg-transparent border-none  px-0 flex justify-center">
-          <SignIn />
-        </DialogContent>
-      </Dialog>
     </div>
   );
 };

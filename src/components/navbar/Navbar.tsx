@@ -9,6 +9,7 @@ import Menu from "./Menu";
 import DrawerCourses from "./DrawerCourses";
 import NavbarNavigationMenu from "./NavbarNavigationMenu";
 import SignOutButton from "./SignOutButton";
+import { SignInButton, SignUpButton } from "@clerk/nextjs";
 
 export default async function Navbar() {
   const user = await currentUser();
@@ -35,7 +36,18 @@ export default async function Navbar() {
           <SignOutButton />
         ) : (
           <div className="lg:block hidden">
-            <NavbarDialogs />
+            <div className="flex ">
+              <SignInButton mode="modal">
+                <div className="rounded-lg flex items-center text-md border-1 border-neutral-700 w-28 justify-center px-4 py-1 mr-2 hover:bg-neutral-900  cursor-pointer">
+                  Ingresar
+                </div>
+              </SignInButton>
+              <SignUpButton mode="modal">
+                <div className="rounded-lg text-md flex items-center  px-4 py-1 mr-2 transition-all hover:bg-green-300 bg-green-500 text-black   cursor-pointer">
+                  Registrarse
+                </div>
+              </SignUpButton>
+            </div>
           </div>
         )}
 
