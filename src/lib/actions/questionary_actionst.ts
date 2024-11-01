@@ -1,5 +1,5 @@
 "use server";
-import { currentUser } from '@clerk/nextjs';
+import { currentUser } from '@clerk/nextjs/server';
 import { exams, options, questionary, questions } from '../db/schema/exams';
 import { db } from '../db';
 import { eq } from 'drizzle-orm';
