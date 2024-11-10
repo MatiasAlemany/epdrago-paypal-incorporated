@@ -6,6 +6,7 @@ import { eq } from "drizzle-orm";
 import { MetadataPreference, PreferenceInputType, createPreferenceResponse } from "./create_preference";
 import { redirect } from "next/navigation";
 
+//test
 
 export async function buyCourse(formData: FormData) {
     const course_id: string = formData.get("course_id") as string;

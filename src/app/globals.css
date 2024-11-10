@@ -94,7 +94,6 @@ html {
     scale: 1;
   }
 }
-
 .fade-in-view {
   animation: fade-in-view ease-in-out;
   animation-timeline: view();
