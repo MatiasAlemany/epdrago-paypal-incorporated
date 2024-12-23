@@ -27,7 +27,7 @@ const EditarCursoPage = async ({
 
   return (
     <div>
-      <BackGroundCourse {...course} />
+      <BackGroundCourse {...course} id={id} />
       <h1 className="mt-12 mb-8 text-green-400  text-center text-2xl font-extrabold lg:text-4xl">
         Instructores{" "}
       </h1>
