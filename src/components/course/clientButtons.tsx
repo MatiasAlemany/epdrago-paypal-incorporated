@@ -2,7 +2,7 @@
 "use client";
 
 import React from "react";
-import { Button } from "@nextui-org/react";
+import { Button, dataFocusVisibleClasses } from "@nextui-org/react";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import MercadoPagoIcon from "../MercadoPago_Icon";
 import {
@@ -14,6 +14,7 @@ import {
 import { buyCourse } from "@/lib/actions/buy_course";
 import createOrder from "@/lib/actions/create-order-paypal";
 import handleApprove from "@/lib/actions/capture-order-paypal";
+import { actionOnServer } from "@/lib/actions/test_action";
 
 interface ClientButtonsProps {
   user: boolean; // Estado del usuario
@@ -68,7 +69,7 @@ const ClientButtons: React.FC<ClientButtonsProps> = ({ user, id }) => {
                   createOrder={() => {
                     return createOrder(id);
                 }}
-                onApprove={handleApprove}
+                onApprove={(data, actions) => handleApprove(data, actions, id)}
                 />
               </PayPalScriptProvider>
             ) : (

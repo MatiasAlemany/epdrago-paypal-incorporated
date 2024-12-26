@@ -13,6 +13,7 @@ import { SignInButton, SignUpButton } from "@clerk/nextjs";
 
 export default async function Navbar() {
   const user = await currentUser();
+  // console.log("USUARIO", user)
   return (
     <div className={cn("fixed w-full mt-0 md:mt-8 z-10", padding)}>
       <div className=" flex justify-between items-center ">

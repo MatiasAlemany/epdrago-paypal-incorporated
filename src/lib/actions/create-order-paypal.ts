@@ -3,7 +3,6 @@ export default function createOrder(id: string): Promise<string> {
     course_id: id,
   });
 
-  // PASAR ID A LA FUNCION.
   return fetch("/api/create-paypal-order", {
     method: "POST",
     headers: {

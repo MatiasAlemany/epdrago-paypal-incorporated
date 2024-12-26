@@ -74,14 +74,14 @@ export async function POST(req: NextRequest) {
     
 
     const data = await paypalResponse.json();
-  // console.log("Respuesta de PayPal:", data);
+    //console.log("Respuesta de PayPal:", data);
     
     if (!paypalResponse.ok) {
       return NextResponse.json({ error: data }, { status: 400 });
     }
 
     // Devolver el orderID al frontend
-    return NextResponse.json({ orderID: data.id });
+    return NextResponse.json({ orderID: data.id, courseId: course_id });
   } catch (error) {
     console.error("Error al crear la orden de PayPal:", error);
     return NextResponse.json(

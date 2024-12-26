@@ -1,6 +1,6 @@
 import { OnApproveData, OnApproveActions } from "@paypal/paypal-js";
 
-const handleApprove = async (data: OnApproveData, actions: OnApproveActions): Promise<void> => {
+const handleApprove = async (data: OnApproveData, actions: OnApproveActions,  id: string): Promise<void> => {
   try {
     console.log("Datos recibidos en onApprove:", data);
 
@@ -12,6 +12,7 @@ const handleApprove = async (data: OnApproveData, actions: OnApproveActions): Pr
       },
       body: JSON.stringify({
         orderId: data.orderID, // `orderID` viene del objeto `data` proporcionado por PayPal
+        course_id: id
       }),
     });
 
@@ -24,7 +25,7 @@ const handleApprove = async (data: OnApproveData, actions: OnApproveActions): Pr
     const result = await response.json();
     console.log("Pago capturado exitosamente:", result);
 
-    // Aquí puedes manejar el éxito (por ejemplo, mostrar un mensaje de éxito o redirigir al usuario)
+
     alert("¡Pago capturado exitosamente!");
   } catch (error) {
     console.error("Error en onApprove:", error);
